@@ -1,0 +1,23 @@
+spring:
+  main:
+    banner-mode: off
+
+  datasource:
+    url: jdbc:mySql://localhost:3306/BankServiceDataBase
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: MySQL1213141516
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+    defer-datasource-initialization: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+#liquibase:
+#  change-log: classpath:/db/changelog/changelog-master.xml
