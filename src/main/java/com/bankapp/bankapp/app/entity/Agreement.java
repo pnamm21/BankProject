@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.entity.enums.StatusAgreement;
+import com.bankapp.bankapp.app.enums.StatusAgreement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,9 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "agreement")
 @Getter
@@ -20,6 +23,7 @@ public class Agreement {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "interest_rate")
@@ -37,12 +41,12 @@ public class Agreement {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @JoinColumn(name = "acount_id",referencedColumnName = "id")
-    @OneToOne
+    @JoinColumn(name = "account_id",referencedColumnName = "id")
+    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
     private Account accountId;
 
     @JoinColumn(name = "product_id",referencedColumnName = "id")
-    @OneToOne
+    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
     private Product productId;
 
     @Override

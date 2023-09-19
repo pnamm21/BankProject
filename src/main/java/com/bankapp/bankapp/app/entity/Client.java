@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.entity.enums.StatusClient;
+import com.bankapp.bankapp.app.enums.StatusClient;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.MERGE;
+import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "clients")
@@ -23,6 +24,7 @@ public class Client {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "status")
@@ -53,8 +55,11 @@ public class Client {
     private LocalDate updated_at;
 
     @JoinColumn(name = "manager_id",referencedColumnName = "id")
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private Manager managerId;
+
+    @OneToMany(mappedBy = "client",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private List<Account> accounts;
 
     @Override
     public boolean equals(Object o) {

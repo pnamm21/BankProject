@@ -1,8 +1,8 @@
-package com.bankapp.bankapp.app.entity.enums;
+package com.bankapp.bankapp.app.enums;
 
 public enum StatusTransaction {
     APPROVED,
     PENDING,
-    REJECTED,
+    UNDER_REVIEW,
     CANCELED;
 }

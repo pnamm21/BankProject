@@ -1,4 +1,4 @@
-package com.bankapp.bankapp.app.entity.enums;
+package com.bankapp.bankapp.app.enums;
 
 public enum StatusProduct {
     ACTIVE,

@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.entity.enums.StatusAccount;
+import com.bankapp.bankapp.app.enums.StatusAccount;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,9 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "accounts")
@@ -22,6 +24,7 @@ public class Account {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "name")
@@ -46,8 +49,14 @@ public class Account {
     private LocalDate updatedAt;
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
-    @OneToOne
+    @OneToOne(cascade = {PERSIST, MERGE, REFRESH})
     private Client clientId;
+
+    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private List<Agreement> agreements;
+
+    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private List<Transaction> transactions;
 
 
     @Override

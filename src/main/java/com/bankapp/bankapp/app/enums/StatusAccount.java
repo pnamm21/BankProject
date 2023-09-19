@@ -1,7 +1,7 @@
-package com.bankapp.bankapp.app.entity.enums;
+package com.bankapp.bankapp.app.enums;
 
 public enum StatusAccount {
-        CONSIDERATION,
-        PROCESSING,
-        SUCCESSFUL;
+    ACTIVE,
+    INACTIVE,
+    CLOSED;
 }

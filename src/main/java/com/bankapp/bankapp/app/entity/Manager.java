@@ -1,18 +1,18 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.entity.enums.StatusManager;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.bankapp.bankapp.app.enums.StatusManager;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "mangers")
@@ -24,6 +24,7 @@ public class Manager {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "first_name")
@@ -40,6 +41,12 @@ public class Manager {
 
     @Column(name = "updated_at")
     private LocalDate updatedAt;
+
+    @OneToMany(mappedBy = "manager",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private List<Client> clients;
+
+    @OneToMany(mappedBy = "manager",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private List<Product> products;
 
     @Override
     public boolean equals(Object o) {
