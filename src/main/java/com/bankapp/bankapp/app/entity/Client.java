@@ -58,7 +58,7 @@ public class Client {
     @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private Manager managerId;
 
-    @OneToMany(mappedBy = "client",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Account> accounts;
 
     @Override

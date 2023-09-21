@@ -52,10 +52,10 @@ public class Account {
     @OneToOne(cascade = {PERSIST, MERGE, REFRESH})
     private Client clientId;
 
-    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Agreement> agreements;
 
-    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Transaction> transactions;
 
 

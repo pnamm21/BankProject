@@ -41,11 +41,11 @@ public class Transaction {
     @Column(name = "created_at")
     private LocalDate createdAt;
 
-    @JoinColumn(name = "debit_account_id",referencedColumnName = "id")
+    @JoinColumn(name = "debitAccount_id",referencedColumnName = "id")
     @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
     private Account debitAccountId;
 
-    @JoinColumn(name = "credit_account_id",referencedColumnName = "id")
+    @JoinColumn(name = "creditAccount_id",referencedColumnName = "id")
     @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
     private Account creditAccountId;
 

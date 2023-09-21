@@ -52,7 +52,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private Manager managerId;
 
-    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Agreement> agreements;
 
     @Override

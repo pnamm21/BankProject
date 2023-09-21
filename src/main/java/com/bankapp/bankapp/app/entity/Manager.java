@@ -15,7 +15,7 @@ import java.util.UUID;
 import static jakarta.persistence.CascadeType.*;
 
 @Entity
-@Table(name = "mangers")
+@Table(name = "managers")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,10 +42,10 @@ public class Manager {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @OneToMany(mappedBy = "manager",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Client> clients;
 
-    @OneToMany(mappedBy = "manager",fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Product> products;
 
     @Override
