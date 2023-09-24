@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product A"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="currency_code" value="1"/>
+            <column name="interest_rate" value="0.0250"/>
+            <column name="limit" value="10000"/>
+            <column name="created_at" value="2023-09-19 10:00:00"/>
+            <column name="updated_at" value="2023-09-19 10:00:00"/>
+            <column name="manager_id" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product B"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="currency_code" value="2"/>
+            <column name="interest_rate" value="0.0350"/>
+            <column name="limit" value="15000"/>
+            <column name="created_at" value="2023-09-19 11:30:00"/>
+            <column name="updated_at" value="2023-09-19 11:30:00"/>
+            <column name="manager_id" value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="3" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product C"/>
+            <column name="status" value="EXPIRED"/>
+            <column name="currency_code" value="3"/>
+            <column name="interest_rate" value="0.0225"/>
+            <column name="limit" value="8000"/>
+            <column name="created_at" value="2023-09-19 14:45:00"/>
+            <column name="updated_at" value="2023-09-19 14:45:00"/>
+            <column name="manager_id" value="3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product D"/>
+            <column name="status" value="UNDER_REVIEW"/>
+            <column name="currency_code" value="4"/>
+            <column name="interest_rate" value="0.0300"/>
+            <column name="limit" value="12000"/>
+            <column name="created_at" value="2023-09-20 09:15:00"/>
+            <column name="updated_at" value="2023-09-20 09:15:00"/>
+            <column name="manager_id" value="4"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product E"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="currency_code" value="5"/>
+            <column name="interest_rate" value="0.0280"/>
+            <column name="limit" value="9500"/>
+            <column name="created_at" value="2023-09-20 11:00:00"/>
+            <column name="updated_at" value="2023-09-20 11:00:00"/>
+            <column name="manager_id" value="5"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product F"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="currency_code" value="6"/>
+            <column name="interest_rate" value="0.0325"/>
+            <column name="limit" value="7800"/>
+            <column name="created_at" value="2023-09-20 13:30:00"/>
+            <column name="updated_at" value="2023-09-20 13:30:00"/>
+            <column name="manager_id" value="6"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="7" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product G"/>
+            <column name="status" value="EXPIRED"/>
+            <column name="currency_code" value="7"/>
+            <column name="interest_rate" value="0.0275"/>
+            <column name="limit" value="10500"/>
+            <column name="created_at" value="2023-09-20 14:45:00"/>
+            <column name="updated_at" value="2023-09-20 14:45:00"/>
+            <column name="manager_id" value="7"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="8" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product H"/>
+            <column name="status" value="UNDER_REVIEW"/>
+            <column name="currency_code" value="8"/>
+            <column name="interest_rate" value="0.0310"/>
+            <column name="limit" value="11500"/>
+            <column name="created_at" value="2023-09-20 16:30:00"/>
+            <column name="updated_at" value="2023-09-20 16:30:00"/>
+            <column name="manager_id" value="8"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="9" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product I"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="currency_code" value="9"/>
+            <column name="interest_rate" value="0.0285"/>
+            <column name="limit" value="8500"/>
+            <column name="created_at" value="2023-09-21 10:15:00"/>
+            <column name="updated_at" value="2023-09-21 10:15:00"/>
+            <column name="manager_id" value="9"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="10" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into product table">
+            <tableExists tableName="products"/>
+        </preConditions>
+
+        <insert tableName="products">
+            <column name="name" value="Product J"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="currency_code" value="10"/>
+            <column name="interest_rate" value="0.0320"/>
+            <column name="limit" value="9200"/>
+            <column name="created_at" value="2023-09-21 11:45:00"/>
+            <column name="updated_at" value="2023-09-21 11:45:00"/>
+            <column name="manager_id" value="10"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

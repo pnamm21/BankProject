@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Doe"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" value="2023-09-16 10:00:00"/>
+            <column name="updated_at" value="2023-09-16 10:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Alice"/>
+            <column name="last_name" value="Smith"/>
+            <column name="status" value="ON_LEAVE"/>
+            <column name="created_at" value="2023-09-16 11:30:00"/>
+            <column name="updated_at" value="2023-09-16 11:30:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="3" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="David"/>
+            <column name="last_name" value="Johnson"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="created_at" value="2023-09-16 14:45:00"/>
+            <column name="updated_at" value="2023-09-16 14:45:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Emma"/>
+            <column name="last_name" value="Brown"/>
+            <column name="status" value="AWAY"/>
+            <column name="created_at" value="2023-09-17 09:15:00"/>
+            <column name="updated_at" value="2023-09-17 09:15:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Sophia"/>
+            <column name="last_name" value="Miller"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" value="2023-09-17 11:00:00"/>
+            <column name="updated_at" value="2023-09-17 11:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Oliver"/>
+            <column name="last_name" value="Wilson"/>
+            <column name="status" value="ON_LEAVE"/>
+            <column name="created_at" value="2023-09-17 13:30:00"/>
+            <column name="updated_at" value="2023-09-17 13:30:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="7" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Liam"/>
+            <column name="last_name" value="Smith"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="created_at" value="2023-09-18 09:45:00"/>
+            <column name="updated_at" value="2023-09-18 09:45:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="8" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Olivia"/>
+            <column name="last_name" value="Davis"/>
+            <column name="status" value="AWAY"/>
+            <column name="created_at" value="2023-09-18 11:15:00"/>
+            <column name="updated_at" value="2023-09-18 11:15:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="9" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Noah"/>
+            <column name="last_name" value="Wilson"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" value="2023-09-18 13:45:00"/>
+            <column name="updated_at" value="2023-09-18 13:45:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="10" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into manager table">
+            <tableExists tableName="managers"/>
+        </preConditions>
+
+        <insert tableName="managers">
+            <column name="first_name" value="Emma"/>
+            <column name="last_name" value="Smith"/>
+            <column name="status" value="ON_LEAVE"/>
+            <column name="created_at" value="2023-09-18 15:00:00"/>
+            <column name="updated_at" value="2023-09-18 15:00:00"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0280"/>
+            <column name="status" value="PROCESSING"/>
+            <column name="sum" value="9500.00"/>
+            <column name="created_at" value="2023-09-17 11:00:00"/>
+            <column name="updated_at" value="2023-09-17 11:00:00"/>
+            <column name="account_id" value="5"/>
+            <column name="product_id" value="105"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0325"/>
+            <column name="status" value="SUCCESSFUL"/>
+            <column name="sum" value="7800.00"/>
+            <column name="created_at" value="2023-09-17 13:30:00"/>
+            <column name="updated_at" value="2023-09-17 13:30:00"/>
+            <column name="account_id" value="6"/>
+            <column name="product_id" value="106"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="3" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0250"/>
+            <column name="status" value="CONSIDERATION"/>
+            <column name="sum" value="10000.00"/>
+            <column name="created_at" value="2023-09-16 10:00:00"/>
+            <column name="updated_at" value="2023-09-16 10:00:00"/>
+            <column name="account_id" value="1"/>
+            <column name="product_id" value="101"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0350"/>
+            <column name="status" value="PROCESSING"/>
+            <column name="sum" value="15000.00"/>
+            <column name="created_at" value="2023-09-16 11:30:00"/>
+            <column name="updated_at" value="2023-09-16 11:30:00"/>
+            <column name="account_id" value="2"/>
+            <column name="product_id" value="102"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0225"/>
+            <column name="status" value="SUCCESSFUL"/>
+            <column name="sum" value="8000.00"/>
+            <column name="created_at" value="2023-09-16 14:45:00"/>
+            <column name="updated_at" value="2023-09-16 14:45:00"/>
+            <column name="account_id" value="3"/>
+            <column name="product_id" value="103"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0300"/>
+            <column name="status" value="CONSIDERATION"/>
+            <column name="sum" value="12000.00"/>
+            <column name="created_at" value="2023-09-17 09:15:00"/>
+            <column name="updated_at" value="2023-09-17 09:15:00"/>
+            <column name="account_id" value="4"/>
+            <column name="product_id" value="104"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="7" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0275"/>
+            <column name="status" value="CONSIDERATION"/>
+            <column name="sum" value="10500.00"/>
+            <column name="created_at" value="2023-09-18 09:45:00"/>
+            <column name="updated_at" value="2023-09-18 09:45:00"/>
+            <column name="account_id" value="7"/>
+            <column name="product_id" value="107"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="8" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0310"/>
+            <column name="status" value="PROCESSING"/>
+            <column name="sum" value="11500.00"/>
+            <column name="created_at" value="2023-09-18 11:15:00"/>
+            <column name="updated_at" value="2023-09-18 11:15:00"/>
+            <column name="account_id" value="8"/>
+            <column name="product_id" value="108"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="9" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0285"/>
+            <column name="status" value="SUCCESSFUL"/>
+            <column name="sum" value="9800.00"/>
+            <column name="created_at" value="2023-09-18 13:45:00"/>
+            <column name="updated_at" value="2023-09-18 13:45:00"/>
+            <column name="account_id" value="9"/>
+            <column name="product_id" value="109"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="10" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Agreement table">
+            <tableExists tableName="agreements"/>
+        </preConditions>
+
+        <insert tableName="agreements">
+            <column name="interest_rate" value="0.0330"/>
+            <column name="status" value="CONSIDERATION"/>
+            <column name="sum" value="12200.00"/>
+            <column name="created_at" value="2023-09-19 09:30:00"/>
+            <column name="updated_at" value="2023-09-19 09:30:00"/>
+            <column name="account_id" value="10"/>
+            <column name="product_id" value="110"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
