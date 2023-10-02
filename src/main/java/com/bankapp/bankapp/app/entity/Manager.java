@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.StatusManager;
+import com.bankapp.bankapp.app.enums.ManagerStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +35,8 @@ public class Manager {
     private String lastName;
 
     @Column(name = "status")
-    private StatusManager status;
+    @Enumerated(EnumType.STRING)
+    private ManagerStatus status;
 
     @Column(name = "created_at")
     private LocalDate createdAt;

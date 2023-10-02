@@ -12,6 +12,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('4efe8f21-f297-4c6c-8cd3-2da3cbd7200e')"/>
             <column name="name" value="Product A"/>
             <column name="status" value="ACTIVE"/>
             <column name="currency_code" value="1"/>
@@ -29,6 +30,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('38966b08-1995-47d6-af40-2cfe2546693d')"/>
             <column name="name" value="Product B"/>
             <column name="status" value="INACTIVE"/>
             <column name="currency_code" value="2"/>
@@ -46,6 +48,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('5cdfd225-2002-4b3d-8001-55caa8c5b561')"/>
             <column name="name" value="Product C"/>
             <column name="status" value="EXPIRED"/>
             <column name="currency_code" value="3"/>
@@ -63,6 +66,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('107e4aa1-13e9-4e29-a1fe-c3d060f55bbd')"/>
             <column name="name" value="Product D"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="currency_code" value="4"/>
@@ -80,6 +84,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('aecd6ed0-39b2-4329-8780-5a2173da65bc')"/>
             <column name="name" value="Product E"/>
             <column name="status" value="ACTIVE"/>
             <column name="currency_code" value="5"/>
@@ -97,6 +102,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('76180aef-76f2-40f2-894f-d737e96a200a')"/>
             <column name="name" value="Product F"/>
             <column name="status" value="INACTIVE"/>
             <column name="currency_code" value="6"/>
@@ -114,6 +120,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('31c843c8-a7b9-4a40-826c-45dc8c682052')"/>
             <column name="name" value="Product G"/>
             <column name="status" value="EXPIRED"/>
             <column name="currency_code" value="7"/>
@@ -131,6 +138,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('2457d219-f995-412e-a10c-5638cb97fd5a')"/>
             <column name="name" value="Product H"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="currency_code" value="8"/>
@@ -148,6 +156,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('d04ad4fc-e8c9-4571-850d-999d836496fb')"/>
             <column name="name" value="Product I"/>
             <column name="status" value="ACTIVE"/>
             <column name="currency_code" value="9"/>
@@ -165,6 +174,7 @@
         </preConditions>
 
         <insert tableName="products">
+            <column name="id" valueComputed="UUID_TO_BIN('f4133bba-a644-4656-afe2-e2feefba972c')"/>
             <column name="name" value="Product J"/>
             <column name="status" value="INACTIVE"/>
             <column name="currency_code" value="10"/>

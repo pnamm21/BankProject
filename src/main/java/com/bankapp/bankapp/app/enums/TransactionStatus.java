@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.enums;
 
-public enum StatusTransaction {
+public enum TransactionStatus {
     APPROVED,
     PENDING,
     UNDER_REVIEW,

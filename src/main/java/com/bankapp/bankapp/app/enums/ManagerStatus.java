@@ -1,7 +1,8 @@
 package com.bankapp.bankapp.app.enums;
 
-public enum StatusAccount {
+public enum ManagerStatus {
     ACTIVE,
+    ON_LEAVE,
     INACTIVE,
-    CLOSED;
+    AWAY;
 }

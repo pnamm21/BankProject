@@ -12,6 +12,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('cf7d57e1-4e4d-4134-86fc-02ef21cf3dff')"/>
             <column name="interest_rate" value="0.035"/>
             <column name="status" value="ACTIVE"/>
             <column name="tax_code" value="ABC123"/>
@@ -32,6 +33,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('678a2194-28f9-48b5-807c-f3a769f2cf12')"/>
             <column name="interest_rate" value="0.028"/>
             <column name="status" value="INACTIVE"/>
             <column name="tax_code" value="XYZ456"/>
@@ -52,6 +54,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('e1adaf04-68b9-49c8-80b5-fed3ec85fde9')"/>
             <column name="interest_rate" value="0.032"/>
             <column name="status" value="CLOSED"/>
             <column name="tax_code" value="PQR789"/>
@@ -72,6 +75,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('749fade4-0ec8-48b2-8597-8acb0e4d3ef1')"/>
             <column name="interest_rate" value="0.025"/>
             <column name="status" value="BLOCKED"/>
             <column name="tax_code" value="LMN012"/>
@@ -92,6 +96,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('fae3d14e-3e72-4868-a00c-2da7ab6474a4')"/>
             <column name="interest_rate" value="0.030"/>
             <column name="status" value="ON_HOLD"/>
             <column name="tax_code" value="OPQ567"/>
@@ -112,6 +117,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('db9f6550-071c-4370-a0d6-b8303417dd4f')"/>
             <column name="interest_rate" value="0.034"/>
             <column name="status" value="ACTIVE"/>
             <column name="tax_code" value="XYZ123"/>
@@ -132,6 +138,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('56876795-4d60-413b-8e30-ee56f49df814')"/>
             <column name="interest_rate" value="0.027"/>
             <column name="status" value="INACTIVE"/>
             <column name="tax_code" value="ABC456"/>
@@ -152,6 +159,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('c385fde8-3817-4129-b321-f37718fbdac4')"/>
             <column name="interest_rate" value="0.031"/>
             <column name="status" value="CLOSED"/>
             <column name="tax_code" value="PQR456"/>
@@ -172,6 +180,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('a3534c4d-a2fa-4f42-8070-c461dffc2a89')"/>
             <column name="interest_rate" value="0.026"/>
             <column name="status" value="BLOCKED"/>
             <column name="tax_code" value="LMN456"/>
@@ -192,6 +201,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('7a5d4ba2-d68e-47d5-83e5-a979e18d698f')"/>
             <column name="interest_rate" value="0.029"/>
             <column name="status" value="ON_HOLD"/>
             <column name="tax_code" value="OPQ456"/>
@@ -212,6 +222,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('f032276e-bbc7-445e-a230-a123857df639')"/>
             <column name="interest_rate" value="0.033"/>
             <column name="status" value="ACTIVE"/>
             <column name="tax_code" value="XYZ789"/>
@@ -232,6 +243,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('ec393d85-d396-4bb5-b591-a50eb24d16dc')"/>
             <column name="interest_rate" value="0.030"/>
             <column name="status" value="INACTIVE"/>
             <column name="tax_code" value="ABC789"/>
@@ -252,6 +264,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('8612d775-b5cf-48a1-aac3-395c825667e4')"/>
             <column name="interest_rate" value="0.031"/>
             <column name="status" value="CLOSED"/>
             <column name="tax_code" value="PQR789"/>
@@ -272,6 +285,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('091cd800-dae4-4066-8404-43a62351363f')"/>
             <column name="interest_rate" value="0.029"/>
             <column name="status" value="BLOCKED"/>
             <column name="tax_code" value="LMN789"/>
@@ -292,6 +306,7 @@
         </preConditions>
 
         <insert tableName="clients">
+            <column name="id" valueComputed="UUID_TO_BIN('d1f9301c-e237-4186-bb74-1f427bed57bf')"/>
             <column name="interest_rate" value="0.030"/>
             <column name="status" value="ON_HOLD"/>
             <column name="tax_code" value="OPQ789"/>

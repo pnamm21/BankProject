@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.StatusTransaction;
+import com.bankapp.bankapp.app.enums.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,7 +36,7 @@ public class Transaction {
     private String description;
 
     @Column(name = "status")
-    private StatusTransaction status;
+    private TransactionStatus status;
 
     @Column(name = "created_at")
     private LocalDate createdAt;

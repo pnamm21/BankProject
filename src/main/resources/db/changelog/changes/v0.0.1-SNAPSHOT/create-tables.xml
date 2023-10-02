@@ -14,7 +14,7 @@
         </preConditions>
 
         <createTable tableName="accounts">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(100)"/>
@@ -24,7 +24,7 @@
             <column name="currency_code" type="varchar(3)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
-            <column name="client_id" type="int"/>
+            <column name="client_id" type="binary(16)"/>
         </createTable>
     </changeSet>
 
@@ -36,7 +36,7 @@
         </preConditions>
 
         <createTable tableName="agreements">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="interest_rate" type="decimal(6,4)"/>
@@ -44,8 +44,6 @@
             <column name="sum" type="decimal(15,2)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
-            <column name="account_id" type="int"/>
-            <column name="product_id" type="int"/>
         </createTable>
     </changeSet>
 
@@ -57,7 +55,7 @@
         </preConditions>
 
         <createTable tableName="clients">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="interest_rate" type="double"/>
@@ -70,7 +68,6 @@
             <column name="phone" type="varchar(20)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
-            <column name="manager_id" type="int"/>
         </createTable>
     </changeSet>
 
@@ -82,7 +79,7 @@
         </preConditions>
 
         <createTable tableName="managers">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="first_name" type="varchar(50)"/>
@@ -101,7 +98,7 @@
         </preConditions>
 
         <createTable tableName="products">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(70)"/>
@@ -111,7 +108,6 @@
             <column name="limit" type="int"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
-            <column name="manager_id" type="int"/>
         </createTable>
     </changeSet>
 
@@ -123,7 +119,7 @@
         </preConditions>
 
         <createTable tableName="transactions">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="type" type="int"/>
@@ -131,8 +127,6 @@
             <column name="description" type="varchar(255)"/>
             <column name="status" type="varchar(50)"/>
             <column name="created_at" type="timestamp"/>
-            <column name="debitAccount_id" type="int"/>
-            <column name="creditAccount_id" type="int"/>
         </createTable>
     </changeSet>
 

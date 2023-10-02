@@ -12,6 +12,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
             <column name="name" value="John Doe"/>
             <column name="type" value="1"/>
             <column name="status" value="Active"/>
@@ -29,6 +30,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
             <column name="name" value="Alice Smith"/>
             <column name="type" value="2"/>
             <column name="status" value="Inactive"/>
@@ -36,7 +38,7 @@
             <column name="currency_code" value="EUR"/>
             <column name="created_at" value="2023-09-16 11:30:00"/>
             <column name="updated_at" value="2023-09-16 11:30:00"/>
-            <column name="client_id" value="456"/>
+            <column name="client_id" value=""/>
         </insert>
     </changeSet>
 
@@ -46,6 +48,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
             <column name="name" value="Bob Johnson"/>
             <column name="type" value="1"/>
             <column name="status" value="Active"/>
@@ -63,6 +66,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
             <column name="name" value="Eva Williams"/>
             <column name="type" value="2"/>
             <column name="status" value="Active"/>
@@ -80,6 +84,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
             <column name="name" value="David Lee"/>
             <column name="type" value="1"/>
             <column name="status" value="Inactive"/>
@@ -97,6 +102,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
             <column name="name" value="Grace Davis"/>
             <column name="type" value="2"/>
             <column name="status" value="Active"/>
@@ -114,6 +120,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
             <column name="name" value="Hannah Taylor"/>
             <column name="type" value="1"/>
             <column name="status" value="Closed"/>
@@ -131,6 +138,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
             <column name="name" value="Isabella Brown"/>
             <column name="type" value="2"/>
             <column name="status" value="Inactive"/>
@@ -148,6 +156,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
             <column name="name" value="Jacob Miller"/>
             <column name="type" value="1"/>
             <column name="status" value="Closed"/>
@@ -165,6 +174,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>
             <column name="name" value="Liam Wilson"/>
             <column name="type" value="2"/>
             <column name="status" value="Active"/>
@@ -182,6 +192,7 @@
         </preConditions>
 
         <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('4bb2ad85-313a-4153-a3b3-b6a8fcc00622')"/>
             <column name="name" value="Mia Moore"/>
             <column name="type" value="1"/>
             <column name="status" value="Inactive"/>

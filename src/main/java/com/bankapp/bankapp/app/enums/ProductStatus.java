@@ -1,8 +1,8 @@
 package com.bankapp.bankapp.app.enums;
 
-public enum StatusManager {
+public enum ProductStatus {
     ACTIVE,
-    ON_LEAVE,
     INACTIVE,
-    AWAY;
+    EXPIRED,
+    UNDER_REVIEW;
 }

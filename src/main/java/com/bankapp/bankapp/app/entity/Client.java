@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.StatusClient;
+import com.bankapp.bankapp.app.enums.ClientStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class Client {
     private UUID id;
 
     @Column(name = "status")
-    private StatusClient status;
+    private ClientStatus status;
 
     @Column(name = "tax_code")
     private String taxCode;

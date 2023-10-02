@@ -1,8 +1,9 @@
 package com.bankapp.bankapp.app.enums;
 
-public enum StatusProduct {
+public enum ClientStatus {
     ACTIVE,
     INACTIVE,
-    EXPIRED,
-    UNDER_REVIEW;
+    CLOSED,
+    BLOCKED,
+    ON_HOLD;
 }

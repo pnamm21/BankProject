@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.StatusAgreement;
+import com.bankapp.bankapp.app.enums.AgreementStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +30,7 @@ public class Agreement {
     private double interestRate;
 
     @Column(name = "status")
-    private StatusAgreement status;
+    private AgreementStatus status;
 
     @Column(name = "sum")
     private double sum;

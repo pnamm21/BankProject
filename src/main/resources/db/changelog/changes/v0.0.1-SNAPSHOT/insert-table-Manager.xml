@@ -26,6 +26,7 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('7a88b870-5c81-41ea-b064-897bd13a7d78')"/>
             <column name="first_name" value="Alice"/>
             <column name="last_name" value="Smith"/>
             <column name="status" value="ON_LEAVE"/>
@@ -40,6 +41,7 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('334f6ea7-8e12-4f57-b3da-f0ce0f51ac7c')"/>
             <column name="first_name" value="David"/>
             <column name="last_name" value="Johnson"/>
             <column name="status" value="INACTIVE"/>
@@ -54,6 +56,7 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('9f65445d-869b-4814-8ce6-553d8c1bb5e3')"/>
             <column name="first_name" value="Emma"/>
             <column name="last_name" value="Brown"/>
             <column name="status" value="AWAY"/>
@@ -145,6 +148,4 @@
             <column name="updated_at" value="2023-09-18 15:00:00"/>
         </insert>
     </changeSet>
-
-
 </databaseChangeLog>

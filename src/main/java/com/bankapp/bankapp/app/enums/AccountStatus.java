@@ -1,9 +1,7 @@
 package com.bankapp.bankapp.app.enums;
 
-public enum StatusClient {
+public enum AccountStatus {
     ACTIVE,
     INACTIVE,
-    CLOSED,
-    BLOCKED,
-    ON_HOLD;
+    CLOSED;
 }

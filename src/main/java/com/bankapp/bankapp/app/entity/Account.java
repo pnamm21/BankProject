@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.StatusAccount;
+import com.bankapp.bankapp.app.enums.AccountStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +35,7 @@ public class Account {
     private int type;
 
     @Column(name = "status")
-    private StatusAccount status;
+    private AccountStatus status;
 
     @Column(name = "balance")
     private double balance;
@@ -50,12 +51,15 @@ public class Account {
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
     @OneToOne(cascade = {PERSIST, MERGE, REFRESH})
+    @JsonIgnore
     private Client clientId;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @JsonIgnore
     private List<Agreement> agreements;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @JsonIgnore
     private List<Transaction> transactions;
 
 
