@@ -8,10 +8,9 @@ public class AccountDto {
     String id;
     String name;
     String type;
-    String statusAccount;
+    String status;
     String balance;
     String currencyCode;
     String createdAt;
-    String updatedAt;
 
 }

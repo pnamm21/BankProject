@@ -13,14 +13,31 @@
 
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
-            <column name="name" value="John Doe"/>
-            <column name="type" value="1"/>
-            <column name="status" value="Active"/>
-            <column name="balance" value="1000.00"/>
+            <column name="account_name" value="John Doe"/>
+            <column name="account_type" value="1"/>
+            <column name="status" value="ACTIVE"/>
             <column name="currency_code" value="USD"/>
             <column name="created_at" value="2023-09-16 10:00:00"/>
             <column name="updated_at" value="2023-09-16 10:00:00"/>
-            <column name="client_id" value="123"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('cf7d57e1-4e4d-4134-86fc-02ef21cf3dff')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Account table">
+            <tableExists tableName="accounts"/>
+        </preConditions>
+
+        <insert tableName="accounts">
+            <column name="id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
+            <column name="account_name" value="Alice Smith"/>
+            <column name="account_type" value="2"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="balance" value="750.50"/>
+            <column name="currency_code" value="EUR"/>
+            <column name="created_at" value="2023-09-16 11:30:00"/>
+            <column name="updated_at" value="2023-09-16 11:30:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('678a2194-28f9-48b5-807c-f3a769f2cf12')"/>
         </insert>
     </changeSet>
 
@@ -30,15 +47,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
-            <column name="name" value="Alice Smith"/>
-            <column name="type" value="2"/>
-            <column name="status" value="Inactive"/>
-            <column name="balance" value="750.50"/>
-            <column name="currency_code" value="EUR"/>
-            <column name="created_at" value="2023-09-16 11:30:00"/>
-            <column name="updated_at" value="2023-09-16 11:30:00"/>
-            <column name="client_id" value=""/>
+            <column name="id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
+            <column name="account_name" value="Bob Johnson"/>
+            <column name="account_type" value="1"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="2000.75"/>
+            <column name="currency_code" value="USD"/>
+            <column name="created_at" value="2023-09-16 14:45:00"/>
+            <column name="updated_at" value="2023-09-16 14:45:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('e1adaf04-68b9-49c8-80b5-fed3ec85fde9')"/>
         </insert>
     </changeSet>
 
@@ -48,15 +65,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
-            <column name="name" value="Bob Johnson"/>
-            <column name="type" value="1"/>
-            <column name="status" value="Active"/>
-            <column name="balance" value="2000.75"/>
-            <column name="currency_code" value="GBP"/>
-            <column name="created_at" value="2023-09-16 14:45:00"/>
-            <column name="updated_at" value="2023-09-16 14:45:00"/>
-            <column name="client_id" value="789"/>
+            <column name="id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
+            <column name="account_name" value="Eva Williams"/>
+            <column name="account_type" value="2"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="1500.25"/>
+            <column name="currency_code" value="USD"/>
+            <column name="created_at" value="2023-09-17 09:15:00"/>
+            <column name="updated_at" value="2023-09-17 09:15:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('749fade4-0ec8-48b2-8597-8acb0e4d3ef1')"/>
         </insert>
     </changeSet>
 
@@ -66,15 +83,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
-            <column name="name" value="Eva Williams"/>
-            <column name="type" value="2"/>
-            <column name="status" value="Active"/>
-            <column name="balance" value="1500.25"/>
-            <column name="currency_code" value="USD"/>
-            <column name="created_at" value="2023-09-17 09:15:00"/>
-            <column name="updated_at" value="2023-09-17 09:15:00"/>
-            <column name="client_id" value="101"/>
+            <column name="id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
+            <column name="account_name" value="David Lee"/>
+            <column name="account_type" value="1"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="balance" value="3000.50"/>
+            <column name="currency_code" value="EUR"/>
+            <column name="created_at" value="2023-09-17 11:30:00"/>
+            <column name="updated_at" value="2023-09-17 11:30:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('fae3d14e-3e72-4868-a00c-2da7ab6474a4')"/>
         </insert>
     </changeSet>
 
@@ -84,15 +101,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
-            <column name="name" value="David Lee"/>
-            <column name="type" value="1"/>
-            <column name="status" value="Inactive"/>
-            <column name="balance" value="3000.50"/>
-            <column name="currency_code" value="EUR"/>
-            <column name="created_at" value="2023-09-17 11:30:00"/>
-            <column name="updated_at" value="2023-09-17 11:30:00"/>
-            <column name="client_id" value="202"/>
+            <column name="id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
+            <column name="account_name" value="Grace Davis"/>
+            <column name="account_type" value="2"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="1800.75"/>
+            <column name="currency_code" value="USD"/>
+            <column name="created_at" value="2023-09-17 14:45:00"/>
+            <column name="updated_at" value="2023-09-17 14:45:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('db9f6550-071c-4370-a0d6-b8303417dd4f')"/>
         </insert>
     </changeSet>
 
@@ -102,15 +119,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
-            <column name="name" value="Grace Davis"/>
-            <column name="type" value="2"/>
-            <column name="status" value="Active"/>
-            <column name="balance" value="1800.75"/>
-            <column name="currency_code" value="GBP"/>
-            <column name="created_at" value="2023-09-17 14:45:00"/>
-            <column name="updated_at" value="2023-09-17 14:45:00"/>
-            <column name="client_id" value="303"/>
+            <column name="id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
+            <column name="account_name" value="Hannah Taylor"/>
+            <column name="account_type" value="1"/>
+            <column name="status" value="CLOSED"/>
+            <column name="balance" value="2500.00"/>
+            <column name="currency_code" value="USD"/>
+            <column name="created_at" value="2023-09-18 10:00:00"/>
+            <column name="updated_at" value="2023-09-18 10:00:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('56876795-4d60-413b-8e30-ee56f49df814')"/>
         </insert>
     </changeSet>
 
@@ -120,15 +137,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
-            <column name="name" value="Hannah Taylor"/>
-            <column name="type" value="1"/>
-            <column name="status" value="Closed"/>
-            <column name="balance" value="2500.00"/>
-            <column name="currency_code" value="USD"/>
-            <column name="created_at" value="2023-09-18 10:00:00"/>
-            <column name="updated_at" value="2023-09-18 10:00:00"/>
-            <column name="client_id" value="404"/>
+            <column name="id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
+            <column name="account_name" value="Isabella Brown"/>
+            <column name="account_type" value="2"/>
+            <column name="status" value="INACTIVE"/>
+            <column name="balance" value="1200.25"/>
+            <column name="currency_code" value="EUR"/>
+            <column name="created_at" value="2023-09-18 11:30:00"/>
+            <column name="updated_at" value="2023-09-18 11:30:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('c385fde8-3817-4129-b321-f37718fbdac4')"/>
         </insert>
     </changeSet>
 
@@ -138,15 +155,15 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
-            <column name="name" value="Isabella Brown"/>
-            <column name="type" value="2"/>
-            <column name="status" value="Inactive"/>
-            <column name="balance" value="1200.25"/>
+            <column name="id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
+            <column name="account_name" value="Jacob Miller"/>
+            <column name="account_type" value="1"/>
+            <column name="status" value="CLOSED"/>
+            <column name="balance" value="3200.50"/>
             <column name="currency_code" value="EUR"/>
-            <column name="created_at" value="2023-09-18 11:30:00"/>
-            <column name="updated_at" value="2023-09-18 11:30:00"/>
-            <column name="client_id" value="505"/>
+            <column name="created_at" value="2023-09-18 14:45:00"/>
+            <column name="updated_at" value="2023-09-18 14:45:00"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('a3534c4d-a2fa-4f42-8070-c461dffc2a89')"/>
         </insert>
     </changeSet>
 
@@ -156,52 +173,17 @@
         </preConditions>
 
         <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
-            <column name="name" value="Jacob Miller"/>
-            <column name="type" value="1"/>
-            <column name="status" value="Closed"/>
-            <column name="balance" value="3200.50"/>
-            <column name="currency_code" value="GBP"/>
-            <column name="created_at" value="2023-09-18 14:45:00"/>
-            <column name="updated_at" value="2023-09-18 14:45:00"/>
-            <column name="client_id" value="606"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="11" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into Account table">
-            <tableExists tableName="accounts"/>
-        </preConditions>
-
-        <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>
-            <column name="name" value="Liam Wilson"/>
-            <column name="type" value="2"/>
-            <column name="status" value="Active"/>
+            <column name="account_name" value="Liam Wilson"/>
+            <column name="account_type" value="2"/>
+            <column name="status" value="ACTIVE"/>
             <column name="balance" value="2100.75"/>
             <column name="currency_code" value="USD"/>
             <column name="created_at" value="2023-09-19 09:15:00"/>
             <column name="updated_at" value="2023-09-19 09:15:00"/>
-            <column name="client_id" value="707"/>
+            <column name="client_id" valueComputed="UUID_TO_BIN('7a5d4ba2-d68e-47d5-83e5-a979e18d698f')"/>
         </insert>
     </changeSet>
 
-    <changeSet id="12" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into Account table">
-            <tableExists tableName="accounts"/>
-        </preConditions>
-
-        <insert tableName="accounts">
-            <column name="id" valueComputed="UUID_TO_BIN('4bb2ad85-313a-4153-a3b3-b6a8fcc00622')"/>
-            <column name="name" value="Mia Moore"/>
-            <column name="type" value="1"/>
-            <column name="status" value="Inactive"/>
-            <column name="balance" value="4000.00"/>
-            <column name="currency_code" value="EUR"/>
-            <column name="created_at" value="2023-09-19 11:30:00"/>
-            <column name="updated_at" value="2023-09-19 11:30:00"/>
-            <column name="client_id" value="808"/>
-        </insert>
-    </changeSet>
 
 </databaseChangeLog>

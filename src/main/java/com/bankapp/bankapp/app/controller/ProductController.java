@@ -1,6 +1,8 @@
 package com.bankapp.bankapp.app.controller;
 
+import com.bankapp.bankapp.app.dto.ProductDto;
 import com.bankapp.bankapp.app.entity.Product;
+import com.bankapp.bankapp.app.mapper.ProductMapper;
 import com.bankapp.bankapp.app.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,14 +21,11 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductMapper productMapper;
 
-    @GetMapping("/{id}")
-    public Product getProduct(@PathVariable("id") String id) {
-        Optional<Product> optionalProduct = productService.getProductById(id);
-        if (optionalProduct.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found");
-        }
-        return optionalProduct.get();
+    @GetMapping("/get/{id}")
+    public ProductDto getProduct(@PathVariable("id")String id){
+        return productMapper.productToProductDto(productService.getProductById(id).orElseThrow());
     }
 
     @PostMapping("/create-product")

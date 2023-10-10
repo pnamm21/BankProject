@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.AccountStatus;
+import com.bankapp.bankapp.app.entity.enums.AccountStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,20 +28,21 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Column(name = "name")
+    @Column(name = "account_name")
     private String name;
 
-    @Column(name = "type")
+    @Column(name = "account_type")
     private int type;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @Column(name = "balance")
     private double balance;
 
     @Column(name = "currency_code")
-    private int currencyCode;
+    private String currencyCode;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
@@ -50,9 +51,9 @@ public class Account {
     private LocalDate updatedAt;
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
-    @OneToOne(cascade = {PERSIST, MERGE, REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     @JsonIgnore
-    private Client clientId;
+    private Client client;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     @JsonIgnore
@@ -61,7 +62,6 @@ public class Account {
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     @JsonIgnore
     private List<Transaction> transactions;
-
 
     @Override
     public boolean equals(Object o) {
@@ -80,7 +80,7 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", clientId=" + clientId +
+                ", clientId=" + client +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", status=" + status +

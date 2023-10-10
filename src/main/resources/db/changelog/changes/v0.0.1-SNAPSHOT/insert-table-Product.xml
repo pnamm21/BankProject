@@ -20,7 +20,7 @@
             <column name="limit" value="10000"/>
             <column name="created_at" value="2023-09-19 10:00:00"/>
             <column name="updated_at" value="2023-09-19 10:00:00"/>
-            <column name="manager_id" value="1"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('0ce2da0e-5313-4bba-a93c-9cba941eefc7')"/>
         </insert>
     </changeSet>
 
@@ -38,7 +38,7 @@
             <column name="limit" value="15000"/>
             <column name="created_at" value="2023-09-19 11:30:00"/>
             <column name="updated_at" value="2023-09-19 11:30:00"/>
-            <column name="manager_id" value="2"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('7a88b870-5c81-41ea-b064-897bd13a7d78')"/>
         </insert>
     </changeSet>
 
@@ -56,7 +56,7 @@
             <column name="limit" value="8000"/>
             <column name="created_at" value="2023-09-19 14:45:00"/>
             <column name="updated_at" value="2023-09-19 14:45:00"/>
-            <column name="manager_id" value="3"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('334f6ea7-8e12-4f57-b3da-f0ce0f51ac7c')"/>
         </insert>
     </changeSet>
 
@@ -74,7 +74,7 @@
             <column name="limit" value="12000"/>
             <column name="created_at" value="2023-09-20 09:15:00"/>
             <column name="updated_at" value="2023-09-20 09:15:00"/>
-            <column name="manager_id" value="4"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('9f65445d-869b-4814-8ce6-553d8c1bb5e3')"/>
         </insert>
     </changeSet>
 
@@ -92,7 +92,7 @@
             <column name="limit" value="9500"/>
             <column name="created_at" value="2023-09-20 11:00:00"/>
             <column name="updated_at" value="2023-09-20 11:00:00"/>
-            <column name="manager_id" value="5"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('47109a64-c3a3-492e-b1f0-c1403f77f75b')"/>
         </insert>
     </changeSet>
 
@@ -110,7 +110,7 @@
             <column name="limit" value="7800"/>
             <column name="created_at" value="2023-09-20 13:30:00"/>
             <column name="updated_at" value="2023-09-20 13:30:00"/>
-            <column name="manager_id" value="6"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('e29055e5-d971-4122-8282-8b8b6e7de1bf')"/>
         </insert>
     </changeSet>
 
@@ -128,7 +128,7 @@
             <column name="limit" value="10500"/>
             <column name="created_at" value="2023-09-20 14:45:00"/>
             <column name="updated_at" value="2023-09-20 14:45:00"/>
-            <column name="manager_id" value="7"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('455285fe-3419-41d5-9dd4-0f701b2b97a7')"/>
         </insert>
     </changeSet>
 
@@ -146,7 +146,7 @@
             <column name="limit" value="11500"/>
             <column name="created_at" value="2023-09-20 16:30:00"/>
             <column name="updated_at" value="2023-09-20 16:30:00"/>
-            <column name="manager_id" value="8"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('33f1cec8-e750-4325-9b4b-127602e49f52')"/>
         </insert>
     </changeSet>
 
@@ -164,7 +164,7 @@
             <column name="limit" value="8500"/>
             <column name="created_at" value="2023-09-21 10:15:00"/>
             <column name="updated_at" value="2023-09-21 10:15:00"/>
-            <column name="manager_id" value="9"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('86b9db71-19d5-4b73-8b86-75e60c82eb9a')"/>
         </insert>
     </changeSet>
 
@@ -182,7 +182,7 @@
             <column name="limit" value="9200"/>
             <column name="created_at" value="2023-09-21 11:45:00"/>
             <column name="updated_at" value="2023-09-21 11:45:00"/>
-            <column name="manager_id" value="10"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('3c559d21-bf77-4b5e-9258-b76755e7774a')"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

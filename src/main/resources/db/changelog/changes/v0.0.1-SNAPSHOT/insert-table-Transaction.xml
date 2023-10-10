@@ -18,8 +18,8 @@
             <column name="description" value="Transaction A"/>
             <column name="status" value="APPROVED"/>
             <column name="created_at" value="2023-09-22 10:00:00"/>
-            <column name="debitAccount_id" value="1"/>
-            <column name="creditAccount_id" value="2"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('6f46f2cd-53f6-4aa4-a9d7-00731d011c55')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('23b4b062-3c8f-42ee-9679-bf2b43db53d3')"/>
         </insert>
     </changeSet>
 
@@ -35,8 +35,8 @@
             <column name="description" value="Transaction B"/>
             <column name="status" value="PENDING"/>
             <column name="created_at" value="2023-09-22 11:30:00"/>
-            <column name="debitAccount_id" value="3"/>
-            <column name="creditAccount_id" value="4"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('13225582-3d5b-4bf8-be57-7a81d1c2c537')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('e979aa7c-7859-45a3-8c80-ec0d2ed586cf')"/>
         </insert>
     </changeSet>
 
@@ -52,8 +52,8 @@
             <column name="description" value="Transaction C"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="created_at" value="2023-09-22 14:45:00"/>
-            <column name="debitAccount_id" value="5"/>
-            <column name="creditAccount_id" value="6"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('94844cf9-e0d8-4109-b75d-316b253ec115')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('28efb326-e882-45b3-b277-1b942d6802cc')"/>
         </insert>
     </changeSet>
 
@@ -69,8 +69,8 @@
             <column name="description" value="Transaction D"/>
             <column name="status" value="CANCELED"/>
             <column name="created_at" value="2023-09-23 09:15:00"/>
-            <column name="debitAccount_id" value="7"/>
-            <column name="creditAccount_id" value="8"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('13b1df0e-d9cd-4ca7-a0bd-e43e5e7ebcef')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('a500f9ab-9dae-4c48-b38c-731abdb14db9')"/>
         </insert>
     </changeSet>
 
@@ -86,8 +86,8 @@
             <column name="description" value="Transaction E"/>
             <column name="status" value="APPROVED"/>
             <column name="created_at" value="2023-09-23 11:00:00"/>
-            <column name="debitAccount_id" value="9"/>
-            <column name="creditAccount_id" value="10"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('94660167-2d9e-43c8-9077-0794d1def642')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('445aa88b-8ed0-48f1-b2de-631834f96174')"/>
         </insert>
     </changeSet>
 
@@ -103,8 +103,8 @@
             <column name="description" value="Transaction F"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="created_at" value="2023-09-23 13:30:00"/>
-            <column name="debitAccount_id" value="11"/>
-            <column name="creditAccount_id" value="12"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('29602c41-8a8b-4a55-a72d-c777e98e2761')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('47771260-aba8-43db-aeb3-1da0828f1070')"/>
         </insert>
     </changeSet>
 
@@ -120,8 +120,8 @@
             <column name="description" value="Transaction G"/>
             <column name="status" value="PENDING"/>
             <column name="created_at" value="2023-09-23 14:45:00"/>
-            <column name="debitAccount_id" value="13"/>
-            <column name="creditAccount_id" value="14"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('a89e68b8-b41f-439a-99b7-737e7e16f065')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('f08c0da6-492f-4fc5-a816-e3a09c25caaa')"/>
         </insert>
     </changeSet>
 
@@ -137,8 +137,8 @@
             <column name="description" value="Transaction H"/>
             <column name="status" value="APPROVED"/>
             <column name="created_at" value="2023-09-23 16:30:00"/>
-            <column name="debitAccount_id" value="15"/>
-            <column name="creditAccount_id" value="16"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('a663ff87-ccd6-471e-a795-82efb80674ec')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('76e552a9-4a5e-4480-be70-6689a76aa48c')"/>
         </insert>
     </changeSet>
 
@@ -154,8 +154,8 @@
             <column name="description" value="Transaction I"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="created_at" value="2023-09-24 09:45:00"/>
-            <column name="debitAccount_id" value="17"/>
-            <column name="creditAccount_id" value="18"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('7576a9c7-62f9-4e77-aafb-91ae1bfd1abf')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('90173888-7193-4267-9c8d-8873fe1d7a6e')"/>
         </insert>
     </changeSet>
 
@@ -171,8 +171,8 @@
             <column name="description" value="Transaction J"/>
             <column name="status" value="CANCELED"/>
             <column name="created_at" value="2023-09-24 11:15:00"/>
-            <column name="debitAccount_id" value="19"/>
-            <column name="creditAccount_id" value="20"/>
+            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('06119aeb-fb22-4d1a-b8a1-09422fe8136f')"/>
+            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('578c7bdd-52f6-4e90-b7f3-7fdcc5632f1b')"/>
         </insert>
     </changeSet>
 

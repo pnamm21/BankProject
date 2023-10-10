@@ -18,8 +18,8 @@
             <column name="sum" value="9500.00"/>
             <column name="created_at" value="2023-09-17 11:00:00"/>
             <column name="updated_at" value="2023-09-17 11:00:00"/>
-            <column name="account_id" value="5"/>
-            <column name="product_id" value="105"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('4efe8f21-f297-4c6c-8cd3-2da3cbd7200e')"/>
         </insert>
     </changeSet>
 
@@ -35,8 +35,8 @@
             <column name="sum" value="7800.00"/>
             <column name="created_at" value="2023-09-17 13:30:00"/>
             <column name="updated_at" value="2023-09-17 13:30:00"/>
-            <column name="account_id" value="6"/>
-            <column name="product_id" value="106"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('38966b08-1995-47d6-af40-2cfe2546693d')"/>
         </insert>
     </changeSet>
 
@@ -52,8 +52,8 @@
             <column name="sum" value="10000.00"/>
             <column name="created_at" value="2023-09-16 10:00:00"/>
             <column name="updated_at" value="2023-09-16 10:00:00"/>
-            <column name="account_id" value="1"/>
-            <column name="product_id" value="101"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('5cdfd225-2002-4b3d-8001-55caa8c5b561')"/>
         </insert>
     </changeSet>
 
@@ -69,8 +69,8 @@
             <column name="sum" value="15000.00"/>
             <column name="created_at" value="2023-09-16 11:30:00"/>
             <column name="updated_at" value="2023-09-16 11:30:00"/>
-            <column name="account_id" value="2"/>
-            <column name="product_id" value="102"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('107e4aa1-13e9-4e29-a1fe-c3d060f55bbd')"/>
         </insert>
     </changeSet>
 
@@ -86,8 +86,8 @@
             <column name="sum" value="8000.00"/>
             <column name="created_at" value="2023-09-16 14:45:00"/>
             <column name="updated_at" value="2023-09-16 14:45:00"/>
-            <column name="account_id" value="3"/>
-            <column name="product_id" value="103"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('aecd6ed0-39b2-4329-8780-5a2173da65bc')"/>
         </insert>
     </changeSet>
 
@@ -103,8 +103,8 @@
             <column name="sum" value="12000.00"/>
             <column name="created_at" value="2023-09-17 09:15:00"/>
             <column name="updated_at" value="2023-09-17 09:15:00"/>
-            <column name="account_id" value="4"/>
-            <column name="product_id" value="104"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('76180aef-76f2-40f2-894f-d737e96a200a')"/>
         </insert>
     </changeSet>
 
@@ -120,8 +120,8 @@
             <column name="sum" value="10500.00"/>
             <column name="created_at" value="2023-09-18 09:45:00"/>
             <column name="updated_at" value="2023-09-18 09:45:00"/>
-            <column name="account_id" value="7"/>
-            <column name="product_id" value="107"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('31c843c8-a7b9-4a40-826c-45dc8c682052')"/>
         </insert>
     </changeSet>
 
@@ -137,8 +137,8 @@
             <column name="sum" value="11500.00"/>
             <column name="created_at" value="2023-09-18 11:15:00"/>
             <column name="updated_at" value="2023-09-18 11:15:00"/>
-            <column name="account_id" value="8"/>
-            <column name="product_id" value="108"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('2457d219-f995-412e-a10c-5638cb97fd5a')"/>
         </insert>
     </changeSet>
 
@@ -154,8 +154,8 @@
             <column name="sum" value="9800.00"/>
             <column name="created_at" value="2023-09-18 13:45:00"/>
             <column name="updated_at" value="2023-09-18 13:45:00"/>
-            <column name="account_id" value="9"/>
-            <column name="product_id" value="109"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('d04ad4fc-e8c9-4571-850d-999d836496fb')"/>
         </insert>
     </changeSet>
 
@@ -171,8 +171,8 @@
             <column name="sum" value="12200.00"/>
             <column name="created_at" value="2023-09-19 09:30:00"/>
             <column name="updated_at" value="2023-09-19 09:30:00"/>
-            <column name="account_id" value="10"/>
-            <column name="product_id" value="110"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
+            <column name="product_id" valueComputed="UUID_TO_BIN('f4133bba-a644-4656-afe2-e2feefba972c')"/>
         </insert>
     </changeSet>
 

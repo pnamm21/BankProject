@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 ;
-import com.bankapp.bankapp.app.enums.ProductStatus;
+import com.bankapp.bankapp.app.entity.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,10 +31,11 @@ public class Product {
     private String name;
 
     @Column(name = "status")
-        private ProductStatus status;
+    @Enumerated(EnumType.STRING)
+    private ProductStatus status;
 
     @Column(name = "currency_code")
-    private int currencyCode;
+    private String currencyCode;
 
     @Column(name = "interest_rate")
     private double interestRate;

@@ -23,7 +23,7 @@
             <column name="phone" value="123-456-7890"/>
             <column name="created_at" value="2023-09-16 10:00:00"/>
             <column name="updated_at" value="2023-09-16 10:00:00"/>
-            <column name="manager_id" value="1"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('0ce2da0e-5313-4bba-a93c-9cba941eefc7')"/>
         </insert>
     </changeSet>
 
@@ -44,7 +44,7 @@
             <column name="phone" value="987-654-3210"/>
             <column name="created_at" value="2023-09-16 11:30:00"/>
             <column name="updated_at" value="2023-09-16 11:30:00"/>
-            <column name="manager_id" value="2"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('7a88b870-5c81-41ea-b064-897bd13a7d78')"/>
         </insert>
     </changeSet>
 
@@ -65,7 +65,7 @@
             <column name="phone" value="555-123-4567"/>
             <column name="created_at" value="2023-09-16 14:45:00"/>
             <column name="updated_at" value="2023-09-16 14:45:00"/>
-            <column name="manager_id" value="3"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('334f6ea7-8e12-4f57-b3da-f0ce0f51ac7c')"/>
         </insert>
     </changeSet>
 
@@ -86,7 +86,7 @@
             <column name="phone" value="555-987-6543"/>
             <column name="created_at" value="2023-09-17 09:15:00"/>
             <column name="updated_at" value="2023-09-17 09:15:00"/>
-            <column name="manager_id" value="4"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('9f65445d-869b-4814-8ce6-553d8c1bb5e3')"/>
         </insert>
     </changeSet>
 
@@ -107,7 +107,7 @@
             <column name="phone" value="555-222-3333"/>
             <column name="created_at" value="2023-09-17 11:00:00"/>
             <column name="updated_at" value="2023-09-17 11:00:00"/>
-            <column name="manager_id" value="5"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('47109a64-c3a3-492e-b1f0-c1403f77f75b')"/>
         </insert>
     </changeSet>
 
@@ -128,7 +128,7 @@
             <column name="phone" value="555-333-4444"/>
             <column name="created_at" value="2023-09-17 13:30:00"/>
             <column name="updated_at" value="2023-09-17 13:30:00"/>
-            <column name="manager_id" value="6"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('e29055e5-d971-4122-8282-8b8b6e7de1bf')"/>
         </insert>
     </changeSet>
 
@@ -149,7 +149,7 @@
             <column name="phone" value="555-444-5555"/>
             <column name="created_at" value="2023-09-18 09:45:00"/>
             <column name="updated_at" value="2023-09-18 09:45:00"/>
-            <column name="manager_id" value="7"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('455285fe-3419-41d5-9dd4-0f701b2b97a7')"/>
         </insert>
     </changeSet>
 
@@ -170,7 +170,7 @@
             <column name="phone" value="555-555-6666"/>
             <column name="created_at" value="2023-09-18 11:15:00"/>
             <column name="updated_at" value="2023-09-18 11:15:00"/>
-            <column name="manager_id" value="8"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('33f1cec8-e750-4325-9b4b-127602e49f52')"/>
         </insert>
     </changeSet>
 
@@ -191,7 +191,7 @@
             <column name="phone" value="555-666-7777"/>
             <column name="created_at" value="2023-09-18 13:45:00"/>
             <column name="updated_at" value="2023-09-18 13:45:00"/>
-            <column name="manager_id" value="9"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('86b9db71-19d5-4b73-8b86-75e60c82eb9a')"/>
         </insert>
     </changeSet>
 
@@ -212,112 +212,7 @@
             <column name="phone" value="555-777-8888"/>
             <column name="created_at" value="2023-09-18 15:00:00"/>
             <column name="updated_at" value="2023-09-18 15:00:00"/>
-            <column name="manager_id" value="10"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="11" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into client table">
-            <tableExists tableName="clients"/>
-        </preConditions>
-
-        <insert tableName="clients">
-            <column name="id" valueComputed="UUID_TO_BIN('f032276e-bbc7-445e-a230-a123857df639')"/>
-            <column name="interest_rate" value="0.033"/>
-            <column name="status" value="ACTIVE"/>
-            <column name="tax_code" value="XYZ789"/>
-            <column name="first_name" value="Liam"/>
-            <column name="last_name" value="Martin"/>
-            <column name="email" value="liam.martin@example.com"/>
-            <column name="address" value="888 Elm St"/>
-            <column name="phone" value="555-888-9999"/>
-            <column name="created_at" value="2023-09-18 16:30:00"/>
-            <column name="updated_at" value="2023-09-18 16:30:00"/>
-            <column name="manager_id" value="11"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="12" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into client table">
-            <tableExists tableName="clients"/>
-        </preConditions>
-
-        <insert tableName="clients">
-            <column name="id" valueComputed="UUID_TO_BIN('ec393d85-d396-4bb5-b591-a50eb24d16dc')"/>
-            <column name="interest_rate" value="0.030"/>
-            <column name="status" value="INACTIVE"/>
-            <column name="tax_code" value="ABC789"/>
-            <column name="first_name" value="Sophia"/>
-            <column name="last_name" value="Davis"/>
-            <column name="email" value="sophia.davis@example.com"/>
-            <column name="address" value="999 Oak St"/>
-            <column name="phone" value="555-999-0000"/>
-            <column name="created_at" value="2023-09-18 17:45:00"/>
-            <column name="updated_at" value="2023-09-18 17:45:00"/>
-            <column name="manager_id" value="12"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="13" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into client table">
-            <tableExists tableName="clients"/>
-        </preConditions>
-
-        <insert tableName="clients">
-            <column name="id" valueComputed="UUID_TO_BIN('8612d775-b5cf-48a1-aac3-395c825667e4')"/>
-            <column name="interest_rate" value="0.031"/>
-            <column name="status" value="CLOSED"/>
-            <column name="tax_code" value="PQR789"/>
-            <column name="first_name" value="Mia"/>
-            <column name="last_name" value="Harris"/>
-            <column name="email" value="mia.harris@example.com"/>
-            <column name="address" value="1010 Pine St"/>
-            <column name="phone" value="555-1010-1111"/>
-            <column name="created_at" value="2023-09-18 18:15:00"/>
-            <column name="updated_at" value="2023-09-18 18:15:00"/>
-            <column name="manager_id" value="13"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="14" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into client table">
-            <tableExists tableName="clients"/>
-        </preConditions>
-
-        <insert tableName="clients">
-            <column name="id" valueComputed="UUID_TO_BIN('091cd800-dae4-4066-8404-43a62351363f')"/>
-            <column name="interest_rate" value="0.029"/>
-            <column name="status" value="BLOCKED"/>
-            <column name="tax_code" value="LMN789"/>
-            <column name="first_name" value="Ethan"/>
-            <column name="last_name" value="Moore"/>
-            <column name="email" value="ethan.moore@example.com"/>
-            <column name="address" value="1111 Elm St"/>
-            <column name="phone" value="555-1111-2222"/>
-            <column name="created_at" value="2023-09-18 19:45:00"/>
-            <column name="updated_at" value="2023-09-18 19:45:00"/>
-            <column name="manager_id" value="14"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="15" author="p.namm">
-        <preConditions onFail="CONTINUE" onFailMessage="Insert into client table">
-            <tableExists tableName="clients"/>
-        </preConditions>
-
-        <insert tableName="clients">
-            <column name="id" valueComputed="UUID_TO_BIN('d1f9301c-e237-4186-bb74-1f427bed57bf')"/>
-            <column name="interest_rate" value="0.030"/>
-            <column name="status" value="ON_HOLD"/>
-            <column name="tax_code" value="OPQ789"/>
-            <column name="first_name" value="James"/>
-            <column name="last_name" value="Anderson"/>
-            <column name="email" value="james.anderson@example.com"/>
-            <column name="address" value="1234 Oak St"/>
-            <column name="phone" value="555-1234-5678"/>
-            <column name="created_at" value="2023-09-18 20:00:00"/>
-            <column name="updated_at" value="2023-09-18 20:00:00"/>
-            <column name="manager_id" value="15"/>
+            <column name="manager_id" valueComputed="UUID_TO_BIN('3c559d21-bf77-4b5e-9258-b76755e7774a')"/>
         </insert>
     </changeSet>
 

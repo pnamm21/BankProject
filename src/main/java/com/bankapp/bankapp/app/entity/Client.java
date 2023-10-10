@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.ClientStatus;
+import com.bankapp.bankapp.app.entity.enums.ClientStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Client {
     private UUID id;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ClientStatus status;
 
     @Column(name = "tax_code")
@@ -37,7 +39,7 @@ public class Client {
     private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -49,16 +51,18 @@ public class Client {
     private String phone;
 
     @Column(name = "created_at")
-    private LocalDate created_at;
+    private LocalDate createdAt;
 
     @Column(name = "updated_at")
-    private LocalDate updated_at;
+    private LocalDate updatedAt;
 
     @JoinColumn(name = "manager_id",referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @JsonIgnore
     private Manager managerId;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @JsonIgnore
     private List<Account> accounts;
 
     @Override
@@ -82,12 +86,12 @@ public class Client {
                 ", status=" + status +
                 ", taxCode='" + taxCode + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", last_name='" + last_name + '\'' +
+                ", last_name='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
+                ", created_at=" + createdAt +
+                ", updated_at=" + updatedAt +
                 '}';
     }
 }

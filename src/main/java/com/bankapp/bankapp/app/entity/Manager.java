@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.entity;
 
-import com.bankapp.bankapp.app.enums.ManagerStatus;
+import com.bankapp.bankapp.app.entity.enums.ManagerStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,9 +44,11 @@ public class Manager {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Client> clients;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     private List<Product> products;
 
