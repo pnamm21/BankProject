@@ -15,9 +15,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('4efe8f21-f297-4c6c-8cd3-2da3cbd7200e')"/>
             <column name="name" value="Product A"/>
             <column name="status" value="ACTIVE"/>
-            <column name="currency_code" value="1"/>
+            <column name="currency_code" value="USD"/>
             <column name="interest_rate" value="0.0250"/>
-            <column name="limit" value="10000"/>
+            <column name="limitt" value="10000"/>
             <column name="created_at" value="2023-09-19 10:00:00"/>
             <column name="updated_at" value="2023-09-19 10:00:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('0ce2da0e-5313-4bba-a93c-9cba941eefc7')"/>
@@ -33,9 +33,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('38966b08-1995-47d6-af40-2cfe2546693d')"/>
             <column name="name" value="Product B"/>
             <column name="status" value="INACTIVE"/>
-            <column name="currency_code" value="2"/>
+            <column name="currency_code" value="EUR"/>
             <column name="interest_rate" value="0.0350"/>
-            <column name="limit" value="15000"/>
+            <column name="limitt" value="15000"/>
             <column name="created_at" value="2023-09-19 11:30:00"/>
             <column name="updated_at" value="2023-09-19 11:30:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('7a88b870-5c81-41ea-b064-897bd13a7d78')"/>
@@ -51,9 +51,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('5cdfd225-2002-4b3d-8001-55caa8c5b561')"/>
             <column name="name" value="Product C"/>
             <column name="status" value="EXPIRED"/>
-            <column name="currency_code" value="3"/>
+            <column name="currency_code" value="USD"/>
             <column name="interest_rate" value="0.0225"/>
-            <column name="limit" value="8000"/>
+            <column name="limitt" value="8000"/>
             <column name="created_at" value="2023-09-19 14:45:00"/>
             <column name="updated_at" value="2023-09-19 14:45:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('334f6ea7-8e12-4f57-b3da-f0ce0f51ac7c')"/>
@@ -69,9 +69,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('107e4aa1-13e9-4e29-a1fe-c3d060f55bbd')"/>
             <column name="name" value="Product D"/>
             <column name="status" value="UNDER_REVIEW"/>
-            <column name="currency_code" value="4"/>
+            <column name="currency_code" value="EUR"/>
             <column name="interest_rate" value="0.0300"/>
-            <column name="limit" value="12000"/>
+            <column name="limitt" value="12000"/>
             <column name="created_at" value="2023-09-20 09:15:00"/>
             <column name="updated_at" value="2023-09-20 09:15:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('9f65445d-869b-4814-8ce6-553d8c1bb5e3')"/>
@@ -87,9 +87,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('aecd6ed0-39b2-4329-8780-5a2173da65bc')"/>
             <column name="name" value="Product E"/>
             <column name="status" value="ACTIVE"/>
-            <column name="currency_code" value="5"/>
+            <column name="currency_code" value="EUR"/>
             <column name="interest_rate" value="0.0280"/>
-            <column name="limit" value="9500"/>
+            <column name="limitt" value="9500"/>
             <column name="created_at" value="2023-09-20 11:00:00"/>
             <column name="updated_at" value="2023-09-20 11:00:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('47109a64-c3a3-492e-b1f0-c1403f77f75b')"/>
@@ -105,9 +105,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('76180aef-76f2-40f2-894f-d737e96a200a')"/>
             <column name="name" value="Product F"/>
             <column name="status" value="INACTIVE"/>
-            <column name="currency_code" value="6"/>
+            <column name="currency_code" value="USD"/>
             <column name="interest_rate" value="0.0325"/>
-            <column name="limit" value="7800"/>
+            <column name="limitt" value="7800"/>
             <column name="created_at" value="2023-09-20 13:30:00"/>
             <column name="updated_at" value="2023-09-20 13:30:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('e29055e5-d971-4122-8282-8b8b6e7de1bf')"/>
@@ -123,9 +123,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('31c843c8-a7b9-4a40-826c-45dc8c682052')"/>
             <column name="name" value="Product G"/>
             <column name="status" value="EXPIRED"/>
-            <column name="currency_code" value="7"/>
+            <column name="currency_code" value="GBR"/>
             <column name="interest_rate" value="0.0275"/>
-            <column name="limit" value="10500"/>
+            <column name="limitt" value="10500"/>
             <column name="created_at" value="2023-09-20 14:45:00"/>
             <column name="updated_at" value="2023-09-20 14:45:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('455285fe-3419-41d5-9dd4-0f701b2b97a7')"/>
@@ -141,9 +141,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('2457d219-f995-412e-a10c-5638cb97fd5a')"/>
             <column name="name" value="Product H"/>
             <column name="status" value="UNDER_REVIEW"/>
-            <column name="currency_code" value="8"/>
+            <column name="currency_code" value="USD"/>
             <column name="interest_rate" value="0.0310"/>
-            <column name="limit" value="11500"/>
+            <column name="limitt" value="11500"/>
             <column name="created_at" value="2023-09-20 16:30:00"/>
             <column name="updated_at" value="2023-09-20 16:30:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('33f1cec8-e750-4325-9b4b-127602e49f52')"/>
@@ -159,9 +159,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('d04ad4fc-e8c9-4571-850d-999d836496fb')"/>
             <column name="name" value="Product I"/>
             <column name="status" value="ACTIVE"/>
-            <column name="currency_code" value="9"/>
+            <column name="currency_code" value="USD"/>
             <column name="interest_rate" value="0.0285"/>
-            <column name="limit" value="8500"/>
+            <column name="limitt" value="8500"/>
             <column name="created_at" value="2023-09-21 10:15:00"/>
             <column name="updated_at" value="2023-09-21 10:15:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('86b9db71-19d5-4b73-8b86-75e60c82eb9a')"/>
@@ -177,9 +177,9 @@
             <column name="id" valueComputed="UUID_TO_BIN('f4133bba-a644-4656-afe2-e2feefba972c')"/>
             <column name="name" value="Product J"/>
             <column name="status" value="INACTIVE"/>
-            <column name="currency_code" value="10"/>
+            <column name="currency_code" value="EUR"/>
             <column name="interest_rate" value="0.0320"/>
-            <column name="limit" value="9200"/>
+            <column name="limitt" value="9200"/>
             <column name="created_at" value="2023-09-21 11:45:00"/>
             <column name="updated_at" value="2023-09-21 11:45:00"/>
             <column name="manager_id" valueComputed="UUID_TO_BIN('3c559d21-bf77-4b5e-9258-b76755e7774a')"/>

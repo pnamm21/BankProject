@@ -1,13 +1,15 @@
 package com.bankapp.bankapp.app.entity;
 
 import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
+import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,14 +25,15 @@ public class Transaction {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "type")
-    private int type;
+    @Column(name = "transaction_type")
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 
     @Column(name = "amount")
-    private double amount;
+    private Double amount;
 
     @Column(name = "description")
     private String description;
@@ -40,15 +43,15 @@ public class Transaction {
     private TransactionStatus status;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    @JoinColumn(name = "debitAccount_id",referencedColumnName = "id")
-    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
-    private Account debitAccountId;
+    @JoinColumn(name = "debit_account_id",referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private Account debitAccount;
 
-    @JoinColumn(name = "creditAccount_id",referencedColumnName = "id")
-    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
-    private Account creditAccountId;
+    @JoinColumn(name = "credit_account_id",referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    private Account creditAccount;
 
     @Override
     public boolean equals(Object o) {
@@ -67,9 +70,9 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", debitAccountId=" + debitAccountId +
-                ", creditAccountId=" + creditAccountId +
-                ", type=" + type +
+                ", debitAccountId=" + debitAccount +
+                ", creditAccountId=" + creditAccount +
+                ", transaction_type=" + transactionType +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", status=" + status +

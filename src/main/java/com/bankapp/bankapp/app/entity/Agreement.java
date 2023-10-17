@@ -23,18 +23,18 @@ public class Agreement {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "interest_rate")
-    private double interestRate;
+    private Double interestRate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AgreementStatus status;
 
     @Column(name = "sum")
-    private double sum;
+    private Double sum;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
@@ -42,33 +42,33 @@ public class Agreement {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @JoinColumn(name = "account_id",referencedColumnName = "id")
-    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
-    private Account accountId;
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REFRESH})
+    private Account account;
 
-    @JoinColumn(name = "product_id",referencedColumnName = "id")
-    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH})
-    private Product productId;
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REFRESH})
+    private Product product;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Agreement agreement = (Agreement) o;
-        return Objects.equals(id, agreement.id) && Objects.equals(accountId, agreement.accountId) && Objects.equals(productId, agreement.productId);
+        return Objects.equals(id, agreement.id) && Objects.equals(account, agreement.account) && Objects.equals(product, agreement.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountId, productId);
+        return Objects.hash(id, account, product);
     }
 
     @Override
     public String toString() {
         return "Agreement{" +
                 "id=" + id +
-                ", accountId=" + accountId +
-                ", productId=" + productId +
+                ", accountId=" + account +
+                ", productId=" + product +
                 ", interestRate=" + interestRate +
                 ", status=" + status +
                 ", sum=" + sum +

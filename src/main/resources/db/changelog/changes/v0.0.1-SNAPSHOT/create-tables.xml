@@ -18,13 +18,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="account_name" type="varchar(100)"/>
-            <column name="account_type" type="int"/>
+            <column name="account_type" type="varchar(30)"/>
             <column name="status" type="varchar(50)"/>
             <column name="balance" type="decimal(15,2)"/>
             <column name="currency_code" type="varchar(5)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
-            <column name="client_id" type="binary(16)"/>
+            <column name="client_id" type="binary(16)">
+                <constraints foreignKeyName="clients(id)"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -103,9 +105,9 @@
             </column>
             <column name="name" type="varchar(70)"/>
             <column name="status" type="varchar(50)"/>
-            <column name="currency_code" type="int"/>
+            <column name="currency_code" type="varchar(3)"/>
             <column name="interest_rate" type="decimal(6,4)"/>
-            <column name="limit" type="int"/>
+            <column name="limitt" type="decimal(12,2)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
         </createTable>

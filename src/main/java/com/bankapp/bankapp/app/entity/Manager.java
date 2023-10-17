@@ -25,7 +25,7 @@ public class Manager {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "first_name")
@@ -45,11 +45,11 @@ public class Manager {
     private LocalDate updatedAt;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany
     private List<Client> clients;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany
     private List<Product> products;
 
     @Override

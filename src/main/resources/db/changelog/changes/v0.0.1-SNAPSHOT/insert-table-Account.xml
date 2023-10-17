@@ -5,7 +5,6 @@
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
     <changeSet id="1" author="p.namm">
         <preConditions onFail="CONTINUE" onFailMessage="Insert into Account table">
             <tableExists tableName="accounts"/>
@@ -14,8 +13,9 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
             <column name="account_name" value="John Doe"/>
-            <column name="account_type" value="1"/>
+            <column name="account_type" value="BUSINESS_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
+            <column name="balance" value="100000.00"/>
             <column name="currency_code" value="USD"/>
             <column name="created_at" value="2023-09-16 10:00:00"/>
             <column name="updated_at" value="2023-09-16 10:00:00"/>
@@ -31,7 +31,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
             <column name="account_name" value="Alice Smith"/>
-            <column name="account_type" value="2"/>
+            <column name="account_type" value="STUDENT_ACCOUNT"/>
             <column name="status" value="INACTIVE"/>
             <column name="balance" value="750.50"/>
             <column name="currency_code" value="EUR"/>
@@ -49,7 +49,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
             <column name="account_name" value="Bob Johnson"/>
-            <column name="account_type" value="1"/>
+            <column name="account_type" value="MAKE_MONEY_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="2000.75"/>
             <column name="currency_code" value="USD"/>
@@ -67,7 +67,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
             <column name="account_name" value="Eva Williams"/>
-            <column name="account_type" value="2"/>
+            <column name="account_type" value="SAVING_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="1500.25"/>
             <column name="currency_code" value="USD"/>
@@ -85,7 +85,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
             <column name="account_name" value="David Lee"/>
-            <column name="account_type" value="1"/>
+            <column name="account_type" value="STUDENT_ACCOUNT"/>
             <column name="status" value="INACTIVE"/>
             <column name="balance" value="3000.50"/>
             <column name="currency_code" value="EUR"/>
@@ -103,7 +103,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
             <column name="account_name" value="Grace Davis"/>
-            <column name="account_type" value="2"/>
+            <column name="account_type" value="STUDENT_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="1800.75"/>
             <column name="currency_code" value="USD"/>
@@ -121,7 +121,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
             <column name="account_name" value="Hannah Taylor"/>
-            <column name="account_type" value="1"/>
+            <column name="account_type" value="SAVING_ACCOUNT"/>
             <column name="status" value="CLOSED"/>
             <column name="balance" value="2500.00"/>
             <column name="currency_code" value="USD"/>
@@ -139,7 +139,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
             <column name="account_name" value="Isabella Brown"/>
-            <column name="account_type" value="2"/>
+            <column name="account_type" value="SAVING_ACCOUNT"/>
             <column name="status" value="INACTIVE"/>
             <column name="balance" value="1200.25"/>
             <column name="currency_code" value="EUR"/>
@@ -157,7 +157,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
             <column name="account_name" value="Jacob Miller"/>
-            <column name="account_type" value="1"/>
+            <column name="account_type" value="MAKE_MONEY_ACCOUNT"/>
             <column name="status" value="CLOSED"/>
             <column name="balance" value="3200.50"/>
             <column name="currency_code" value="EUR"/>
@@ -175,7 +175,7 @@
         <insert tableName="accounts">
             <column name="id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>
             <column name="account_name" value="Liam Wilson"/>
-            <column name="account_type" value="2"/>
+            <column name="account_type" value="MAKE_MONEY_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="2100.75"/>
             <column name="currency_code" value="USD"/>

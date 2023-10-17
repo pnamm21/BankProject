@@ -1,12 +1,14 @@
 package com.bankapp.bankapp.app.controller;
 
 import com.bankapp.bankapp.app.dto.ClientDto;
+import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Client;
 import com.bankapp.bankapp.app.mapper.ClientMapper;
 import com.bankapp.bankapp.app.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,22 +22,18 @@ public class ClientController {
     private final ClientService clientService;
     private final ClientMapper clientMapper;
 
-    @GetMapping("/{id}")
-    public Client getClientById(@PathVariable("id") String id) {
-        Optional<Client> optionalClient = clientService.getClientById(id);
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<ClientDto> getClient(@PathVariable("id") String id) {
+        Optional<Client> optionalClient;
+        try {
+            optionalClient = clientService.getClientById(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not found");
+        }
         if (optionalClient.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not found");
         }
-        return optionalClient.get();
+        return new ResponseEntity<>(clientMapper.clientToClientDTO(clientService.getClientById(id).orElseThrow()), HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
-    public ClientDto getClient(@PathVariable("id")String id){
-        return clientMapper.clientToClientDTO(clientService.getClientById(id).orElseThrow());
-    }
-
-    @PostMapping("/delete-client/{id}")
-    public boolean deleteClient(@PathVariable("id") String id) {
-        return clientService.deleteClient(id);
-    }
 }

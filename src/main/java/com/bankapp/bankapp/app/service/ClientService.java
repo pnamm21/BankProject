@@ -8,5 +8,6 @@ import java.util.Optional;
 @Service
 public interface ClientService {
     Optional<Client> getClientById(String id);
+
     boolean deleteClient(String id);
 }

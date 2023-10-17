@@ -12,6 +12,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('0ce2da0e-5313-4bba-a93c-9cba941eefc7')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="John"/>
             <column name="last_name" value="Doe"/>
             <column name="status" value="ACTIVE"/>
@@ -26,7 +29,9 @@
         </preConditions>
 
         <insert tableName="managers">
-            <column name="id" valueComputed="UUID_TO_BIN('7a88b870-5c81-41ea-b064-897bd13a7d78')"/>
+            <column name="id" valueComputed="UUID_TO_BIN('7a88b870-5c81-41ea-b064-897bd13a7d78')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Alice"/>
             <column name="last_name" value="Smith"/>
             <column name="status" value="ON_LEAVE"/>
@@ -41,7 +46,9 @@
         </preConditions>
 
         <insert tableName="managers">
-            <column name="id" valueComputed="UUID_TO_BIN('334f6ea7-8e12-4f57-b3da-f0ce0f51ac7c')"/>
+            <column name="id" valueComputed="UUID_TO_BIN('334f6ea7-8e12-4f57-b3da-f0ce0f51ac7c')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="David"/>
             <column name="last_name" value="Johnson"/>
             <column name="status" value="INACTIVE"/>
@@ -56,7 +63,9 @@
         </preConditions>
 
         <insert tableName="managers">
-            <column name="id" valueComputed="UUID_TO_BIN('9f65445d-869b-4814-8ce6-553d8c1bb5e3')"/>
+            <column name="id" valueComputed="UUID_TO_BIN('9f65445d-869b-4814-8ce6-553d8c1bb5e3')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Emma"/>
             <column name="last_name" value="Brown"/>
             <column name="status" value="AWAY"/>
@@ -71,6 +80,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('47109a64-c3a3-492e-b1f0-c1403f77f75b')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Sophia"/>
             <column name="last_name" value="Miller"/>
             <column name="status" value="ACTIVE"/>
@@ -85,6 +97,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('e29055e5-d971-4122-8282-8b8b6e7de1bf')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Oliver"/>
             <column name="last_name" value="Wilson"/>
             <column name="status" value="ON_LEAVE"/>
@@ -99,6 +114,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('455285fe-3419-41d5-9dd4-0f701b2b97a7')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Liam"/>
             <column name="last_name" value="Smith"/>
             <column name="status" value="INACTIVE"/>
@@ -113,6 +131,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('33f1cec8-e750-4325-9b4b-127602e49f52')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Olivia"/>
             <column name="last_name" value="Davis"/>
             <column name="status" value="AWAY"/>
@@ -127,6 +148,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('86b9db71-19d5-4b73-8b86-75e60c82eb9a')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Noah"/>
             <column name="last_name" value="Wilson"/>
             <column name="status" value="ACTIVE"/>
@@ -141,6 +165,9 @@
         </preConditions>
 
         <insert tableName="managers">
+            <column name="id" valueComputed="UUID_TO_BIN('3c559d21-bf77-4b5e-9258-b76755e7774a')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="first_name" value="Emma"/>
             <column name="last_name" value="Smith"/>
             <column name="status" value="ON_LEAVE"/>

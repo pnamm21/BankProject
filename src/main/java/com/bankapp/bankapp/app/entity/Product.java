@@ -1,13 +1,14 @@
 package com.bankapp.bankapp.app.entity;
 ;
 import com.bankapp.bankapp.app.entity.enums.ProductStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "name")
@@ -38,22 +39,23 @@ public class Product {
     private String currencyCode;
 
     @Column(name = "interest_rate")
-    private double interestRate;
+    private Double interestRate;
 
-    @Column(name = "limit")
-    private int limit;
+    @Column(name = "limitt")
+    private Double limit;
 
     @Column(name = "created_at")
-    private LocalDate created_at;
+    private LocalDateTime created_at;
 
     @Column(name = "updated_at")
-    private LocalDate updated_at;
+    private LocalDateTime updated_at;
 
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
-    private Manager managerId;
+    private Manager manager;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany
+    @JsonIgnore
     private List<Agreement> agreements;
 
     @Override
@@ -73,7 +75,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", managerId=" + managerId +
+                ", managerId=" + manager +
                 ", name='" + name + '\'' +
                 ", status=" + status +
                 ", currencyCode=" + currencyCode +

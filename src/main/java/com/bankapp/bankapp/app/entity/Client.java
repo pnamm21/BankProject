@@ -25,7 +25,7 @@ public class Client {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "status")
@@ -59,9 +59,9 @@ public class Client {
     @JoinColumn(name = "manager_id",referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     @JsonIgnore
-    private Manager managerId;
+    private Manager manager;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany
     @JsonIgnore
     private List<Account> accounts;
 
@@ -82,7 +82,7 @@ public class Client {
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", managerId=" + managerId +
+                ", managerId=" + manager +
                 ", status=" + status +
                 ", taxCode='" + taxCode + '\'' +
                 ", firstName='" + firstName + '\'' +

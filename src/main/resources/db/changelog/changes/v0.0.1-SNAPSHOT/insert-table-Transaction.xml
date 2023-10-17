@@ -6,20 +6,20 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="1" author="p.namm">
+    <changeSet id = "1" author="p.namm">
         <preConditions onFail="CONTINUE" onFailMessage="Insert into transaction table">
             <tableExists tableName="transactions"/>
         </preConditions>
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('9fc197b4-8e53-4750-be2d-22b7d0816b00')"/>
-            <column name="type" value="1"/>
+            <column name="transaction_type" value="ATM"/>
             <column name="amount" value="100.0000"/>
             <column name="description" value="Transaction A"/>
             <column name="status" value="APPROVED"/>
             <column name="created_at" value="2023-09-22 10:00:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('6f46f2cd-53f6-4aa4-a9d7-00731d011c55')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('23b4b062-3c8f-42ee-9679-bf2b43db53d3')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
         </insert>
     </changeSet>
 
@@ -30,13 +30,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('adeb2a36-f146-4d2a-bb98-cd8ba734eba8')"/>
-            <column name="type" value="2"/>
+            <column name="transaction_type" value="WITHDRAWALS"/>
             <column name="amount" value="200.0000"/>
             <column name="description" value="Transaction B"/>
             <column name="status" value="PENDING"/>
             <column name="created_at" value="2023-09-22 11:30:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('13225582-3d5b-4bf8-be57-7a81d1c2c537')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('e979aa7c-7859-45a3-8c80-ec0d2ed586cf')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
         </insert>
     </changeSet>
 
@@ -47,13 +47,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('990c8943-c173-4b34-bc05-047964b97d6a')"/>
-            <column name="type" value="1"/>
+            <column name="transaction_type" value="TRANSFERS"/>
             <column name="amount" value="150.0000"/>
             <column name="description" value="Transaction C"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="created_at" value="2023-09-22 14:45:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('94844cf9-e0d8-4109-b75d-316b253ec115')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('28efb326-e882-45b3-b277-1b942d6802cc')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
         </insert>
     </changeSet>
 
@@ -64,13 +64,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('19842eaf-8e8c-4d72-8be4-ca7cf0768749')"/>
-            <column name="type" value="2"/>
+            <column name="transaction_type" value="WITHDRAWALS"/>
             <column name="amount" value="300.0000"/>
             <column name="description" value="Transaction D"/>
             <column name="status" value="CANCELED"/>
             <column name="created_at" value="2023-09-23 09:15:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('13b1df0e-d9cd-4ca7-a0bd-e43e5e7ebcef')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('a500f9ab-9dae-4c48-b38c-731abdb14db9')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
         </insert>
     </changeSet>
 
@@ -81,13 +81,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('4d86ae83-b62f-4f44-80af-0c4e4af5af00')"/>
-            <column name="type" value="1"/>
+            <column name="transaction_type" value="TRANSFERS"/>
             <column name="amount" value="120.0000"/>
             <column name="description" value="Transaction E"/>
             <column name="status" value="APPROVED"/>
             <column name="created_at" value="2023-09-23 11:00:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('94660167-2d9e-43c8-9077-0794d1def642')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('445aa88b-8ed0-48f1-b2de-631834f96174')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('f80a6bae-ca10-4131-a0ce-47bc3e83a326')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
         </insert>
     </changeSet>
 
@@ -98,13 +98,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('60b64c8b-ec33-44a2-98ab-8266becd2a94')"/>
-            <column name="type" value="2"/>
+            <column name="transaction_type" value="WITHDRAWALS"/>
             <column name="amount" value="180.0000"/>
             <column name="description" value="Transaction F"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="created_at" value="2023-09-23 13:30:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('29602c41-8a8b-4a55-a72d-c777e98e2761')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('47771260-aba8-43db-aeb3-1da0828f1070')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
         </insert>
     </changeSet>
 
@@ -115,13 +115,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('b3f1390a-ff72-4bbf-9449-a85a55e5e045')"/>
-            <column name="type" value="1"/>
+            <column name="transaction_type" value="TRANSFERS"/>
             <column name="amount" value="250.0000"/>
             <column name="description" value="Transaction G"/>
             <column name="status" value="PENDING"/>
             <column name="created_at" value="2023-09-23 14:45:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('a89e68b8-b41f-439a-99b7-737e7e16f065')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('f08c0da6-492f-4fc5-a816-e3a09c25caaa')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
         </insert>
     </changeSet>
 
@@ -132,13 +132,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('aca1608d-93b8-401d-948f-1ed66e092035')"/>
-            <column name="type" value="2"/>
+            <column name="transaction_type" value="DEPOSITS"/>
             <column name="amount" value="170.0000"/>
             <column name="description" value="Transaction H"/>
             <column name="status" value="APPROVED"/>
             <column name="created_at" value="2023-09-23 16:30:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('a663ff87-ccd6-471e-a795-82efb80674ec')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('76e552a9-4a5e-4480-be70-6689a76aa48c')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
         </insert>
     </changeSet>
 
@@ -149,13 +149,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('6212c6c9-efe6-4449-9f9e-7a7490274104')"/>
-            <column name="type" value="1"/>
+            <column name="transaction_type" value="TRANSFERS"/>
             <column name="amount" value="140.0000"/>
             <column name="description" value="Transaction I"/>
             <column name="status" value="UNDER_REVIEW"/>
             <column name="created_at" value="2023-09-24 09:45:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('7576a9c7-62f9-4e77-aafb-91ae1bfd1abf')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('90173888-7193-4267-9c8d-8873fe1d7a6e')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>
         </insert>
     </changeSet>
 
@@ -166,13 +166,13 @@
 
         <insert tableName="transactions">
             <column name="id" valueComputed="UUID_TO_BIN('78a8050d-253b-44b8-bfc0-6142d9a66234')"/>
-            <column name="type" value="2"/>
+            <column name="transaction_type" value="DEPOSITS"/>
             <column name="amount" value="220.0000"/>
             <column name="description" value="Transaction J"/>
             <column name="status" value="CANCELED"/>
             <column name="created_at" value="2023-09-24 11:15:00"/>
-            <column name="debitAccount_id" valueComputed="UUID_TO_BIN('06119aeb-fb22-4d1a-b8a1-09422fe8136f')"/>
-            <column name="creditAccount_id" valueComputed="UUID_TO_BIN('578c7bdd-52f6-4e90-b7f3-7fdcc5632f1b')"/>
+            <column name="debit_account_id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>
+            <column name="credit_account_id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>
         </insert>
     </changeSet>
 

@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.entity;
 
 import com.bankapp.bankapp.app.entity.enums.AccountStatus;
+import com.bankapp.bankapp.app.entity.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -25,14 +26,15 @@ public class Account {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "account_name")
     private String name;
 
     @Column(name = "account_type")
-    private int type;
+    @Enumerated(EnumType.STRING)
+    private AccountType type;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -45,21 +47,21 @@ public class Account {
     private String currencyCode;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
     @JsonIgnore
     private Client client;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany
     @JsonIgnore
     private List<Agreement> agreements;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @OneToMany
     @JsonIgnore
     private List<Transaction> transactions;
 
@@ -91,5 +93,3 @@ public class Account {
                 '}';
     }
 }
-
-
