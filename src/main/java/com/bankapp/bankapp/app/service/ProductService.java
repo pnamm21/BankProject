@@ -14,6 +14,6 @@ import java.util.UUID;
 public interface ProductService {
 
     Optional<Product> getProductById(String id);
-    void createProduct(Product product);
-    List<Product> getListProduct(@Param("id")UUID id);
+    Product createProduct(ProductDtoPost productDtoPost);
+    List<ProductDto> getListProduct(@Param("id")UUID id);
 }

@@ -2,6 +2,7 @@ package com.bankapp.bankapp.app.dto;
 
 import lombok.Data;
 
+
 @Data
 public class AccountDto {
 
@@ -12,5 +13,4 @@ public class AccountDto {
     String balance;
     String currencyCode;
     String createdAt;
-
 }

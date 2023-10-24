@@ -87,7 +87,7 @@
             <column name="id" valueComputed="UUID_TO_BIN('aecd6ed0-39b2-4329-8780-5a2173da65bc')"/>
             <column name="name" value="Product E"/>
             <column name="status" value="ACTIVE"/>
-            <column name="currency_code" value="EUR"/>
+            <column name="currency_code" value="PLN"/>
             <column name="interest_rate" value="0.0280"/>
             <column name="limitt" value="9500"/>
             <column name="created_at" value="2023-09-20 11:00:00"/>
@@ -105,7 +105,7 @@
             <column name="id" valueComputed="UUID_TO_BIN('76180aef-76f2-40f2-894f-d737e96a200a')"/>
             <column name="name" value="Product F"/>
             <column name="status" value="INACTIVE"/>
-            <column name="currency_code" value="USD"/>
+            <column name="currency_code" value="UAH"/>
             <column name="interest_rate" value="0.0325"/>
             <column name="limitt" value="7800"/>
             <column name="created_at" value="2023-09-20 13:30:00"/>
@@ -123,7 +123,7 @@
             <column name="id" valueComputed="UUID_TO_BIN('31c843c8-a7b9-4a40-826c-45dc8c682052')"/>
             <column name="name" value="Product G"/>
             <column name="status" value="EXPIRED"/>
-            <column name="currency_code" value="GBR"/>
+            <column name="currency_code" value="AUD"/>
             <column name="interest_rate" value="0.0275"/>
             <column name="limitt" value="10500"/>
             <column name="created_at" value="2023-09-20 14:45:00"/>
@@ -141,7 +141,7 @@
             <column name="id" valueComputed="UUID_TO_BIN('2457d219-f995-412e-a10c-5638cb97fd5a')"/>
             <column name="name" value="Product H"/>
             <column name="status" value="UNDER_REVIEW"/>
-            <column name="currency_code" value="USD"/>
+            <column name="currency_code" value="VND"/>
             <column name="interest_rate" value="0.0310"/>
             <column name="limitt" value="11500"/>
             <column name="created_at" value="2023-09-20 16:30:00"/>
@@ -177,7 +177,7 @@
             <column name="id" valueComputed="UUID_TO_BIN('f4133bba-a644-4656-afe2-e2feefba972c')"/>
             <column name="name" value="Product J"/>
             <column name="status" value="INACTIVE"/>
-            <column name="currency_code" value="EUR"/>
+            <column name="currency_code" value="VND"/>
             <column name="interest_rate" value="0.0320"/>
             <column name="limitt" value="9200"/>
             <column name="created_at" value="2023-09-21 11:45:00"/>

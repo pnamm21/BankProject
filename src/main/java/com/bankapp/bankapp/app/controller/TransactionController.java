@@ -1,19 +1,19 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Transaction;
+import com.bankapp.bankapp.app.exception.ExceptionMessage;
+import com.bankapp.bankapp.app.exception.InvalidUUIDException;
 import com.bankapp.bankapp.app.mapper.TransactionMapper;
 import com.bankapp.bankapp.app.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+import com.bankapp.bankapp.app.validation.UUIDValidator;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/transaction")
@@ -21,25 +21,27 @@ import java.util.UUID;
 public class TransactionController {
 
     private final TransactionService transactionService;
-    private final TransactionMapper transactionMapper;
 
     @GetMapping("/get/{id}")
-    public TransactionDto getTransactionById(@PathVariable("id")String id){
-        Optional<Transaction> optTransaction;
-        try{
-            optTransaction = transactionService.getTransactionById(id);
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"not found!");
+    public Optional<ResponseEntity<Transaction>> getTransactionById(@PathVariable("id") String id) {
+
+        try {
+            Optional<Transaction> optTransaction = transactionService.getTransactionById(id);
+            return optTransaction.map(transaction -> new ResponseEntity<>(transaction,HttpStatus.OK));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not found!");
         }
-        if (optTransaction.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"not found!");
-        }
-        return transactionMapper.transactionToTransactionDto(optTransaction.get());
+
     }
 
-    @RequestMapping(value = "/update-transaction/{id}",method = {RequestMethod.PUT,RequestMethod.GET})
-    public void updateTransaction(@PathVariable("id") String id, @RequestBody TransactionDtoFullUpdate transactionDtoFullUpdate) {
-        transactionService.updateTransaction(id, transactionDtoFullUpdate);
+    @RequestMapping(value = "/update-transaction/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable("id") String id, @RequestBody TransactionDtoFullUpdate transactionDtoFullUpdate) {
+
+        if (!UUIDValidator.isValid(id)) {
+            throw new InvalidUUIDException(ExceptionMessage.UUID_INVALID);
+        }
+
+        return ResponseEntity.ofNullable(transactionService.updateTransaction(id, transactionDtoFullUpdate));
     }
 
 }

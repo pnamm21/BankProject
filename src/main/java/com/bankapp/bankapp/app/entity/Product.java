@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.entity;
-;
+
+import com.bankapp.bankapp.app.entity.enums.CurrencyCodeType;
 import com.bankapp.bankapp.app.entity.enums.ProductStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -36,7 +37,8 @@ public class Product {
     private ProductStatus status;
 
     @Column(name = "currency_code")
-    private String currencyCode;
+    @Enumerated(EnumType.STRING)
+    private CurrencyCodeType currencyCode;
 
     @Column(name = "interest_rate")
     private Double interestRate;

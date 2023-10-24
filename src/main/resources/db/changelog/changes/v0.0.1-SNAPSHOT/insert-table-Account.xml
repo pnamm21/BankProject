@@ -16,7 +16,7 @@
             <column name="account_type" value="BUSINESS_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="100000.00"/>
-            <column name="currency_code" value="USD"/>
+            <column name="currency_code" value="PLN"/>
             <column name="created_at" value="2023-09-16 10:00:00"/>
             <column name="updated_at" value="2023-09-16 10:00:00"/>
             <column name="client_id" valueComputed="UUID_TO_BIN('cf7d57e1-4e4d-4134-86fc-02ef21cf3dff')"/>
@@ -52,7 +52,7 @@
             <column name="account_type" value="MAKE_MONEY_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="2000.75"/>
-            <column name="currency_code" value="USD"/>
+            <column name="currency_code" value="PLN"/>
             <column name="created_at" value="2023-09-16 14:45:00"/>
             <column name="updated_at" value="2023-09-16 14:45:00"/>
             <column name="client_id" valueComputed="UUID_TO_BIN('e1adaf04-68b9-49c8-80b5-fed3ec85fde9')"/>
@@ -106,7 +106,7 @@
             <column name="account_type" value="STUDENT_ACCOUNT"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="1800.75"/>
-            <column name="currency_code" value="USD"/>
+            <column name="currency_code" value="AUD"/>
             <column name="created_at" value="2023-09-17 14:45:00"/>
             <column name="updated_at" value="2023-09-17 14:45:00"/>
             <column name="client_id" valueComputed="UUID_TO_BIN('db9f6550-071c-4370-a0d6-b8303417dd4f')"/>
@@ -123,8 +123,8 @@
             <column name="account_name" value="Hannah Taylor"/>
             <column name="account_type" value="SAVING_ACCOUNT"/>
             <column name="status" value="CLOSED"/>
-            <column name="balance" value="2500.00"/>
-            <column name="currency_code" value="USD"/>
+            <column name="balance" value="250000.00"/>
+            <column name="currency_code" value="VND"/>
             <column name="created_at" value="2023-09-18 10:00:00"/>
             <column name="updated_at" value="2023-09-18 10:00:00"/>
             <column name="client_id" valueComputed="UUID_TO_BIN('56876795-4d60-413b-8e30-ee56f49df814')"/>
@@ -142,7 +142,7 @@
             <column name="account_type" value="SAVING_ACCOUNT"/>
             <column name="status" value="INACTIVE"/>
             <column name="balance" value="1200.25"/>
-            <column name="currency_code" value="EUR"/>
+            <column name="currency_code" value="UAH"/>
             <column name="created_at" value="2023-09-18 11:30:00"/>
             <column name="updated_at" value="2023-09-18 11:30:00"/>
             <column name="client_id" valueComputed="UUID_TO_BIN('c385fde8-3817-4129-b321-f37718fbdac4')"/>

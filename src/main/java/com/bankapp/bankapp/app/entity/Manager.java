@@ -21,6 +21,15 @@ import static jakarta.persistence.CascadeType.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(name = "manager-client-account-graph",
+        attributeNodes = @NamedAttributeNode(value = "clients", subgraph = "client"),
+        subgraphs = {
+                @NamedSubgraph(name = "client", attributeNodes = {@NamedAttributeNode("status"),
+                        @NamedAttributeNode("createdAt"),
+                        @NamedAttributeNode(value = "accounts", subgraph = "account")}),
+                @NamedSubgraph(name = "account", attributeNodes = {@NamedAttributeNode(value = "agreements"),
+                        @NamedAttributeNode("transactions"),
+                        @NamedAttributeNode("status")})})
 public class Manager {
 
     @Id

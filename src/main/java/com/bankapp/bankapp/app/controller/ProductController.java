@@ -1,11 +1,11 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.dto.AccountDto;
 import com.bankapp.bankapp.app.dto.ProductDto;
 import com.bankapp.bankapp.app.dto.ProductDtoPost;
 import com.bankapp.bankapp.app.entity.Product;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.ExceptionMessage;
+import com.bankapp.bankapp.app.exception.InvalidUUIDException;
 import com.bankapp.bankapp.app.mapper.ProductMapper;
 import com.bankapp.bankapp.app.service.ManagerService;
 import com.bankapp.bankapp.app.service.ProductService;
@@ -26,35 +26,35 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
-    private final ManagerService managerService;
-    private final ProductMapper productMapper;
+
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ProductDto> getProductId(@PathVariable("id") String id) {
-        Optional<Product> optionalProduct;
+    public Optional<ResponseEntity<Product>> getProductId(@PathVariable("id") String id) {
+
         try {
-            optionalProduct = productService.getProductById(id);
+            Optional<Product> optionalProduct = productService.getProductById(id);
+            return optionalProduct.map(product -> new ResponseEntity<>(product,HttpStatus.OK));
         } catch (Exception e) {
             throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
-        if (optionalProduct.isEmpty()) {
-            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
-        }
-        return new ResponseEntity<>(productMapper.productToProductDto(optionalProduct.get()), HttpStatus.OK);
+
     }
 
     @GetMapping("/all-products")
     public ResponseEntity<List<ProductDto>> getListProductsByManagerId(@RequestParam("id") String id) {
-        return ResponseEntity.ofNullable(productMapper.listProductToListProductDto(productService.getListProduct(UUID.fromString(id))));
+
+        if (!com.bankapp.bankapp.app.validation.UUIDValidator.isValid(id)) {
+            throw new InvalidUUIDException(ExceptionMessage.UUID_INVALID);
+        }
+        List<ProductDto> productDtos = productService.getListProduct(UUID.fromString(id));
+        return ResponseEntity.ofNullable(productDtos);
     }
 
     @RequestMapping(value = "/create-product", method = {RequestMethod.POST, RequestMethod.GET})
-    public ProductDto createProduct(@RequestBody ProductDtoPost productDtoPost) {
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDtoPost productDtoPost) {
         productDtoPost.setId(UUID.randomUUID().toString());
-        Product product = productMapper.productDtoPostToProduct(productDtoPost);
-        product.setManager(managerService.getManagerById(productDtoPost.getManagerId()).orElseThrow());
-        productService.createProduct(product);
-        return productMapper.productToProductDto(product);
+
+        return new ResponseEntity<>(productService.createProduct(productDtoPost), HttpStatus.OK);
     }
 
 }

@@ -21,7 +21,7 @@
             <column name="account_type" type="varchar(30)"/>
             <column name="status" type="varchar(50)"/>
             <column name="balance" type="decimal(15,2)"/>
-            <column name="currency_code" type="varchar(5)"/>
+            <column name="currency_code" type="varchar(3)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
             <column name="client_id" type="binary(16)">

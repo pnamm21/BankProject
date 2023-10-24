@@ -1,18 +1,20 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.dto.ClientDto;
-import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Client;
+import com.bankapp.bankapp.app.exception.ExceptionMessage;
+import com.bankapp.bankapp.app.exception.InvalidUUIDException;
 import com.bankapp.bankapp.app.mapper.ClientMapper;
 import com.bankapp.bankapp.app.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/client")
@@ -20,20 +22,27 @@ import java.util.Optional;
 public class ClientController {
 
     private final ClientService clientService;
-    private final ClientMapper clientMapper;
 
     @GetMapping(value = "/get/{id}")
-    public ResponseEntity<ClientDto> getClient(@PathVariable("id") String id) {
-        Optional<Client> optionalClient;
+    public Optional<ResponseEntity<Client>> getClient(@PathVariable("id") String id) {
+
         try {
-            optionalClient = clientService.getClientById(id);
+            Optional<Client> optionalClient = clientService.getClientById(id);
+            return optionalClient.map(client -> new ResponseEntity<>(client,HttpStatus.OK));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not found");
         }
-        if (optionalClient.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not found");
+
+    }
+
+    @RequestMapping(value = "/delete-client/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public ResponseEntity<HttpStatus> deleteClient(@PathVariable("id") String id) {
+
+        if (!com.bankapp.bankapp.app.validation.UUIDValidator.isValid(id)) {
+            throw new InvalidUUIDException(ExceptionMessage.UUID_INVALID);
         }
-        return new ResponseEntity<>(clientMapper.clientToClientDTO(clientService.getClientById(id).orElseThrow()), HttpStatus.OK);
+
+        return ResponseEntity.status(clientService.deleteClient(id) ? OK : NOT_FOUND).build();
     }
 
 }

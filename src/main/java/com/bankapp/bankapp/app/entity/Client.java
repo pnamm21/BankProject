@@ -56,8 +56,8 @@ public class Client {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @JoinColumn(name = "manager_id",referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
+    @ManyToOne
     @JsonIgnore
     private Manager manager;
 

@@ -2,6 +2,7 @@ package com.bankapp.bankapp.app.entity;
 
 import com.bankapp.bankapp.app.entity.enums.AccountStatus;
 import com.bankapp.bankapp.app.entity.enums.AccountType;
+import com.bankapp.bankapp.app.entity.enums.CurrencyCodeType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,7 +45,8 @@ public class Account {
     private double balance;
 
     @Column(name = "currency_code")
-    private String currencyCode;
+    @Enumerated(EnumType.STRING)
+    private CurrencyCodeType currencyCode;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -53,7 +55,7 @@ public class Account {
     private LocalDateTime updatedAt;
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @ManyToOne
     @JsonIgnore
     private Client client;
 
