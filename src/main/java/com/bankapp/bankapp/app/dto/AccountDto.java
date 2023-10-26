@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.dto;
 
+import com.bankapp.bankapp.app.entity.Account;
 import lombok.Data;
 
 

@@ -16,6 +16,11 @@ import java.util.UUID;
 public interface TransactionService {
     Optional<Transaction> getTransactionById(String id);
 
+    List<TransactionDto> getListTransactionByCreditAccountId(@Param("id") UUID id);
+
+    List<TransactionDto> getListTransactionByDebitAccountId(@Param("id") UUID id);
+
+    @Transactional
     Transaction updateTransaction(String id, TransactionDtoFullUpdate transactionDtoFullUpdate);
 
     @Transactional

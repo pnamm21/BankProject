@@ -6,6 +6,7 @@ import com.bankapp.bankapp.app.entity.Product;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.ExceptionMessage;
 import com.bankapp.bankapp.app.exception.InvalidUUIDException;
+import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
 import com.bankapp.bankapp.app.mapper.ProductMapper;
 import com.bankapp.bankapp.app.service.ManagerService;
 import com.bankapp.bankapp.app.service.ProductService;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +31,7 @@ public class ProductController {
 
 
     @GetMapping("/get/{id}")
-    public Optional<ResponseEntity<Product>> getProductId(@PathVariable("id") String id) {
+    public Optional<ResponseEntity<Product>> getProductId( @PathVariable("id")@IDChecker String id) {
 
         try {
             Optional<Product> optionalProduct = productService.getProductById(id);
@@ -41,17 +43,14 @@ public class ProductController {
     }
 
     @GetMapping("/all-products")
-    public ResponseEntity<List<ProductDto>> getListProductsByManagerId(@RequestParam("id") String id) {
+    public ResponseEntity<List<ProductDto>> getListProductsByManagerId( @RequestParam("id") @IDChecker String id) {
 
-        if (!com.bankapp.bankapp.app.validation.UUIDValidator.isValid(id)) {
-            throw new InvalidUUIDException(ExceptionMessage.UUID_INVALID);
-        }
         List<ProductDto> productDtos = productService.getListProduct(UUID.fromString(id));
         return ResponseEntity.ofNullable(productDtos);
     }
 
     @RequestMapping(value = "/create-product", method = {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDtoPost productDtoPost) {
+    public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductDtoPost productDtoPost) {
         productDtoPost.setId(UUID.randomUUID().toString());
 
         return new ResponseEntity<>(productService.createProduct(productDtoPost), HttpStatus.OK);

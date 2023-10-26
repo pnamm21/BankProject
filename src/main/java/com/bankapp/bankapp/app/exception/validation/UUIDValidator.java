@@ -1,4 +1,4 @@
-package com.bankapp.bankapp.app.validation;
+package com.bankapp.bankapp.app.exception.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

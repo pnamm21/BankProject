@@ -32,5 +32,4 @@ public interface AccountMapper {
     Account accountDtoFullToAccount(AccountDtoFullUpdate accountDtoFullUpdate);
 
     List<AccountDto> ListAccountToListAccountDto(List<Account> accounts);
-
 }

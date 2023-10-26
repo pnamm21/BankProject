@@ -3,9 +3,7 @@ package com.bankapp.bankapp.app.service.impl;
 import com.bankapp.bankapp.app.dto.AccountDto;
 import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.AccountDtoPost;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
-import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.entity.enums.AccountStatus;
 import com.bankapp.bankapp.app.entity.enums.AccountType;
 import com.bankapp.bankapp.app.entity.enums.CurrencyCodeType;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,8 +33,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Optional<Account> getAccountById(String id) throws NoSuchElementException {
-        return accountRepository.findById(UUID.fromString(id));
+    public Optional<Account> getAccountById(String id) throws DataNotFoundException {
+        return Optional.ofNullable(accountRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND)));
     }
 
     @Override

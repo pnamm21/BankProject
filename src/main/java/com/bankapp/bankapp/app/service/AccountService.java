@@ -5,10 +5,8 @@ import com.bankapp.bankapp.app.dto.AccountDto;
 import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
 
 import com.bankapp.bankapp.app.dto.AccountDtoPost;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
 
-import com.bankapp.bankapp.app.entity.Transaction;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -21,3 +21,7 @@ spring:
 
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
+
+  server:
+   error:
+     include-message: always

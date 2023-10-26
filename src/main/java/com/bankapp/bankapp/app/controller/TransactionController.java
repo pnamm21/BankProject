@@ -1,47 +1,56 @@
 package com.bankapp.bankapp.app.controller;
 
+import com.bankapp.bankapp.app.dto.AccountDto;
+import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Transaction;
-import com.bankapp.bankapp.app.exception.ExceptionMessage;
-import com.bankapp.bankapp.app.exception.InvalidUUIDException;
-import com.bankapp.bankapp.app.mapper.TransactionMapper;
+
+
+import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
+
 import com.bankapp.bankapp.app.service.TransactionService;
-import lombok.RequiredArgsConstructor;
+
+
 import org.springframework.http.HttpStatus;
-import com.bankapp.bankapp.app.validation.UUIDValidator;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 
+import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
+
+@Validated
 @RestController
-@RequestMapping("/transaction")
-@RequiredArgsConstructor
+@RequestMapping("api/transaction")
 public class TransactionController {
 
     private final TransactionService transactionService;
 
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
+
     @GetMapping("/get/{id}")
-    public Optional<ResponseEntity<Transaction>> getTransactionById(@PathVariable("id") String id) {
+    public ResponseEntity<Transaction> getTransactionById(@PathVariable("id") @IDChecker String id) {
+        return ResponseEntity.ok(transactionService.getTransactionById(id).orElse(null));
+    }
 
-        try {
-            Optional<Transaction> optTransaction = transactionService.getTransactionById(id);
-            return optTransaction.map(transaction -> new ResponseEntity<>(transaction,HttpStatus.OK));
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not found!");
-        }
+    @GetMapping(value = "/creditAccount/all-transactions")
+    public ResponseEntity<List<TransactionDto>> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker String id) {
+        List<TransactionDto> transactionDtos = transactionService.getListTransactionByCreditAccountId(UUID.fromString(id));
+        return new ResponseEntity<>(transactionDtos, HttpStatus.OK);
+    }
 
+    @GetMapping(value = "/debitAccount/all-transactions")
+    public ResponseEntity<List<TransactionDto>> getListTransactionByDebitAccountId(@RequestParam("id") @IDChecker String id) {
+        List<TransactionDto> transactionDtos = transactionService.getListTransactionByDebitAccountId(UUID.fromString(id));
+        return new ResponseEntity<>(transactionDtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/update-transaction/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Transaction> updateTransaction(@PathVariable("id") String id, @RequestBody TransactionDtoFullUpdate transactionDtoFullUpdate) {
-
-        if (!UUIDValidator.isValid(id)) {
-            throw new InvalidUUIDException(ExceptionMessage.UUID_INVALID);
-        }
-
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable("id") @IDChecker String id, @RequestBody @Valid TransactionDtoFullUpdate transactionDtoFullUpdate) {
         return ResponseEntity.ofNullable(transactionService.updateTransaction(id, transactionDtoFullUpdate));
     }
-
 }

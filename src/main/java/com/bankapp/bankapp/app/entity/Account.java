@@ -42,7 +42,7 @@ public class Account {
     private AccountStatus status;
 
     @Column(name = "balance")
-    private double balance;
+    private Double balance;
 
     @Column(name = "currency_code")
     @Enumerated(EnumType.STRING)

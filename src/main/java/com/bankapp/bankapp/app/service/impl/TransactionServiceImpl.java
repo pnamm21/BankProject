@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.service.impl;
 
+import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
@@ -16,7 +17,7 @@ import com.bankapp.bankapp.app.service.TransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,8 +39,21 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Optional<Transaction> getTransactionById(String id) throws NoSuchElementException {
-        return transactionRepository.findById(UUID.fromString(id));
+    public Optional<Transaction> getTransactionById(String id) throws DataNotFoundException {
+        return Optional.ofNullable(transactionRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND)));
+    }
+
+    @Override
+    public List<TransactionDto> getListTransactionByCreditAccountId(UUID id) {
+        List<Transaction> transactions = transactionRepository.getListTransactionsByCreditAccountId(id);
+        return transactionMapper.listTransactionToListTransactionDto(transactions);
+    }
+
+    @Override
+    public List<TransactionDto> getListTransactionByDebitAccountId(UUID id) {
+        List<Transaction> transactions = transactionRepository.getListTransactionsByDebitAccountId(id);
+        return transactionMapper.listTransactionToListTransactionDto(transactions);
     }
 
     @Override
@@ -47,8 +61,8 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction updateTransaction(String id, TransactionDtoFullUpdate transactionDtoFullUpdate) {
         UUID stringId = UUID.fromString(id);
         if (transactionRepository.existsById(stringId)) {
-            transactionDtoFullUpdate.setDebitAccountId(null);
-            transactionDtoFullUpdate.setCreditAccountId(null);
+            transactionDtoFullUpdate.setDebitAccountId(transactionDtoFullUpdate.getDebitAccountId());
+            transactionDtoFullUpdate.setCreditAccountId(transactionDtoFullUpdate.getCreditAccountId());
             transactionDtoFullUpdate.setId(id);
             Transaction transaction = transactionMapper.transactionFUllDtoTotransaction(transactionDtoFullUpdate);
             Transaction original = transactionRepository.findById(stringId).orElseThrow();
@@ -67,7 +81,7 @@ public class TransactionServiceImpl implements TransactionService {
         Account fromAccount = accountRepository.findById(accountId).orElseThrow();
         Account toAccount = accountService.getAccountByAccountNumber(transactionDtoTransfer.getCreditAccount());
 
-        if (toAccount == null){
+        if (toAccount == null) {
             throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
 
@@ -84,7 +98,7 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.setAmount(amount);
 
             return transactionRepository.save(transaction);
-        }else{
+        } else {
             throw new BalanceIsEmptyException(ExceptionMessage.BALANCE_IS_EMPTY);
         }
     }
