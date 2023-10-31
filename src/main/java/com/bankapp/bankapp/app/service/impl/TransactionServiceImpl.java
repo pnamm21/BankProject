@@ -5,6 +5,8 @@ import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Transaction;
+import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
+import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import com.bankapp.bankapp.app.exception.BalanceIsEmptyException;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.ExceptionMessage;
@@ -17,6 +19,7 @@ import com.bankapp.bankapp.app.service.TransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,14 +31,12 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionMapper transactionMapper;
     private final AccountRepository accountRepository;
     private final AccountService accountService;
-    private final AccountMapper accountMapper;
 
-    public TransactionServiceImpl(TransactionRepository transactionRepository, TransactionMapper transactionMapper, AccountRepository accountRepository, AccountService accountService, AccountMapper accountMapper) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, TransactionMapper transactionMapper, AccountRepository accountRepository, AccountService accountService) {
         this.transactionRepository = transactionRepository;
         this.transactionMapper = transactionMapper;
         this.accountRepository = accountRepository;
         this.accountService = accountService;
-        this.accountMapper = accountMapper;
     }
 
     @Override
@@ -61,17 +62,19 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction updateTransaction(String id, TransactionDtoFullUpdate transactionDtoFullUpdate) {
         UUID stringId = UUID.fromString(id);
         if (transactionRepository.existsById(stringId)) {
+            transactionDtoFullUpdate.setId(id);
             transactionDtoFullUpdate.setDebitAccountId(transactionDtoFullUpdate.getDebitAccountId());
             transactionDtoFullUpdate.setCreditAccountId(transactionDtoFullUpdate.getCreditAccountId());
-            transactionDtoFullUpdate.setId(id);
             Transaction transaction = transactionMapper.transactionFUllDtoTotransaction(transactionDtoFullUpdate);
-            Transaction original = transactionRepository.findById(stringId).orElseThrow();
-            transaction.setCreditAccount(original.getCreditAccount());
+            Transaction original = transactionRepository.findById(stringId)
+                    .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
             transaction.setDebitAccount(original.getDebitAccount());
+            transaction.setCreditAccount(original.getCreditAccount());
             Transaction updated = transactionMapper.mergeTransaction(transaction, original);
             return transactionRepository.save(updated);
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
-        return null;
     }
 
     @Override
@@ -80,10 +83,6 @@ public class TransactionServiceImpl implements TransactionService {
 
         Account fromAccount = accountRepository.findById(accountId).orElseThrow();
         Account toAccount = accountService.getAccountByAccountNumber(transactionDtoTransfer.getCreditAccount());
-
-        if (toAccount == null) {
-            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
-        }
 
         double amount = Double.parseDouble(transactionDtoTransfer.getAmount());
 
@@ -95,7 +94,11 @@ public class TransactionServiceImpl implements TransactionService {
             Transaction transaction = new Transaction();
             transaction.setDebitAccount(fromAccount);
             transaction.setCreditAccount(toAccount);
+            transaction.setTransactionType(TransactionType.valueOf(transactionDtoTransfer.getTransactionType()));
             transaction.setAmount(amount);
+            transaction.setDescription(transactionDtoTransfer.getDescription());
+            transaction.setStatus(TransactionStatus.valueOf(transactionDtoTransfer.getStatus()));
+            transaction.setCreatedAt(LocalDateTime.now());
 
             return transactionRepository.save(transaction);
         } else {

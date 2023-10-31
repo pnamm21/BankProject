@@ -67,26 +67,29 @@ public class AccountServiceImpl implements AccountService {
             accountDtoFullUpdate.setClientId(accountDtoFullUpdate.getClientId());
             accountDtoFullUpdate.setId(id);
             Account account = accountMapper.accountDtoFullToAccount(accountDtoFullUpdate);
-            Account original = accountRepository.findById(stringId).orElseThrow();
+            Account original = accountRepository.findById(stringId)
+                    .orElseThrow(()->new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
             account.setClient(original.getClient());
             Account updated = accountMapper.mergeAccounts(account, original);
             return accountRepository.save(updated);
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
-        return null;
     }
 
     @Override
     @Transactional
-    public boolean deleteAccount(String id) {
+    public String deleteAccount(String id) {
         UUID stringId = UUID.fromString(id);
         if (accountRepository.existsById(stringId)) {
             Optional<Account> account = accountRepository.findById(stringId);
             Account getAccount = account.get();
             getAccount.setStatus(CLOSED);
             accountRepository.save(getAccount);
-            return true;
+            return "Account has been CLOSED!";
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
-        return false;
     }
 
     @Override

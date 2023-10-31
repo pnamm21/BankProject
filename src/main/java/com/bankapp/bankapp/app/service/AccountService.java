@@ -30,7 +30,7 @@ public interface AccountService {
     Account updateAccount(String id, AccountDtoFullUpdate accountDtoFullUpdate);
 
     @Transactional
-    boolean deleteAccount(String id);
+    String deleteAccount(String id);
 
     Account getAccountByAccountNumber(String accountNumber);
 

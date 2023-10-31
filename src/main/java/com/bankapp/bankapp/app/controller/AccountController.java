@@ -6,14 +6,11 @@ import com.bankapp.bankapp.app.dto.AccountDtoPost;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Transaction;
-import com.bankapp.bankapp.app.exception.DataNotFoundException;
-import com.bankapp.bankapp.app.exception.ExceptionMessage;
-import com.bankapp.bankapp.app.exception.InvalidUUIDException;
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
 import com.bankapp.bankapp.app.service.AccountService;
 import com.bankapp.bankapp.app.service.TransactionService;
-import com.bankapp.bankapp.app.exception.validation.UUIDValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,18 +18,29 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.*;
+
 @Validated
 @RestController
 @RequestMapping("/api/account")
-@RequiredArgsConstructor
 public class AccountController {
 
     private final AccountService accountService;
     private final TransactionService transactionService;
+
+    @Autowired
+    public AccountController(AccountService accountService, TransactionService transactionService) {
+        this.accountService = accountService;
+        this.transactionService = transactionService;
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String getById(@IDChecker @PathVariable("id") String id) {
+        return "Valid UUID " + id;
+    }
 
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<Account> getAccount(@PathVariable("id") @IDChecker String id) {
@@ -54,8 +62,8 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/delete-account/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public ResponseEntity<HttpStatus> deleteAccount(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.status(accountService.deleteAccount(id) ? OK : NOT_FOUND).build();
+    public ResponseEntity<String> deleteAccount(@PathVariable("id") @IDChecker String id) {
+        return ResponseEntity.ok(accountService.deleteAccount(id));
     }
 
     @RequestMapping(value = "/update-account/{id}", method = {RequestMethod.PUT, RequestMethod.GET})

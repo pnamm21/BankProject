@@ -55,7 +55,7 @@ public class Account {
     private LocalDateTime updatedAt;
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Client client;
 

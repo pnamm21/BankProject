@@ -33,8 +33,6 @@ class AccountServiceImplTest {
     @InjectMocks
     private AccountServiceImpl accountService;
 
-    private static final UUID id = UUID.randomUUID();
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -183,12 +181,15 @@ class AccountServiceImplTest {
         UUID accountId = UUID.randomUUID();
         Account mockAccount = new Account();
         mockAccount.setId(accountId);
+        mockAccount.setStatus(AccountStatus.ACTIVE);
 
         when(accountRepository.existsById(accountId)).thenReturn(true);
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(mockAccount));
-        when(accountRepository.save(mockAccount)).thenReturn(mockAccount);
 
-        assertTrue(accountService.deleteAccount(accountId.toString()));
+       String result = accountService.deleteAccount(accountId.toString());
+
+       assertEquals("Account has been CLOSED!",result);
+       assertEquals(AccountStatus.CLOSED, mockAccount.getStatus());
 
         verify(accountRepository, times(1)).existsById(accountId);
         verify(accountRepository, times(1)).findById(accountId);
@@ -202,7 +203,9 @@ class AccountServiceImplTest {
 
         when(accountRepository.existsById(accountId)).thenReturn(false);
 
-        assertFalse(accountService.deleteAccount(accountId.toString()));
+        assertThrows(DataNotFoundException.class, ()->{
+           accountService.deleteAccount(accountId.toString());
+        });
 
         verify(accountRepository, times(1)).existsById(accountId);
         verify(accountRepository, never()).findById(accountId);

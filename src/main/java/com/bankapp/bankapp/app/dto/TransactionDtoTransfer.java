@@ -10,5 +10,6 @@ public class TransactionDtoTransfer {
     String transactionType;
     String amount;
     String description;
+    String status;
 
 }

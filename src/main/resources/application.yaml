@@ -25,3 +25,8 @@ spring:
   server:
    error:
      include-message: always
+     include-binding-error: always
+   port: 8080
+
+spring.security.user.name: nam
+spring.security.user.password: 1234

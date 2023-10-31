@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.dto;
 
-import com.bankapp.bankapp.app.entity.Account;
+
 import lombok.Data;
 
 
@@ -8,6 +8,7 @@ import lombok.Data;
 public class AccountDto {
 
     String id;
+    String accountNumber;
     String name;
     String type;
     String status;

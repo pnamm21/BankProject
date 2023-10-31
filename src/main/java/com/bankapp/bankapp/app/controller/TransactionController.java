@@ -32,11 +32,6 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Transaction> getTransactionById(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(transactionService.getTransactionById(id).orElse(null));
-    }
-
     @GetMapping(value = "/creditAccount/all-transactions")
     public ResponseEntity<List<TransactionDto>> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker String id) {
         List<TransactionDto> transactionDtos = transactionService.getListTransactionByCreditAccountId(UUID.fromString(id));

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,15 +22,15 @@ import static jakarta.persistence.CascadeType.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedEntityGraph(name = "manager-client-account-graph",
-        attributeNodes = @NamedAttributeNode(value = "clients", subgraph = "client"),
-        subgraphs = {
-                @NamedSubgraph(name = "client", attributeNodes = {@NamedAttributeNode("status"),
-                        @NamedAttributeNode("createdAt"),
-                        @NamedAttributeNode(value = "accounts", subgraph = "account")}),
-                @NamedSubgraph(name = "account", attributeNodes = {@NamedAttributeNode(value = "agreements"),
-                        @NamedAttributeNode("transactions"),
-                        @NamedAttributeNode("status")})})
+//@NamedEntityGraph(name = "manager-client-account-graph",
+//        attributeNodes = @NamedAttributeNode(value = "clients", subgraph = "client"),
+//        subgraphs = {
+//                @NamedSubgraph(name = "client", attributeNodes = {@NamedAttributeNode("status"),
+//                        @NamedAttributeNode("createdAt"),
+//                        @NamedAttributeNode(value = "accounts", subgraph = "account")}),
+//                @NamedSubgraph(name = "account", attributeNodes = {@NamedAttributeNode(value = "agreements"),
+//                        @NamedAttributeNode("transactions"),
+//                        @NamedAttributeNode("status")})})
 public class Manager {
 
     @Id
@@ -48,10 +49,10 @@ public class Manager {
     private ManagerStatus status;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @JsonIgnore
     @OneToMany

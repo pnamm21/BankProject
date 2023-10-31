@@ -6,6 +6,7 @@ import lombok.Data;
 public class AccountDtoPost {
 
     String id;
+    String accountNumber;
     String name;
     String type;
     String status;

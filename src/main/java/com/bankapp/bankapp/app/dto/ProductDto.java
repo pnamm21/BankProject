@@ -1,8 +1,8 @@
 package com.bankapp.bankapp.app.dto;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class ProductDto {
     String id;
     String name;

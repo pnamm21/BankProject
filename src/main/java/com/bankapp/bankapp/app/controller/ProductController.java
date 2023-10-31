@@ -31,22 +31,15 @@ public class ProductController {
 
 
     @GetMapping("/get/{id}")
-    public Optional<ResponseEntity<Product>> getProductId( @PathVariable("id")@IDChecker String id) {
-
-        try {
-            Optional<Product> optionalProduct = productService.getProductById(id);
-            return optionalProduct.map(product -> new ResponseEntity<>(product,HttpStatus.OK));
-        } catch (Exception e) {
-            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
-        }
-
+    public ResponseEntity<Product> getProductId(@PathVariable("id") @IDChecker String id) {
+        return ResponseEntity.ok(productService.getProductById(id).orElse(null));
     }
 
     @GetMapping("/all-products")
-    public ResponseEntity<List<ProductDto>> getListProductsByManagerId( @RequestParam("id") @IDChecker String id) {
+    public ResponseEntity<List<ProductDto>> getListProductsByManagerId(@RequestParam("id") @IDChecker String id) {
 
         List<ProductDto> productDtos = productService.getListProduct(UUID.fromString(id));
-        return ResponseEntity.ofNullable(productDtos);
+        return new ResponseEntity<>(productDtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create-product", method = {RequestMethod.POST, RequestMethod.GET})

@@ -4,6 +4,8 @@ import com.bankapp.bankapp.app.dto.ProductDto;
 import com.bankapp.bankapp.app.dto.ProductDtoPost;
 import com.bankapp.bankapp.app.entity.Product;
 import com.bankapp.bankapp.app.entity.enums.ProductStatus;
+import com.bankapp.bankapp.app.exception.DataNotFoundException;
+import com.bankapp.bankapp.app.exception.ExceptionMessage;
 import com.bankapp.bankapp.app.mapper.ProductMapper;
 import com.bankapp.bankapp.app.repository.ProductRepository;
 import com.bankapp.bankapp.app.service.ProductService;
@@ -25,16 +27,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
+    @Transactional
     public Optional<Product> getProductById(String id) {
-        try {
-            return productRepository.findById(UUID.fromString(id));
-        } catch (Exception e) {
-            throw new NoSuchElementException("Product with this id not found");
-        }
+        return productRepository.findById(UUID.fromString(id));
     }
 
     @Override
-    public List<ProductDto> getListProduct(UUID id){
+    public List<ProductDto> getListProduct(UUID id) {
 
         List<Product> products = productRepository.getListProduct(id);
         return productMapper.listProductToListProductDto(products);
