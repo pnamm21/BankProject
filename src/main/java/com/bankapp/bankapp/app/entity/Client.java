@@ -58,7 +58,7 @@ public class Client {
     private LocalDateTime updatedAt;
 
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Manager manager;
 

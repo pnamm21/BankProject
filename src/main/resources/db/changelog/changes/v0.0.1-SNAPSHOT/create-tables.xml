@@ -46,6 +46,12 @@
             <column name="sum" type="decimal(15,2)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
+            <column name="account_id" type="binary(16)">
+                <constraints foreignKeyName="accounts(id)"/>
+            </column>
+            <column name="product_id" type="binary(16)">
+                <constraints foreignKeyName="products(id)"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -70,6 +76,9 @@
             <column name="phone" type="varchar(20)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
+            <column name="manager_id" type="binary(16)">
+                <constraints foreignKeyName="managers(id)"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -107,9 +116,12 @@
             <column name="status" type="varchar(50)"/>
             <column name="currency_code" type="varchar(3)"/>
             <column name="interest_rate" type="decimal(6,4)"/>
-            <column name="limitt" type="decimal(12,2)"/>
+            <column name="limitt" type="int"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
+            <column name="manager_id" type="binary(16)">
+                <constraints foreignKeyName="managers(id)"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -129,6 +141,34 @@
             <column name="description" type="varchar(255)"/>
             <column name="status" type="varchar(50)"/>
             <column name="created_at" type="timestamp"/>
+            <column name="debit_account_id" type="binary(16)">
+                <constraints foreignKeyName="accounts(id)"/>
+            </column>
+            <column name="credit_account_id" type="binary(16)">
+                <constraints foreignKeyName="accounts(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Table users already exists">
+            <not>
+                <tableExists tableName="cards"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="cards">
+            <column name="card_id" type="binary(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_number" type="varchar(25)"/>
+            <column name="cvv" type="varchar(3)"/>
+            <column name="card_type" type="varchar(30)"/>
+            <column name="card_status" type="varchar(30)"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="account_id" type="binary(16)">
+                <constraints foreignKeyName="accounts(id)"/>
+            </column>
         </createTable>
     </changeSet>
 

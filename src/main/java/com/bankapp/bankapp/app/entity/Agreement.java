@@ -1,6 +1,8 @@
 package com.bankapp.bankapp.app.entity;
 
 import com.bankapp.bankapp.app.entity.enums.AgreementStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,11 +45,13 @@ public class Agreement {
     private LocalDate updatedAt;
 
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Account account;
 
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Product product;
 
     @Override
@@ -55,20 +59,18 @@ public class Agreement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Agreement agreement = (Agreement) o;
-        return Objects.equals(id, agreement.id) && Objects.equals(account, agreement.account) && Objects.equals(product, agreement.product);
+        return Objects.equals(id, agreement.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, account, product);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Agreement{" +
                 "id=" + id +
-                ", accountId=" + account +
-                ", productId=" + product +
                 ", interestRate=" + interestRate +
                 ", status=" + status +
                 ", sum=" + sum +

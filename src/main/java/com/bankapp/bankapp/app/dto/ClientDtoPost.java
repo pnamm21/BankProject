@@ -8,6 +8,8 @@ public class ClientDtoPost {
     String firstName;
     String lastName;
     String status;
+    String email;
+    String address;
     String phone;
     String createdAt;
 }

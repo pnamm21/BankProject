@@ -9,20 +9,16 @@ import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
 import com.bankapp.bankapp.app.service.AccountService;
 import com.bankapp.bankapp.app.service.TransactionService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.*;
 
-@Validated
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
@@ -47,15 +43,8 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccountById(id).orElse(null));
     }
 
-    @GetMapping(value = "/all-accounts")
-    public ResponseEntity<List<AccountDto>> getListAccountByClientId(@RequestParam("id") @IDChecker String id) {
-
-        List<AccountDto> accountDtos = accountService.getListAccount(UUID.fromString(id));
-        return new ResponseEntity<>(accountDtos, HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/client-accounts/new", method = {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<Account> createAccount(@RequestBody @Valid AccountDtoPost accountDtoPost) {
+    public ResponseEntity<Account> createAccount(@RequestBody AccountDtoPost accountDtoPost) {
         accountDtoPost.setId(UUID.randomUUID().toString());
 
         return new ResponseEntity<>(accountService.createAccount(accountDtoPost), OK);
@@ -67,12 +56,12 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/update-account/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Account> updateAccount(@PathVariable("id") @IDChecker String id, @RequestBody @Valid AccountDtoFullUpdate accountDtoFullUpdate) {
+    public ResponseEntity<Account> updateAccount(@PathVariable("id") @IDChecker String id, @RequestBody  AccountDtoFullUpdate accountDtoFullUpdate) {
         return ResponseEntity.ofNullable(accountService.updateAccount(id, accountDtoFullUpdate));
     }
 
     @RequestMapping(value = "/transfer/{id}")
-    public ResponseEntity<Transaction> transfer(@PathVariable("id") @IDChecker UUID id, @RequestBody @Valid TransactionDtoTransfer transactionDtoTransfer) {
+    public ResponseEntity<Transaction> transfer(@PathVariable("id") @IDChecker UUID id, @RequestBody  TransactionDtoTransfer transactionDtoTransfer) {
 
         Transaction transaction = transactionService.transfer(id, transactionDtoTransfer);
         return new ResponseEntity<>(transaction, BAD_REQUEST);

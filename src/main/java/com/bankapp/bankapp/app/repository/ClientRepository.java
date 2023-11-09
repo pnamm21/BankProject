@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface ClientRepository extends JpaRepository<Client, UUID> {
     @Query("select c from Client c where c.manager.id = :id")
     List<Client> getListClient(@Param("id")UUID id);
+
 }

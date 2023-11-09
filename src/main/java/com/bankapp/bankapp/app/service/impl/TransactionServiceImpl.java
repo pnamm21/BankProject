@@ -106,4 +106,20 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
+    @Override
+    @Transactional
+    public String deleteTransaction(String id) {
+
+        UUID stringId = UUID.fromString(id);
+        if (transactionRepository.existsById(stringId)) {
+            Optional<Transaction> transaction = transactionRepository.findById(stringId);
+            Transaction getTransaction = transaction.get();
+            getTransaction.setStatus(TransactionStatus.CANCELED);
+            transactionRepository.save(getTransaction);
+            return "Transaction has been CANCELED";
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
+        }
+    }
+
 }

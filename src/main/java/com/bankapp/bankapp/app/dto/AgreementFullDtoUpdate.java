@@ -3,7 +3,6 @@ package com.bankapp.bankapp.app.dto;
 import lombok.Data;
 
 @Data
-
 public class AgreementFullDtoUpdate {
     String id;
     String interestRate;

@@ -8,7 +8,6 @@ import lombok.Data;
 public class AccountDto {
 
     String id;
-    String accountNumber;
     String name;
     String type;
     String status;

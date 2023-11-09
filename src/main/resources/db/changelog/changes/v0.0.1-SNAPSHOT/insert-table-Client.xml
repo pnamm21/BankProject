@@ -16,8 +16,8 @@
             <column name="interest_rate" value="0.035"/>
             <column name="status" value="ACTIVE"/>
             <column name="tax_code" value="ABC123"/>
-            <column name="first_name" value="John"/>
-            <column name="last_name" value="Doe"/>
+            <column name="first_name" value="Elena"/>
+            <column name="last_name" value=" Martinez"/>
             <column name="email" value="john.doe@example.com"/>
             <column name="address" value="123 Main St"/>
             <column name="phone" value="123-456-7890"/>
@@ -37,8 +37,8 @@
             <column name="interest_rate" value="0.028"/>
             <column name="status" value="INACTIVE"/>
             <column name="tax_code" value="XYZ456"/>
-            <column name="first_name" value="Alice"/>
-            <column name="last_name" value="Smith"/>
+            <column name="first_name" value="Lucas "/>
+            <column name="last_name" value="Johnson"/>
             <column name="email" value="alice.smith@example.com"/>
             <column name="address" value="456 Elm St"/>
             <column name="phone" value="987-654-3210"/>
@@ -58,8 +58,8 @@
             <column name="interest_rate" value="0.032"/>
             <column name="status" value="CLOSED"/>
             <column name="tax_code" value="PQR789"/>
-            <column name="first_name" value="David"/>
-            <column name="last_name" value="Johnson"/>
+            <column name="first_name" value="Sophia"/>
+            <column name="last_name" value="Thompson"/>
             <column name="email" value="david.johnson@example.com"/>
             <column name="address" value="789 Oak St"/>
             <column name="phone" value="555-123-4567"/>
@@ -79,8 +79,8 @@
             <column name="interest_rate" value="0.025"/>
             <column name="status" value="BLOCKED"/>
             <column name="tax_code" value="LMN012"/>
-            <column name="first_name" value="Emma"/>
-            <column name="last_name" value="Brown"/>
+            <column name="first_name" value="Nathan"/>
+            <column name="last_name" value="Clark"/>
             <column name="email" value="emma.brown@example.com"/>
             <column name="address" value="101 Pine St"/>
             <column name="phone" value="555-987-6543"/>
@@ -100,8 +100,8 @@
             <column name="interest_rate" value="0.030"/>
             <column name="status" value="ON_HOLD"/>
             <column name="tax_code" value="OPQ567"/>
-            <column name="first_name" value="Sophia"/>
-            <column name="last_name" value="Miller"/>
+            <column name="first_name" value="Ava"/>
+            <column name="last_name" value="Anderson"/>
             <column name="email" value="sophia.miller@example.com"/>
             <column name="address" value="222 Oak St"/>
             <column name="phone" value="555-222-3333"/>
@@ -122,7 +122,7 @@
             <column name="status" value="ACTIVE"/>
             <column name="tax_code" value="XYZ123"/>
             <column name="first_name" value="Oliver"/>
-            <column name="last_name" value="Wilson"/>
+            <column name="last_name" value="Wright"/>
             <column name="email" value="oliver.wilson@example.com"/>
             <column name="address" value="333 Elm St"/>
             <column name="phone" value="555-333-4444"/>
@@ -142,8 +142,8 @@
             <column name="interest_rate" value="0.027"/>
             <column name="status" value="INACTIVE"/>
             <column name="tax_code" value="ABC456"/>
-            <column name="first_name" value="Liam"/>
-            <column name="last_name" value="Smith"/>
+            <column name="first_name" value="Isabella "/>
+            <column name="last_name" value="Davis"/>
             <column name="email" value="liam.smith@example.com"/>
             <column name="address" value="444 Pine St"/>
             <column name="phone" value="555-444-5555"/>
@@ -163,7 +163,7 @@
             <column name="interest_rate" value="0.031"/>
             <column name="status" value="CLOSED"/>
             <column name="tax_code" value="PQR456"/>
-            <column name="first_name" value="Olivia"/>
+            <column name="first_name" value="Liam"/>
             <column name="last_name" value="Davis"/>
             <column name="email" value="olivia.davis@example.com"/>
             <column name="address" value="555 Oak St"/>
@@ -184,7 +184,7 @@
             <column name="interest_rate" value="0.026"/>
             <column name="status" value="BLOCKED"/>
             <column name="tax_code" value="LMN456"/>
-            <column name="first_name" value="Noah"/>
+            <column name="first_name" value="Emma"/>
             <column name="last_name" value="Wilson"/>
             <column name="email" value="noah.wilson@example.com"/>
             <column name="address" value="666 Pine St"/>
@@ -205,7 +205,7 @@
             <column name="interest_rate" value="0.029"/>
             <column name="status" value="ON_HOLD"/>
             <column name="tax_code" value="OPQ456"/>
-            <column name="first_name" value="Ava"/>
+            <column name="first_name" value="Noah"/>
             <column name="last_name" value="Johnson"/>
             <column name="email" value="ava.johnson@example.com"/>
             <column name="address" value="777 Oak St"/>

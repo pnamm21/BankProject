@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class AccountDtoFullUpdate {
     String id;
-    String accountNumber;
     String name;
     String type;
     String status;

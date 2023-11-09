@@ -13,9 +13,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
-
-import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "accounts")
@@ -41,12 +40,12 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
-    @Column(name = "balance")
-    private Double balance;
-
     @Column(name = "currency_code")
     @Enumerated(EnumType.STRING)
     private CurrencyCodeType currencyCode;
+
+    @Column(name = "balance")
+    private Double balance;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -55,9 +54,13 @@ public class Account {
     private LocalDateTime updatedAt;
 
     @JoinColumn(name = "client_id",referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Client client;
+
+    @OneToMany
+    @JsonIgnore
+    private Set<Card> cards;
 
     @OneToMany
     @JsonIgnore
@@ -65,7 +68,11 @@ public class Account {
 
     @OneToMany
     @JsonIgnore
-    private List<Transaction> transactions;
+    private Set<Transaction> debitAccount;
+
+    @OneToMany
+    @JsonIgnore
+    private Set<Transaction> creditAccount;
 
     @Override
     public boolean equals(Object o) {

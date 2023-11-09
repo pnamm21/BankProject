@@ -1,19 +1,20 @@
 package com.bankapp.bankapp.app.controller;
 
+import com.bankapp.bankapp.app.dto.ClientDto;
+import com.bankapp.bankapp.app.dto.ManagerDtoFullUpdate;
+import com.bankapp.bankapp.app.dto.ProductDto;
 import com.bankapp.bankapp.app.entity.Manager;
-import com.bankapp.bankapp.app.exception.DataNotFoundException;
-import com.bankapp.bankapp.app.exception.ExceptionMessage;
-import com.bankapp.bankapp.app.mapper.ManagerMapper;
+import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
+import com.bankapp.bankapp.app.service.ClientService;
 import com.bankapp.bankapp.app.service.ManagerService;
+import com.bankapp.bankapp.app.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/manager")
@@ -21,15 +22,31 @@ import java.util.Optional;
 public class ManagerController {
 
     private final ManagerService managerService;
+    private final ClientService clientService;
+    private final ProductService productService;
 
     @GetMapping("/get/{id}")
-    public Optional<ResponseEntity<Manager>> getManager(@PathVariable("id") String id) {
-
-        try {
-            Optional<Manager> optionalManager = managerService.getManagerById(id);
-            return optionalManager.map(manager -> new ResponseEntity<>(manager,HttpStatus.OK));
-        } catch (Exception e) {
-            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
-        }
+    public ResponseEntity<Manager> getManager(@PathVariable("id") String id) {
+        return ResponseEntity.ok(managerService.getManagerById(id).orElse(null));
     }
+
+    @RequestMapping(value = "/update-manager/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public ResponseEntity<Manager> updateManager(@PathVariable("id") @IDChecker String id, @RequestBody ManagerDtoFullUpdate managerDtoFullUpdate) {
+        return ResponseEntity.ofNullable(managerService.updateManager(id, managerDtoFullUpdate));
+    }
+
+    @RequestMapping("/get/all-clients")
+    public ResponseEntity<List<ClientDto>> getClients(@RequestParam("id") @IDChecker String id){
+
+        List<ClientDto> clientDtos = clientService.getListClients(UUID.fromString(id));
+        return new ResponseEntity<>(clientDtos,HttpStatus.OK);
+    }
+
+    @RequestMapping("/get/all-products")
+    public ResponseEntity<List<ProductDto>> getProducts(@RequestParam("id") @IDChecker String id){
+
+        List<ProductDto> productDtos = productService.getListProduct(UUID.fromString(id));
+        return new ResponseEntity<>(productDtos,HttpStatus.OK);
+    }
+
 }

@@ -34,7 +34,7 @@ public class AgreementController {
         return ResponseEntity.ok(agreementService.getAgreementById(id).orElse(null));
     }
 
-    @GetMapping("all-agreements")
+    @GetMapping("/all-agreements")
     public ResponseEntity<List<AgreementDto>> getListAgreement(@RequestParam("id") @IDChecker String id) {
 
         List<AgreementDto> agreementDtos = agreementService.getListAgreement(UUID.fromString(id));

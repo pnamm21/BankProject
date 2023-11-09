@@ -3,6 +3,7 @@ package com.bankapp.bankapp.app.entity;
 import com.bankapp.bankapp.app.entity.enums.CurrencyCodeType;
 import com.bankapp.bankapp.app.entity.enums.ProductStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,16 +45,16 @@ public class Product {
     private Double interestRate;
 
     @Column(name = "limitt")
-    private Double limit;
+    private int limit;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {PERSIST, MERGE, REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER)
     private Manager manager;
 
     @OneToMany
@@ -83,8 +84,8 @@ public class Product {
                 ", currencyCode=" + currencyCode +
                 ", interestRate=" + interestRate +
                 ", limit=" + limit +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
+                ", created_at=" + createdAt +
+                ", updated_at=" + updatedAt +
                 '}';
     }
 }

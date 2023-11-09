@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.service.impl;
 
 import com.bankapp.bankapp.app.dto.ProductDto;
+import com.bankapp.bankapp.app.dto.ProductDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.ProductDtoPost;
 import com.bankapp.bankapp.app.entity.Product;
 import com.bankapp.bankapp.app.entity.enums.ProductStatus;
@@ -15,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,12 +47,47 @@ public class ProductServiceImpl implements ProductService {
 
         product.setName(productDtoPost.getName());
         product.setStatus(ProductStatus.valueOf(productDtoPost.getStatus()));
-        product.setLimit(Double.valueOf(productDtoPost.getLimit()));
+        product.setLimit(Integer.parseInt(productDtoPost.getLimit()));
         product.setInterestRate(Double.valueOf(productDtoPost.getInterestRate()));
-        product.setCreated_at(LocalDateTime.now());
-        product.setUpdated_at(LocalDateTime.now());
+        product.setCreatedAt(LocalDateTime.now());
+        product.setUpdatedAt(LocalDateTime.now());
         productRepository.save(product);
         return product;
+    }
+
+    @Override
+    @Transactional
+    public Product updateProduct(String id, ProductDtoFullUpdate productDtoFullUpdate) {
+
+        UUID stringId = UUID.fromString(id);
+        if (productRepository.existsById(stringId)) {
+            productDtoFullUpdate.setManagerId(productDtoFullUpdate.getManagerId());
+            productDtoFullUpdate.setId(id);
+            Product product = productMapper.productFullDtoToProduct(productDtoFullUpdate);
+            Product original = productRepository.findById(stringId)
+                    .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
+            product.setManager(original.getManager());
+            Product updated = productMapper.mergeProduct(product, original);
+            return productRepository.save(updated);
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deleteProduct(String id) {
+
+        UUID stringId = UUID.fromString(id);
+        if (productRepository.existsById(stringId)) {
+            Optional<Product> product = productRepository.findById(stringId);
+            Product getProduct = product.get();
+            getProduct.setStatus(ProductStatus.EXPIRED);
+            productRepository.save(getProduct);
+            return "Product has been EXPIRED";
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
+        }
     }
 
 }

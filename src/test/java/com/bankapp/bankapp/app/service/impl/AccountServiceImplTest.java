@@ -33,6 +33,8 @@ class AccountServiceImplTest {
     @InjectMocks
     private AccountServiceImpl accountService;
 
+    private static final UUID accountId = UUID.randomUUID();
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -41,7 +43,6 @@ class AccountServiceImplTest {
     @Test
     void getAccountByIdTest() {
 
-        UUID accountId = UUID.randomUUID();
         Account mockAccount = new Account();
         mockAccount.setId(accountId);
 
@@ -57,7 +58,6 @@ class AccountServiceImplTest {
 
     @Test
     void getAccountByIdNotFoundTest() {
-        UUID accountId = UUID.randomUUID();
 
         when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
 
@@ -71,18 +71,17 @@ class AccountServiceImplTest {
     @Test
     void getListAccountTest() {
 
-        UUID clientId = UUID.randomUUID();
         List<Account> mockAccounts = Arrays.asList(new Account(), new Account());
 
-        when(accountRepository.getListAccount(clientId)).thenReturn(mockAccounts);
+        when(accountRepository.getListAccount(accountId)).thenReturn(mockAccounts);
         when(accountMapper.ListAccountToListAccountDto(mockAccounts)).thenReturn(Arrays.asList(new AccountDto(), new AccountDto()));
 
-        List<AccountDto> result = accountService.getListAccount(clientId);
+        List<AccountDto> result = accountService.getListAccount(accountId);
 
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        verify(accountRepository, times(1)).getListAccount(clientId);
+        verify(accountRepository, times(1)).getListAccount(accountId);
         verify(accountMapper, times(1)).ListAccountToListAccountDto(mockAccounts);
     }
 
@@ -115,7 +114,6 @@ class AccountServiceImplTest {
     @Test
     void updateAccountTest() {
 
-        UUID accountID = UUID.randomUUID();
         AccountDtoFullUpdate accountDtoFullUpdate = new AccountDtoFullUpdate();
         accountDtoFullUpdate.setName("Updated Account");
         accountDtoFullUpdate.setType("MAKE_MONEY_ACCOUNT");
@@ -125,34 +123,34 @@ class AccountServiceImplTest {
         accountDtoFullUpdate.setClientId(String.valueOf(UUID.randomUUID()));
 
         Account originalAccount = new Account();
-        originalAccount.setId(accountID);
+        originalAccount.setId(accountId);
 
         Account updatedAccount = new Account();
-        updatedAccount.setId(accountID);
+        updatedAccount.setId(accountId);
         updatedAccount.setName(accountDtoFullUpdate.getName());
         updatedAccount.setType(AccountType.valueOf(accountDtoFullUpdate.getType()));
         updatedAccount.setStatus(AccountStatus.valueOf(accountDtoFullUpdate.getStatus()));
         updatedAccount.setBalance(Double.valueOf(accountDtoFullUpdate.getBalance()));
         updatedAccount.setCurrencyCode(CurrencyCodeType.valueOf(accountDtoFullUpdate.getCurrencyCode()));
 
-        when(accountRepository.existsById(accountID)).thenReturn(true);
-        when(accountRepository.findById(accountID)).thenReturn(Optional.of(originalAccount));
+        when(accountRepository.existsById(accountId)).thenReturn(true);
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(originalAccount));
         when(accountMapper.accountDtoFullToAccount(accountDtoFullUpdate)).thenReturn(updatedAccount);
         when(accountMapper.mergeAccounts(updatedAccount, originalAccount)).thenReturn(updatedAccount);
         when(accountRepository.save(updatedAccount)).thenReturn(updatedAccount);
 
-        Account result = accountService.updateAccount(accountID.toString(), accountDtoFullUpdate);
+        Account result = accountService.updateAccount(accountId.toString(), accountDtoFullUpdate);
 
         assertNotNull(result);
-        assertEquals(accountID, result.getId());
+        assertEquals(accountId, result.getId());
         assertEquals(accountDtoFullUpdate.getName(), result.getName());
         assertEquals(accountDtoFullUpdate.getType(), result.getType().toString());
         assertEquals(accountDtoFullUpdate.getStatus(), result.getStatus().toString());
         assertEquals(Double.parseDouble(accountDtoFullUpdate.getBalance()), result.getBalance());
         assertEquals(accountDtoFullUpdate.getCurrencyCode(), result.getCurrencyCode().toString());
 
-        verify(accountRepository, times(1)).existsById(accountID);
-        verify(accountRepository, times(1)).findById(accountID);
+        verify(accountRepository, times(1)).existsById(accountId);
+        verify(accountRepository, times(1)).findById(accountId);
         verify(accountMapper, times(1)).accountDtoFullToAccount(accountDtoFullUpdate);
         verify(accountMapper, times(1)).mergeAccounts(updatedAccount, originalAccount);
         verify(accountRepository, times(1)).save(updatedAccount);
@@ -161,12 +159,13 @@ class AccountServiceImplTest {
     @Test
     void updateAccountNotFound() {
 
-        UUID accountId = UUID.randomUUID();
         AccountDtoFullUpdate accountDtoFullUpdate = new AccountDtoFullUpdate();
 
         when(accountRepository.existsById(accountId)).thenReturn(false);
 
-        assertNull(accountService.updateAccount(accountId.toString(), accountDtoFullUpdate));
+        assertThrows(DataNotFoundException.class, ()->{
+           accountService.updateAccount(accountId.toString(), accountDtoFullUpdate);
+        });
 
         verify(accountRepository, times(1)).existsById(accountId);
         verify(accountRepository, never()).findById(accountId);
@@ -178,7 +177,6 @@ class AccountServiceImplTest {
     @Test
     void deleteAccountTest() {
 
-        UUID accountId = UUID.randomUUID();
         Account mockAccount = new Account();
         mockAccount.setId(accountId);
         mockAccount.setStatus(AccountStatus.ACTIVE);
@@ -199,8 +197,6 @@ class AccountServiceImplTest {
     @Test
     void deleteAccountNotFoundTest() {
 
-        UUID accountId = UUID.randomUUID();
-
         when(accountRepository.existsById(accountId)).thenReturn(false);
 
         assertThrows(DataNotFoundException.class, ()->{
@@ -215,32 +211,29 @@ class AccountServiceImplTest {
     @Test
     void getAccountByAccountNumberTest() {
 
-        UUID accountNumber = UUID.randomUUID();
         Account mockAccount = new Account();
-        mockAccount.setId(accountNumber);
+        mockAccount.setId(accountId);
 
-        when(accountRepository.findById(accountNumber)).thenReturn(Optional.of(mockAccount));
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(mockAccount));
 
-        Account result = accountService.getAccountByAccountNumber(accountNumber.toString());
+        Account result = accountService.getAccountByAccountNumber(accountId.toString());
 
         assertNotNull(result);
-        assertEquals(accountNumber, result.getId());
+        assertEquals(accountId, result.getId());
 
-        verify(accountRepository, times(1)).findById(accountNumber);
+        verify(accountRepository, times(1)).findById(accountId);
     }
 
     @Test
     void getAccountByAccountNumberNotFound() {
 
-        UUID accountNumber = UUID.randomUUID();
-
-        when(accountRepository.findById(accountNumber)).thenReturn(Optional.empty());
+        when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
 
         assertThrows(DataNotFoundException.class, () -> {
-            accountService.getAccountByAccountNumber(accountNumber.toString());
+            accountService.getAccountByAccountNumber(accountId.toString());
         });
 
-        verify(accountRepository, times(1)).findById(accountNumber);
+        verify(accountRepository, times(1)).findById(accountId);
     }
 
 }

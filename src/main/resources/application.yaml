@@ -23,10 +23,11 @@ spring:
     change-log: classpath:/db/changelog/changelog-master.xml
 
   server:
-   error:
-     include-message: always
-     include-binding-error: always
-   port: 8080
+    error:
+      include-message: always
+      include-binding-error: always
+      port: 8080
 
 spring.security.user.name: nam
-spring.security.user.password: 1234
+spring.security.user.password: 12345
+
