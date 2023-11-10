@@ -1,15 +1,15 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.dto.AccountDto;
-import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
-import com.bankapp.bankapp.app.dto.AccountDtoPost;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
+import com.bankapp.bankapp.app.dto.*;
 import com.bankapp.bankapp.app.entity.Account;
+import com.bankapp.bankapp.app.entity.Card;
 import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
 import com.bankapp.bankapp.app.service.AccountService;
 import com.bankapp.bankapp.app.service.TransactionService;
+import com.bankapp.bankapp.app.service.util.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +25,13 @@ public class AccountController {
 
     private final AccountService accountService;
     private final TransactionService transactionService;
+    private final CardService cardService;
 
     @Autowired
-    public AccountController(AccountService accountService, TransactionService transactionService) {
+    public AccountController(AccountService accountService, TransactionService transactionService, CardService cardService) {
         this.accountService = accountService;
         this.transactionService = transactionService;
+        this.cardService = cardService;
     }
 
     @GetMapping("/{id}")
@@ -50,18 +52,25 @@ public class AccountController {
         return new ResponseEntity<>(accountService.createAccount(accountDtoPost), OK);
     }
 
+    // check this method
+    @RequestMapping("/get-cards")
+    public ResponseEntity<List<CardDto>> getCards(@RequestParam("id") @IDChecker String id) {
+        List<CardDto> cardDtos = cardService.getListCards(UUID.fromString(id));
+        return new ResponseEntity<>(cardDtos, OK);
+    }
+
     @RequestMapping(value = "/delete-account/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ResponseEntity<String> deleteAccount(@PathVariable("id") @IDChecker String id) {
         return ResponseEntity.ok(accountService.deleteAccount(id));
     }
 
     @RequestMapping(value = "/update-account/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Account> updateAccount(@PathVariable("id") @IDChecker String id, @RequestBody  AccountDtoFullUpdate accountDtoFullUpdate) {
+    public ResponseEntity<Account> updateAccount(@PathVariable("id") @IDChecker String id, @RequestBody AccountDtoFullUpdate accountDtoFullUpdate) {
         return ResponseEntity.ofNullable(accountService.updateAccount(id, accountDtoFullUpdate));
     }
 
     @RequestMapping(value = "/transfer/{id}")
-    public ResponseEntity<Transaction> transfer(@PathVariable("id") @IDChecker UUID id, @RequestBody  TransactionDtoTransfer transactionDtoTransfer) {
+    public ResponseEntity<Transaction> transfer(@PathVariable("id") @IDChecker UUID id, @RequestBody TransactionDtoTransfer transactionDtoTransfer) {
 
         Transaction transaction = transactionService.transfer(id, transactionDtoTransfer);
         return new ResponseEntity<>(transaction, BAD_REQUEST);

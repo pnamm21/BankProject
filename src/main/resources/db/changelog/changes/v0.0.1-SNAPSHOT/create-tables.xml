@@ -162,9 +162,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="card_number" type="varchar(25)"/>
+            <column name="card_holder" type="varchar(25)"/>
             <column name="cvv" type="varchar(3)"/>
             <column name="card_type" type="varchar(30)"/>
             <column name="card_status" type="varchar(30)"/>
+            <column name="expiration_date" type="timestamp"/>
             <column name="created_at" type="timestamp"/>
             <column name="account_id" type="binary(16)">
                 <constraints foreignKeyName="accounts(id)"/>
