@@ -5,11 +5,12 @@ import com.bankapp.bankapp.app.dto.ClientDtpFullUpdate;
 import com.bankapp.bankapp.app.entity.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", uses = UUID.class)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ClientMapper {
     ClientDto clientToClientDTO(Client client);
 

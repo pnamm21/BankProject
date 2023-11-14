@@ -8,13 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "managers")

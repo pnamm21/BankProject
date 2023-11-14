@@ -10,6 +10,8 @@ import com.bankapp.bankapp.app.repository.ManagerRepository;
 import com.bankapp.bankapp.app.service.ManagerService;
 import org.springframework.stereotype.Service;
 
+import javax.print.DocFlavor;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,16 +37,16 @@ public class ManagerServiceImpl implements ManagerService {
         UUID stringId = UUID.fromString(id);
         if (managerRepository.existsById(stringId)) {
             managerDtoFullUpdate.setId(id);
-            Manager account = managerMapper.managerDtoFullToManager(managerDtoFullUpdate);
+            managerDtoFullUpdate.setUpdatedAt(String.valueOf(LocalDateTime.now()));
+            Manager manager = managerMapper.managerDtoFullToManager(managerDtoFullUpdate);
             Manager original = managerRepository.findById(stringId)
                     .orElseThrow(()->new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
-            Manager updated = managerMapper.mergeManagers(account, original);
+            Manager updated = managerMapper.mergeManagers(manager, original);
             return managerRepository.save(updated);
         } else {
             throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
     }
-
 
 
 }

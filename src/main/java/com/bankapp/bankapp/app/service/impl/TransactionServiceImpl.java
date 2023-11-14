@@ -4,18 +4,20 @@ import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
+import com.bankapp.bankapp.app.entity.Card;
 import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
 import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import com.bankapp.bankapp.app.exception.BalanceIsEmptyException;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.ExceptionMessage;
-import com.bankapp.bankapp.app.mapper.AccountMapper;
 import com.bankapp.bankapp.app.mapper.TransactionMapper;
 import com.bankapp.bankapp.app.repository.AccountRepository;
+import com.bankapp.bankapp.app.repository.CardRepository;
 import com.bankapp.bankapp.app.repository.TransactionRepository;
 import com.bankapp.bankapp.app.service.AccountService;
 import com.bankapp.bankapp.app.service.TransactionService;
+import com.bankapp.bankapp.app.service.util.CardService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,6 +88,10 @@ public class TransactionServiceImpl implements TransactionService {
 
         double amount = Double.parseDouble(transactionDtoTransfer.getAmount());
 
+        if (amount < 0) {
+            throw new BalanceIsEmptyException("Account is empty");
+        }
+
         if (fromAccount.getBalance() >= amount) {
 
             fromAccount.setBalance(fromAccount.getBalance() - amount);
@@ -105,6 +111,7 @@ public class TransactionServiceImpl implements TransactionService {
             throw new BalanceIsEmptyException(ExceptionMessage.BALANCE_IS_EMPTY);
         }
     }
+
 
     @Override
     @Transactional

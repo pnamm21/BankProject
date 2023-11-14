@@ -3,7 +3,6 @@ package com.bankapp.bankapp.app.entity;
 import com.bankapp.bankapp.app.entity.enums.CurrencyCodeType;
 import com.bankapp.bankapp.app.entity.enums.ProductStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,8 +14,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.*;
-
 @Entity
 @Table(name = "products")
 @Getter
@@ -27,7 +24,7 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "name")
