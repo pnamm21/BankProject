@@ -4,7 +4,7 @@ import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
-import com.bankapp.bankapp.app.service.TransactionService;
+import com.bankapp.bankapp.app.service.util.TransactionService;
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/transaction")
+@RequestMapping("/api/transaction")
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -25,14 +25,14 @@ public class TransactionController {
     }
 
     @GetMapping(value = "/creditAccount/all-transactions")
-    public ResponseEntity<List<TransactionDto>> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker String id) {
-        List<TransactionDto> transactionDtos = transactionService.getListTransactionByCreditAccountId(UUID.fromString(id));
+    public ResponseEntity<List<TransactionDto>> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker UUID id) {
+        List<TransactionDto> transactionDtos = transactionService.getListTransactionByCreditAccountId(id);
         return new ResponseEntity<>(transactionDtos, HttpStatus.OK);
     }
 
     @GetMapping(value = "/debitAccount/all-transactions")
-    public ResponseEntity<List<TransactionDto>> getListTransactionByDebitAccountId(@RequestParam("id") @IDChecker String id) {
-        List<TransactionDto> transactionDtos = transactionService.getListTransactionByDebitAccountId(UUID.fromString(id));
+    public ResponseEntity<List<TransactionDto>> getListTransactionByDebitAccountId(@RequestParam("id") @IDChecker UUID id) {
+        List<TransactionDto> transactionDtos = transactionService.getListTransactionByDebitAccountId(id);
         return new ResponseEntity<>(transactionDtos, HttpStatus.OK);
     }
 

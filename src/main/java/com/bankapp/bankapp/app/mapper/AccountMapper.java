@@ -16,9 +16,7 @@ import java.util.UUID;
 @Mapper(componentModel = "spring", uses = UUID.class, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface AccountMapper {
 
-
     AccountDto accountToAccountDTO(Account account);
-
 
     Account accountDTOtoAccount(AccountDto accountDto);
 

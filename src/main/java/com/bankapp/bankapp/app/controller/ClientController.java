@@ -36,7 +36,7 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/update-client/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Client> updateAccount(@PathVariable("id") @IDChecker String id, @RequestBody ClientDtpFullUpdate clientDtpFullUpdate) {
+    public ResponseEntity<Client> updateClient(@PathVariable("id") @IDChecker String id, @RequestBody ClientDtpFullUpdate clientDtpFullUpdate) {
         return ResponseEntity.ofNullable(clientService.updateClient(id, clientDtpFullUpdate));
     }
 

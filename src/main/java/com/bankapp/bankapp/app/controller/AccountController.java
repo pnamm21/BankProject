@@ -2,14 +2,12 @@ package com.bankapp.bankapp.app.controller;
 
 import com.bankapp.bankapp.app.dto.*;
 import com.bankapp.bankapp.app.entity.Account;
-import com.bankapp.bankapp.app.entity.Card;
 import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
 import com.bankapp.bankapp.app.service.AccountService;
-import com.bankapp.bankapp.app.service.TransactionService;
+import com.bankapp.bankapp.app.service.util.TransactionService;
 import com.bankapp.bankapp.app.service.util.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

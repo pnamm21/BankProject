@@ -23,13 +23,13 @@ import java.util.UUID;
 
 @Validated
 @RestController
-@RequestMapping("/agreement")
+@RequestMapping("/api/agreement")
 @RequiredArgsConstructor
 public class AgreementController {
 
     private final AgreementService agreementService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Agreement> getAgreement(@PathVariable("id") @IDChecker String id) {
         return ResponseEntity.ok(agreementService.getAgreementById(id).orElse(null));
     }
