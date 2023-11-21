@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="p.namm">
+    <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">
+        <tableExists tableName="cards"/>
+    </preConditions>
+        <insert tableName="cards">
+            <column name="card_id" valueComputed="UUID_TO_BIN('a46fe0de-ae78-4e58-83b9-774fc244a559')"/>
+            <column name="card_number" value="4234-5678-9012-3456"/>
+            <column name="card_holder" value="John Doe"/>
+            <column name="cvv" value="354"/>
+            <column name="card_type" value="VISA"/>
+            <column name="card_status" value="ACTIVE"/>
+            <column name="created_at" value="2023-11-09 15:44:59"/>
+            <column name="expiration_date" value="2025-11-09 15:44:59"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('13ad9144-6f02-40f1-bb12-207310775a3f')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">
+            <tableExists tableName="cards"/>
+        </preConditions>
+        <insert tableName="cards">
+            <column name="card_id" valueComputed="UUID_TO_BIN('6611922e-4e30-4101-9160-702a3b77f011')" />
+            <column name="card_number" value="5254-5008-9082-9034"/>
+            <column name="card_holder" value="Alice Smith"/>
+            <column name="cvv" value="765"/>
+            <column name="card_type" value="MASTERCARD"/>
+            <column name="card_status" value="INACTIVE"/>
+            <column name="created_at" value="2023-11-09 15:44:59"/>
+            <column name="expiration_date" value="2030-11-09 15:44:59"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('488e29ad-b572-46f9-b305-8c3345216cf5')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="3" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">
+            <tableExists tableName="cards"/>
+        </preConditions>
+        <insert tableName="cards">
+            <column name="card_id" valueComputed="UUID_TO_BIN('4684a6a7-0944-4916-97f0-a2b515901542')" />
+            <column name="card_number" value="4434-5678-9012-3456"/>
+            <column name="card_holder" value="Bob Johnson"/>
+            <column name="cvv" value="214"/>
+            <column name="card_type" value="VISA"/>
+            <column name="card_status" value="ACTIVE"/>
+            <column name="created_at" value="2023-11-09 15:44:59"/>
+            <column name="expiration_date" value="2028-11-09 15:44:59"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('3a246748-0e59-473f-96dd-be0b96d18dba')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">
+            <tableExists tableName="cards"/>
+        </preConditions>
+        <insert tableName="cards">
+            <column name="card_id" valueComputed="UUID_TO_BIN('552c0e06-3763-40b7-8488-a8633f10f720')" />
+            <column name="card_number" value="5931-8562-1234-9876"/>
+            <column name="card_holder" value="Grace Davis"/>
+            <column name="cvv" value="456"/>
+            <column name="card_type" value="MASTERCARD"/>
+            <column name="card_status" value="BLOCKED"/>
+            <column name="created_at" value="2023-11-09 15:44:59"/>
+            <column name="expiration_date" value="2023-11-09 15:44:59"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('58b434fe-4e30-49a1-bea2-d3b9942e925c')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">
+            <tableExists tableName="cards"/>
+        </preConditions>
+        <insert tableName="cards">
+            <column name="card_id" valueComputed="UUID_TO_BIN('75e683d9-a01c-48d0-a1e5-406e407566ba')" />
+            <column name="card_number" value="5467-8932-4561-2345"/>
+            <column name="card_holder" value="David Lee"/>
+            <column name="cvv" value="456"/>
+            <column name="card_type" value="MASTERCARD"/>
+            <column name="card_status" value="BLOCKED"/>
+            <column name="created_at" value="2023-11-09 15:44:59"/>
+            <column name="expiration_date" value="2034-11-09 15:44:59"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="p.namm">
+        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">
+            <tableExists tableName="cards"/>
+        </preConditions>
+        <insert tableName="cards">
+            <column name="card_id" valueComputed="UUID_TO_BIN('78e22a2a-aabc-4f63-a039-3bc5d95461c8')" />
+            <column name="card_number" value="5467-8932-4561-2345"/>
+            <column name="card_holder" value="David Lee"/>
+            <column name="cvv" value="456"/>
+            <column name="card_type" value="VISA"/>
+            <column name="card_status" value="ACTIVE"/>
+            <column name="created_at" value="2023-11-09 15:44:59"/>
+            <column name="expiration_date" value="2034-11-09 15:44:59"/>
+            <column name="account_id" valueComputed="UUID_TO_BIN('a8812afb-1f9a-45e9-99de-3aa066476264')"/>
+        </insert>
+    </changeSet>
+
+<!--    <changeSet id="7" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('03338ffb-cff9-4f6f-962d-816dd8ed8a4c')" />-->
+<!--            <column name="card_number" value="4467-8932-4561-2345"/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="VISA"/>-->
+<!--            <column name="card_status" value="BLOCKED"/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="8" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('0b78b24d-d281-4e30-b667-b461a100ab27')" />-->
+<!--            <column name="card_number" value="5467-8932-4561-2345"/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="MASTERCARD"/>-->
+<!--            <column name="card_status" value="ACTIVE"/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('240a158e-d55b-46d3-86a2-88914dae4e68')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="9" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('0beffd78-6d99-4106-a7dd-bce52c6b2b91')" />-->
+<!--            <column name="card_number" value="5467-8932-4561-2345"/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="MASTERCARD"/>-->
+<!--            <column name="card_status" value="ACTIVE"/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('914f7681-d297-4ef5-9d4f-1c490382fa1c')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="10" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('56e08fd1-e5b0-4644-bd1f-b2b727d40bdf')" />-->
+<!--            <column name="card_number" value="4467-8932-4561-2345"/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="VISA"/>-->
+<!--            <column name="card_status" value="ACTIVE"/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="11" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('213fd3b3-2100-4785-bd42-fff45305883d')" />-->
+<!--            <column name="card_number" value="5467-8932-4561-2345"/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="MASTERCARD"/>-->
+<!--            <column name="card_status" value="INACTIVE"/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('3e49bf21-ee85-4361-909c-ebe10c9a68b1')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="12" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('cb2ddea4-e193-4c6c-8baf-6f38a31792a2')" />-->
+<!--            <column name="card_number" value="4467-8932-4561-2345"/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="VISA"/>-->
+<!--            <column name="card_status" value="ACTIVE"/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="13" author="p.namm">-->
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Insert into Card table">-->
+<!--            <tableExists tableName="cards"/>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="cards">-->
+<!--            <column name="card_id" valueComputed="UUID_TO_BIN('a6e15005-29e7-4c00-a1f1-ecdc334e50c0')" />-->
+<!--            <column name="card_number" value="5467-8932-4561-2345"/>-->
+<!--            <column name="card_holder" value="  "/>-->
+<!--            <column name="cvv" value="456"/>-->
+<!--            <column name="card_type" value="MASTERCARD"/>-->
+<!--            <column name="card_status" value="ACTIVE"/>-->
+<!--            <column name="expiration_date" value="  "/>-->
+<!--            <column name="created_at" value="2023-11-09 15:44:59"/>-->
+<!--            <column name="account_id" valueComputed="UUID_TO_BIN('f7a7c08a-4bd7-4c68-894b-bd2cca07f52b')"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+
+
+</databaseChangeLog>

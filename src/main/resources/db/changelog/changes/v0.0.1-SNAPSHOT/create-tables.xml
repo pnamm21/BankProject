@@ -41,7 +41,7 @@
             <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="interest_rate" type="decimal(6,4)"/>
+            <column name="interest_rate" type="decimal(6,3)"/>
             <column name="status" type="varchar(50)"/>
             <column name="sum" type="decimal(15,2)"/>
             <column name="created_at" type="timestamp"/>
@@ -136,8 +136,8 @@
             <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="type" type="int"/>
-            <column name="amount" type="decimal(12,4)"/>
+            <column name="transaction_type" type="varchar(20)"/>
+            <column name="amount" type="decimal(12,2)"/>
             <column name="description" type="varchar(255)"/>
             <column name="status" type="varchar(50)"/>
             <column name="created_at" type="timestamp"/>

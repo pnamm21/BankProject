@@ -1,0 +1,93 @@
+21.11.2023 18:59:54.672 [main] INFO  c.b.b.BankProjectApplication - Starting BankProjectApplication using Java 19.0.2 with PID 14560 (C:\Users\ffam5\BankProject\target\classes started by ffam5 in C:\Users\ffam5\BankProject)
+21.11.2023 18:59:54.677 [main] INFO  c.b.b.BankProjectApplication - No active profile set, falling back to 1 default profile: "default"
+21.11.2023 18:59:55.417 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+21.11.2023 18:59:55.493 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 7 JPA repository interfaces.
+21.11.2023 18:59:56.154 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+21.11.2023 18:59:56.162 [main] INFO  o.a.c.c.StandardService - Starting service [Tomcat]
+21.11.2023 18:59:56.162 [main] INFO  o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.12]
+21.11.2023 18:59:56.240 [main] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+21.11.2023 18:59:56.240 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1510 ms
+21.11.2023 18:59:56.379 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+21.11.2023 18:59:56.790 [main] INFO  c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ab66127
+21.11.2023 18:59:56.792 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+21.11.2023 18:59:57.800 [main] INFO  liquibase.changelog - Reading from BankServiceDataBase.DATABASECHANGELOG
+21.11.2023 18:59:57.923 [main] INFO  liquibase.changelog - Reading from BankServiceDataBase.DATABASECHANGELOG
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - UPDATE SUMMARY
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - Run:                          0
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - Previously run:              73
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - Filtered out:                 0
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - -------------------------------
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - Total change sets:           73
+
+21.11.2023 18:59:57.935 [main] INFO  liquibase.util - Update summary generated
+21.11.2023 18:59:57.951 [main] INFO  l.lockservice - Successfully released change log lock
+21.11.2023 18:59:57.952 [main] INFO  liquibase.command - Command execution complete
+21.11.2023 18:59:58.030 [main] INFO  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+21.11.2023 18:59:58.125 [main] INFO  o.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.7.Final
+21.11.2023 18:59:58.129 [main] INFO  o.h.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+21.11.2023 18:59:58.285 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+21.11.2023 18:59:58.494 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+21.11.2023 18:59:58.781 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+21.11.2023 18:59:59.414 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+21.11.2023 18:59:59.416 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+21.11.2023 18:59:59.743 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+21.11.2023 19:00:00.729 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@51d1e7e6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3e5265be, org.springframework.security.web.context.SecurityContextHolderFilter@d13201f, org.springframework.security.web.header.HeaderWriterFilter@2fe10ec3, org.springframework.security.web.csrf.CsrfFilter@2b64981, org.springframework.security.web.authentication.logout.LogoutFilter@3144f650, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@54a1fa3e, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5d4f402d, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@d5a417e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6f7b8812, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@38b50313, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@44d5582b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51dc08eb, org.springframework.security.web.access.ExceptionTranslationFilter@1a30a359, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5585d454]
+21.11.2023 19:00:01.299 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+21.11.2023 19:00:01.304 [main] INFO  c.b.b.BankProjectApplication - Started BankProjectApplication in 7.166 seconds (process running for 8.062)
+21.11.2023 19:00:15.403 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+21.11.2023 19:00:15.403 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+21.11.2023 19:00:15.404 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+21.11.2023 19:00:58.553 [http-nio-8080-exec-8] INFO  c.b.b.a.a.Logging - NEW REQUEST:
+IP : 0:0:0:0:0:0:0:1
+URL : http://localhost:8080/api/account/get/58b434fe-4e30-49a1-bea2-d3b9942e925c
+HTTP_METHOD : GET
+CONTROLLER_METHOD : com.bankapp.bankapp.app.controller.AccountController.getAccount
+21.11.2023 19:00:58.553 [http-nio-8080-exec-8] INFO  c.b.b.a.a.Logging - RUN SERVICE:
+SERVICE_METHOD : com.bankapp.bankapp.app.service.impl.AccountServiceImpl.getAccountById
+21.11.2023 19:00:58.718 [http-nio-8080-exec-8] INFO  c.b.b.a.a.Logging - Return value: <200 OK OK,Account{id=58b434fe-4e30-49a1-bea2-d3b9942e925c, clientId=Client{id=db9f6550-071c-4370-a0d6-b8303417dd4f, managerId=Manager{id=e29055e5-d971-4122-8282-8b8b6e7de1bf, firstName='Oliver', lastName='Wilson', status=ON_LEAVE, createdAt=2023-09-17T13:30, updatedAt=2023-09-17T13:30}, status=ACTIVE, taxCode='XYZ123', firstName='Oliver', last_name='Wright', email='oliver.wilson@example.com', address='333 Elm St', phone='555-333-4444', created_at=2023-09-17T13:30, updated_at=2023-09-17T13:30}, name='Grace Davis', type=STUDENT_ACCOUNT, status=ACTIVE, balance=1800.75, currencyCode=UAH, createdAt=2023-09-17T14:45, updatedAt=2023-09-17T14:45},[]>
+END OF REQUEST
+21.11.2023 19:01:02.960 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+21.11.2023 19:01:02.962 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+21.11.2023 19:01:02.970 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+21.11.2023 19:29:01.472 [main] INFO  c.b.b.BankProjectApplication - Starting BankProjectApplication using Java 19.0.2 with PID 5788 (C:\Users\ffam5\BankProject\target\classes started by ffam5 in C:\Users\ffam5\BankProject)
+21.11.2023 19:29:01.475 [main] INFO  c.b.b.BankProjectApplication - No active profile set, falling back to 1 default profile: "default"
+21.11.2023 19:29:02.137 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+21.11.2023 19:29:02.207 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 7 JPA repository interfaces.
+21.11.2023 19:29:02.877 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+21.11.2023 19:29:02.886 [main] INFO  o.a.c.c.StandardService - Starting service [Tomcat]
+21.11.2023 19:29:02.886 [main] INFO  o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.12]
+21.11.2023 19:29:02.978 [main] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+21.11.2023 19:29:02.978 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1467 ms
+21.11.2023 19:29:03.191 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+21.11.2023 19:29:03.522 [main] INFO  c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4cd7d5e1
+21.11.2023 19:29:03.523 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+21.11.2023 19:29:04.526 [main] INFO  liquibase.changelog - Reading from BankServiceDataBase.DATABASECHANGELOG
+21.11.2023 19:29:04.630 [main] INFO  liquibase.changelog - Reading from BankServiceDataBase.DATABASECHANGELOG
+21.11.2023 19:29:04.642 [main] INFO  liquibase.util - UPDATE SUMMARY
+21.11.2023 19:29:04.642 [main] INFO  liquibase.util - Run:                          0
+21.11.2023 19:29:04.642 [main] INFO  liquibase.util - Previously run:              73
+21.11.2023 19:29:04.642 [main] INFO  liquibase.util - Filtered out:                 0
+21.11.2023 19:29:04.642 [main] INFO  liquibase.util - -------------------------------
+21.11.2023 19:29:04.642 [main] INFO  liquibase.util - Total change sets:           73
+
+21.11.2023 19:29:04.644 [main] INFO  liquibase.util - Update summary generated
+21.11.2023 19:29:04.660 [main] INFO  l.lockservice - Successfully released change log lock
+21.11.2023 19:29:04.661 [main] INFO  liquibase.command - Command execution complete
+21.11.2023 19:29:04.733 [main] INFO  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+21.11.2023 19:29:04.834 [main] INFO  o.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.7.Final
+21.11.2023 19:29:04.837 [main] INFO  o.h.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+21.11.2023 19:29:04.977 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+21.11.2023 19:29:05.095 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+21.11.2023 19:29:05.362 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+21.11.2023 19:29:06.089 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+21.11.2023 19:29:06.091 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+21.11.2023 19:29:06.439 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+21.11.2023 19:29:07.397 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@40da7079, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14477609, org.springframework.security.web.context.SecurityContextHolderFilter@2e383d6f, org.springframework.security.web.header.HeaderWriterFilter@62398a19, org.springframework.security.web.csrf.CsrfFilter@16b3b292, org.springframework.security.web.authentication.logout.LogoutFilter@54b58502, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@596324c, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4939e783, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@576ffbe0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@198b4c05, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29c5abef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@51d49864, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4a0c625, org.springframework.security.web.access.ExceptionTranslationFilter@5d7832f4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4405a27e]
+21.11.2023 19:29:07.957 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+21.11.2023 19:29:07.961 [main] INFO  c.b.b.BankProjectApplication - Started BankProjectApplication in 6.999 seconds (process running for 7.812)
+21.11.2023 19:29:13.695 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+21.11.2023 19:29:13.696 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+21.11.2023 19:29:13.697 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+21.11.2023 19:29:52.092 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+21.11.2023 19:29:52.094 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+21.11.2023 19:29:52.104 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.

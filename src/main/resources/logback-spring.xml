@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!--Spring default values -->
+    <!-- Аппендер - это объект, который отвечает за запись логов в определенное место -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Local log file -->
+    <!-- Файл будет называться logback.log и будет хранить максимум 10 лог-файлов,
+                      каждый из которых размером не более 1 ГБ -->
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logback.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>slf4jlogback.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} -%msg%n</Pattern>
+        </layout>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logstash log -->
+    <!-- Корневой уровень определяет минимальный уровень логов, которые будут зарегистрированы.
+         В данном случае регистрироваться будут только логи уровня INFO и выше -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>  <!-- Это указывает Logback выводить логи на консоль -->
+        <appender-ref ref="FILE"/>   <!-- Это указывает Logback выводить логи в файл -->
+    </root>
+</configuration>
