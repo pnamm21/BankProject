@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getListProduct(UUID id) {
 
-        List<Product> products = productRepository.getListProduct(id);
+        List<Product> products = productRepository.getProductsByManagerId(id);
         return productMapper.listProductToListProductDto(products);
     }
 

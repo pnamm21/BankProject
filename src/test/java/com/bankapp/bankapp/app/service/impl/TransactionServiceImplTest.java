@@ -78,7 +78,7 @@ class TransactionServiceImplTest {
 
         List<Transaction> mockTransaction = Arrays.asList(new Transaction(), new Transaction());
 
-        when(transactionRepository.getListTransactionsByCreditAccountId(transactionId)).thenReturn(mockTransaction);
+        when(transactionRepository.getTransactionsByCreditAccountId(transactionId)).thenReturn(mockTransaction);
         when(transactionMapper.listTransactionToListTransactionDto(mockTransaction)).thenReturn(Arrays.asList(new TransactionDto(), new TransactionDto()));
 
         List<TransactionDto> result = transactionService.getListTransactionByCreditAccountId(transactionId);
@@ -86,7 +86,7 @@ class TransactionServiceImplTest {
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        verify(transactionRepository, times(1)).getListTransactionsByCreditAccountId(transactionId);
+        verify(transactionRepository, times(1)).getTransactionsByCreditAccountId(transactionId);
         verify(transactionMapper, times(1)).listTransactionToListTransactionDto(mockTransaction);
     }
 
@@ -95,7 +95,7 @@ class TransactionServiceImplTest {
 
         List<Transaction> mockTransaction = Arrays.asList(new Transaction(), new Transaction());
 
-        when(transactionRepository.getListTransactionsByDebitAccountId(transactionId)).thenReturn(mockTransaction);
+        when(transactionRepository.getTransactionsByDebitAccountId(transactionId)).thenReturn(mockTransaction);
         when(transactionMapper.listTransactionToListTransactionDto(mockTransaction)).thenReturn(Arrays.asList(new TransactionDto(), new TransactionDto()));
 
         List<TransactionDto> result = transactionService.getListTransactionByDebitAccountId(transactionId);
@@ -103,7 +103,7 @@ class TransactionServiceImplTest {
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        verify(transactionRepository, times(1)).getListTransactionsByDebitAccountId(transactionId);
+        verify(transactionRepository, times(1)).getTransactionsByDebitAccountId(transactionId);
         verify(transactionMapper, times(1)).listTransactionToListTransactionDto(mockTransaction);
     }
 

@@ -36,10 +36,9 @@ public class AgreementServiceImpl implements AgreementService {
 
     @Override
     public List<AgreementDto> getListAgreement(UUID id) {
-        List<Agreement> agreements = agreementRepository.getListAgreementByAccountId(id);
+        List<Agreement> agreements = agreementRepository.getAgreementByAccountId(id);
         return agreementMapper.listAgreementToListAgreementDto(agreements);
     }
-
 
     @Override
     @Transactional

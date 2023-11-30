@@ -44,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDto> getListAccount(UUID id) {
-        List<Account> accounts = accountRepository.getListAccount(id);
+        List<Account> accounts = accountRepository.getAccountsByClientId(id);
         return accountMapper.ListAccountToListAccountDto(accounts);
     }
 

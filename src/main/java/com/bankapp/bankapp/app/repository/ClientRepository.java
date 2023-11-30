@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.UUID;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, UUID> {
-    @Query("select c from Client c where c.manager.id = :id")
-    List<Client> getListClient(@Param("id")UUID id);
+    List<Client> getClientsByManagerId(@Param("id")UUID id);
 
 }

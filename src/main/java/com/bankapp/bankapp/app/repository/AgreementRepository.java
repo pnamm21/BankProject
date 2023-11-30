@@ -12,7 +12,6 @@ import java.util.UUID;
 @Repository
 public interface AgreementRepository extends JpaRepository<Agreement, UUID> {
 
- @Query("select a from Agreement a where a.account.id = :id")
- List<Agreement> getListAgreementByAccountId(@Param("id") UUID id);
+   List<Agreement> getAgreementByAccountId(@Param("id") UUID id);
 
 }

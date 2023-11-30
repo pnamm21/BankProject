@@ -12,10 +12,7 @@ import java.util.UUID;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, UUID> {
 
-    @Query("select a from Account a where a.client.id = :id")
-    List<Account> getListAccount(@Param("id") UUID id);
+    List<Account> getAccountsByClientId(@Param("id") UUID id);
 
-    @Query("select c from Card c where c.cardNumber = :cardNumber")
-    Account findAccountByCardNumber(String cardNumber);
 
 }

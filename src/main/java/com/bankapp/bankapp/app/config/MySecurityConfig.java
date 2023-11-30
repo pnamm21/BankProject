@@ -2,6 +2,7 @@ package com.bankapp.bankapp.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,16 +26,6 @@ public class MySecurityConfig {
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults());
         return http.build();
-
-//        http
-//                .authorizeRequests(authorize -> authorize
-//                        .antMatchers("/swagger-ui.html", "/v2/api-docs", "/webjars/**", "/swagger-resources/**", "/v3/api-docs/**", "/swagger-ui/**")
-//                        .permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .httpBasic();
-//
-//        return http.build();
     }
 
     @Bean
@@ -47,8 +38,17 @@ public class MySecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
+//    @Bean
+//    public SecurityFilterChain configureTest(HttpSecurity http) throws Exception {
+//        http.csrf(Customizer.withDefaults())
+//                .authorizeRequests()
+//                .anyRequest().permitAll();
+//        return http.build();
+//    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

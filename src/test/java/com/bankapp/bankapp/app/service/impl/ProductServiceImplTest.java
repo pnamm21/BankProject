@@ -79,7 +79,7 @@ class ProductServiceImplTest {
 
         List<Product> mockProducts = Arrays.asList(new Product(), new Product());
 
-        when(productRepository.getListProduct(productId)).thenReturn(mockProducts);
+        when(productRepository.getProductsByManagerId(productId)).thenReturn(mockProducts);
         when(productMapper.listProductToListProductDto(mockProducts)).thenReturn(Arrays.asList(new ProductDto(), new ProductDto()));
 
         List<ProductDto> result = productService.getListProduct(productId);
@@ -87,7 +87,7 @@ class ProductServiceImplTest {
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        verify(productRepository, times(1)).getListProduct(productId);
+        verify(productRepository, times(1)).getProductsByManagerId(productId);
         verify(productMapper, times(1)).listProductToListProductDto(mockProducts);
     }
 

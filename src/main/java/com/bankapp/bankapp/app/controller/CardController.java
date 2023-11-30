@@ -36,9 +36,9 @@ public class CardController {
         return new ResponseEntity<>(cardService.createVisaCard(cardDtoPost), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/card-transfer", method = {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<String> transferByCardNumber(@RequestBody TransactionDtoTransferCard transactionDtoTransferCard) {
-        cardService.transferByCardNumbers(transactionDtoTransferCard.getFrom(), transactionDtoTransferCard.getTo(), transactionDtoTransferCard);
+    @RequestMapping(value = "/card-transfer/{cardNumber}", method = {RequestMethod.POST, RequestMethod.GET})
+    public ResponseEntity<String> transferByCardNumber(@PathVariable("cardNumber") String cardNumber,@RequestBody TransactionDtoTransferCard transactionDtoTransferCard) {
+        cardService.transferByCardNumbers(cardNumber, transactionDtoTransferCard.getTo(), transactionDtoTransferCard);
         return ResponseEntity.ok("Transfer successful");
     }
 

@@ -3,7 +3,7 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:mySql://localhost:3306/BankServiceDataBase
+    url: jdbc:mysql://localhost:3306/BankServiceDataBase
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: MySQL1213141516
@@ -27,4 +27,27 @@ spring:
       include-message: always
       include-binding-error: always
       port: 8080
+
+  security:
+    oauth2:
+      client:
+        registration:
+
+#          google:
+#            client-id: YOUR_OAUTH2_CLIENT_ID client-secret: YOUR_OAUTH2_CLIENT_SECRET authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+#            token-uri: https://oauth2.googleapis.com/token
+#            redirect-uri: http://localhost:8080/oauth2/login/google
+#            scope: email, profile
+
+          github:
+            client-id: 365d365842d2793c8e30
+            client-secret: d1ef4b01ed91a32e6a32b269baa84a85538dca98
+        provider:
+          github:
+          user-uri: https://api.github.com/pnamm21
+
+
+#  rabbitmq:
+#    host:
+
 

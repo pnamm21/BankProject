@@ -50,7 +50,6 @@ public class AccountController {
         return new ResponseEntity<>(accountService.createAccount(accountDtoPost), OK);
     }
 
-    // check this method
     @RequestMapping("/get-cards")
     public ResponseEntity<List<CardDto>> getCards(@RequestParam("id") @IDChecker String id) {
         List<CardDto> cardDtos = cardService.getListCards(UUID.fromString(id));

@@ -80,7 +80,7 @@ class AccountServiceImplTest {
 
         List<Account> mockAccounts = Arrays.asList(new Account(), new Account());
 
-        when(accountRepository.getListAccount(accountId)).thenReturn(mockAccounts);
+        when(accountRepository.getAccountsByClientId(accountId)).thenReturn(mockAccounts);
         when(accountMapper.ListAccountToListAccountDto(mockAccounts)).thenReturn(Arrays.asList(new AccountDto(), new AccountDto()));
 
         List<AccountDto> result = accountService.getListAccount(accountId);
@@ -88,7 +88,7 @@ class AccountServiceImplTest {
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        verify(accountRepository, times(1)).getListAccount(accountId);
+        verify(accountRepository, times(1)).getAccountsByClientId(accountId);
         verify(accountMapper, times(1)).ListAccountToListAccountDto(mockAccounts);
     }
 

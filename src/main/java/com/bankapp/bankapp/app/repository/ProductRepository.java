@@ -10,6 +10,5 @@ import java.util.List;
 import java.util.UUID;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
-    @Query("select p from Product p where p.manager.id = :id")
-    List<Product> getListProduct(@Param("id")UUID id);
+    List<Product> getProductsByManagerId(@Param("id")UUID id);
 }

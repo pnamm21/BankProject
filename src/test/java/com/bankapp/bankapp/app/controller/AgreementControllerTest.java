@@ -51,11 +51,11 @@ class AgreementControllerTest {
         agreement.setId(agreementId);
         Mockito.when(agreementService.getAgreementById(agreementId.toString())).thenReturn(Optional.of(agreement));
 
-
         String responseContent = null;
         try {
-            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/agreement/get/{id}", agreementId))
-                    .andExpect(status().isOk())  // Expect a successful response
+            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/agreement/get/{id}", agreementId)
+                            .secure(true))
+                    .andExpect(status().isOk()) // Expect a successful response
                     .andReturn().getResponse().getContentAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);

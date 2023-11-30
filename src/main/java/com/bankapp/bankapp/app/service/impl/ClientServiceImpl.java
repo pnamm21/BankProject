@@ -39,7 +39,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientDto> getListClients(UUID id) {
-        List<Client> clients = clientRepository.getListClient(id);
+        List<Client> clients = clientRepository.getClientsByManagerId(id);
         return clientMapper.listClientToListClientDto(clients);
     }
 

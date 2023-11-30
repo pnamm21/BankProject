@@ -103,7 +103,7 @@ class ClientServiceImplTest {
 
         List<Client> mockClients = Arrays.asList(new Client(),new Client());
 
-        when(clientRepository.getListClient(clientId)).thenReturn(mockClients);
+        when(clientRepository.getClientsByManagerId(clientId)).thenReturn(mockClients);
         when(clientMapper.listClientToListClientDto(mockClients)).thenReturn(Arrays.asList(new ClientDto(),new ClientDto()));
 
         List<ClientDto> result = clientService.getListClients(clientId);
@@ -111,7 +111,7 @@ class ClientServiceImplTest {
         assertNotNull(result);
         assertEquals(2,result.size());
 
-        verify(clientRepository, times(1)).getListClient(clientId);
+        verify(clientRepository, times(1)).getClientsByManagerId(clientId);
         verify(clientMapper,times(1)).listClientToListClientDto(mockClients);
     }
 

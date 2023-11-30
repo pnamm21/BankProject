@@ -1,11 +1,14 @@
 package com.bankapp.bankapp.app.service.impl;
 
+import com.bankapp.bankapp.app.Generator.CardGenerator;
 import com.bankapp.bankapp.app.dto.CardDto;
 import com.bankapp.bankapp.app.dto.CardDtoPost;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransferCard;
 import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Card;
 import com.bankapp.bankapp.app.entity.Transaction;
+import com.bankapp.bankapp.app.entity.enums.CardStatus;
+import com.bankapp.bankapp.app.entity.enums.CardType;
 import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
 import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import com.bankapp.bankapp.app.mapper.CardMapper;
@@ -18,7 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -85,7 +88,7 @@ class CardServiceImplTest {
 
         List<Card> cards = Arrays.asList(new Card(), new Card());
 
-        when(cardRepository.getListCards(cardId)).thenReturn(cards);
+        when(cardRepository.getCardsByAccount_Id(cardId)).thenReturn(cards);
         when(cardMapper.listCardToListCardDto(cards)).thenReturn(Arrays.asList(new CardDto(), new CardDto()));
 
         List<CardDto> result = cardService.getListCards(cardId);
@@ -93,7 +96,7 @@ class CardServiceImplTest {
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        verify(cardRepository, times(1)).getListCards(cardId);
+        verify(cardRepository, times(1)).getCardsByAccount_Id(cardId);
         verify(cardMapper, times(1)).listCardToListCardDto(cards);
     }
 
@@ -146,49 +149,60 @@ class CardServiceImplTest {
 
     }
 
-//    @Test
-//    void testTransferByCardNumbers() {
-//
-//        // Mock data
-//        String fromCardNumber = "1234567890123456";
-//        String toCardNumber = "9876543210987654";
-//        TransactionDtoTransferCard transactionDtoTransferCard = new TransactionDtoTransferCard();
-//        transactionDtoTransferCard.setFrom(fromCardNumber);
-//        transactionDtoTransferCard.setTo(toCardNumber);
-//        transactionDtoTransferCard.setAmount("50.0");
-//        transactionDtoTransferCard.setTransactionType("TRANSFERS");
-//        transactionDtoTransferCard.setDescription("Test Transfer");
-//        transactionDtoTransferCard.setStatus("APPROVED");
-//
-//        Card sourceCard = new Card();
-//        sourceCard.setCardNumber(fromCardNumber);
-//        Account fromAccount = new Account();
-//        fromAccount.setBalance(100.0);
-//        sourceCard.setAccount(fromAccount);
-//
-//        Card destinationCard = new Card();
-//        destinationCard.setCardNumber(toCardNumber);
-//        Account toAccount = new Account();
-//        toAccount.setBalance(50.0);
-//        destinationCard.setAccount(toAccount);
-//
-//        when(cardRepository.findByCardNumber(fromCardNumber)).thenReturn(Optional.of(sourceCard));
-//        when(cardRepository.findByCardNumber(toCardNumber)).thenReturn(Optional.of(destinationCard));
-//
-//        // Invoke the method
-//        Transaction resultTransaction = cardService.transferByCardNumbers(fromCardNumber,toCardNumber,transactionDtoTransferCard);
-//
-//        // Assertions
-//        assertNotNull(resultTransaction);
-//        assertEquals(fromAccount.getBalance(), 100.0); // Check if the balance was updated correctly for the source account
-//        assertEquals(toAccount.getBalance(), 50.0); // Check if the balance was updated correctly for the destination account
-//        assertEquals(TransactionType.TRANSFERS, resultTransaction.getTransactionType());
-//        assertEquals(50.0, resultTransaction.getAmount());
-//        assertEquals("Test Transfer", resultTransaction.getDescription());
-//        assertEquals(TransactionStatus.APPROVED, resultTransaction.getStatus());
-//
-//        verify(cardService, times(1)).transferByCardNumbers(fromCardNumber, toCardNumber, transactionDtoTransferCard);
-//    }
+    @Test
+    void testTransferByCardNumbers() {
 
+        // Mock data
+        String fromCardNumber = "4234567890123456";
+        String toCardNumber = "4876543210987654";
+        TransactionDtoTransferCard transactionDtoTransferCard = new TransactionDtoTransferCard();
+        transactionDtoTransferCard.setFrom(fromCardNumber);
+        transactionDtoTransferCard.setTo(toCardNumber);
+        transactionDtoTransferCard.setAmount("50.0");
+        transactionDtoTransferCard.setTransactionType("TRANSFERS");
+        transactionDtoTransferCard.setDescription("Test Transfer");
+        transactionDtoTransferCard.setStatus("APPROVED");
+
+        Card sourceCard = new Card();
+        sourceCard.setCardHolder("Name");
+        sourceCard.setCardNumber(fromCardNumber);
+        sourceCard.setCvv("123");
+        sourceCard.setStatus(CardStatus.ACTIVE);
+        sourceCard.setType(CardType.VISA);
+        sourceCard.setExpirationDate(CardGenerator.generateExpirationDate());
+        sourceCard.setCreatedAt(LocalDateTime.now());
+        Account fromAccount = new Account();
+        fromAccount.setBalance(100.0);
+        sourceCard.setAccount(fromAccount);
+
+        Card destinationCard = new Card();
+        destinationCard.setCardHolder("Name");
+        destinationCard.setCardNumber(toCardNumber);
+        destinationCard.setCvv("123");
+        destinationCard.setStatus(CardStatus.ACTIVE);
+        destinationCard.setType(CardType.VISA);
+        destinationCard.setExpirationDate(CardGenerator.generateExpirationDate());
+        destinationCard.setCreatedAt(LocalDateTime.now());
+        Account toAccount = new Account();
+        toAccount.setBalance(50.0);
+        destinationCard.setAccount(toAccount);
+
+        when(cardRepository.findCardByCardNumber(fromCardNumber)).thenReturn(Optional.of(sourceCard));
+        when(cardRepository.findCardByCardNumber(toCardNumber)).thenReturn(Optional.of(destinationCard));
+
+        // Invoke the method
+        Transaction resultTransaction = cardService.transferByCardNumbers(fromCardNumber,toCardNumber,transactionDtoTransferCard);
+
+        // Assertions
+//        assertNotNull(resultTransaction);
+        assertEquals(fromAccount.getBalance(), 50.0); // Check if the balance was updated correctly for the source account
+        assertEquals(toAccount.getBalance(), 100.0); // Check if the balance was updated correctly for the destination account
+        assertEquals(TransactionType.TRANSFERS, resultTransaction.getTransactionType());
+        assertEquals(50.0, resultTransaction.getAmount());
+        assertEquals("Test Transfer", resultTransaction.getDescription());
+        assertEquals(TransactionStatus.APPROVED, resultTransaction.getStatus());
+
+        verify(cardService, times(1)).transferByCardNumbers(fromCardNumber, toCardNumber, transactionDtoTransferCard);
+    }
 
 }

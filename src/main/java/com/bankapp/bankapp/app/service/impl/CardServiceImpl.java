@@ -3,7 +3,6 @@ package com.bankapp.bankapp.app.service.impl;
 import com.bankapp.bankapp.app.Generator.CardGenerator;
 import com.bankapp.bankapp.app.dto.CardDto;
 import com.bankapp.bankapp.app.dto.CardDtoPost;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransferCard;
 import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Card;
@@ -49,7 +48,7 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public List<CardDto> getListCards(UUID id) {
-        List<Card> cards = cardRepository.getListCards(id);
+        List<Card> cards = cardRepository.getCardsByAccount_Id(id);
         return cardMapper.listCardToListCardDto(cards);
     }
 
@@ -104,11 +103,11 @@ public class CardServiceImpl implements CardService {
     public Transaction transferByCardNumbers(String from, String to, TransactionDtoTransferCard transactionDtoTransferCard) {
 
         // Find source card
-        Card sourceCard = cardRepository.findByCardNumber(from)
+        Card sourceCard = cardRepository.findCardByCardNumber(from)
                 .orElseThrow(() -> new DataNotFoundException("Source card not found"));
 
         // Find destination card
-        Card destinationCard = cardRepository.findByCardNumber(to)
+        Card destinationCard = cardRepository.findCardByCardNumber(to)
                 .orElseThrow(() -> new DataNotFoundException("Destination card not found"));
 
         // Get associated accounts
@@ -135,7 +134,8 @@ public class CardServiceImpl implements CardService {
             transaction.setStatus(TransactionStatus.valueOf(transactionDtoTransferCard.getStatus()));
             transaction.setCreatedAt(LocalDateTime.now());
 
-            return transactionRepository.save(transaction);
+            transactionRepository.save(transaction);
+            return transaction;
         } else {
             throw new BalanceIsEmptyException("Account is empty");
         }

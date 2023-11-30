@@ -46,13 +46,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<TransactionDto> getListTransactionByCreditAccountId(UUID id) {
-        List<Transaction> transactions = transactionRepository.getListTransactionsByCreditAccountId(id);
+        List<Transaction> transactions = transactionRepository.getTransactionsByCreditAccountId(id);
         return transactionMapper.listTransactionToListTransactionDto(transactions);
     }
 
     @Override
     public List<TransactionDto> getListTransactionByDebitAccountId(UUID id) {
-        List<Transaction> transactions = transactionRepository.getListTransactionsByDebitAccountId(id);
+        List<Transaction> transactions = transactionRepository.getTransactionsByDebitAccountId(id);
         return transactionMapper.listTransactionToListTransactionDto(transactions);
     }
 

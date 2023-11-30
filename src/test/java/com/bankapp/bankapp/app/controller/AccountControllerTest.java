@@ -21,12 +21,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AccountController.class)
@@ -53,16 +51,19 @@ class AccountControllerTest {
 
     // Test case for the getById endpoint
     @Test
-    void getById_ValidId_ReturnsOk() {
+    public void testGetById_ValidId_ReturnsOk() throws Exception {
+        // Create basic authentication credentials
+        String credentials = "nam:password";
+        String encodedCredentials = new String(Base64.getEncoder().encode(credentials.getBytes()));
 
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/account/{id}", accountId.toString()))
-                    .andExpect(status().isOk());  // Expect a successful response (status code 200 OK)
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        // Set the Authorization header
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/account/{id}", accountId.toString())
+                        .header("Authorization", "Basic " + encodedCredentials))
 
+                // Expect a successful response (status code 200 OK)
+                .andExpect(status().isOk());
     }
+
 
     // Test case for the getAccount endpoint
     @Test
