@@ -2,6 +2,10 @@ spring:
   main:
     banner-mode: off
 
+  thymeleaf:
+    prefix: classpath:/front-end/
+    suffix: .html
+
   datasource:
     url: jdbc:mysql://localhost:3306/BankServiceDataBase
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,11 +26,11 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
 
-  server:
-    error:
-      include-message: always
-      include-binding-error: always
-      port: 8080
+#  server:
+#    error:
+#      include-message: always
+#      include-binding-error: always
+#      port: 8080
 
   security:
     oauth2:
@@ -42,10 +46,10 @@ spring:
           github:
             client-id: 365d365842d2793c8e30
             client-secret: d1ef4b01ed91a32e6a32b269baa84a85538dca98
-        provider:
-          github:
-          user-uri: https://api.github.com/pnamm21
 
+#        provider:
+#          github:
+#          user-uri: https://api.github.com/pnamm21
 
 #  rabbitmq:
 #    host:

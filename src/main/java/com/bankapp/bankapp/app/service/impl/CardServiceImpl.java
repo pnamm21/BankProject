@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.service.impl;
 
-import com.bankapp.bankapp.app.Generator.CardGenerator;
+import com.bankapp.bankapp.app.generator.CardGenerator;
 import com.bankapp.bankapp.app.dto.CardDto;
 import com.bankapp.bankapp.app.dto.CardDtoPost;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransferCard;

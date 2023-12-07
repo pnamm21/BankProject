@@ -31,11 +31,16 @@ public class Logging {
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        log.info("NEW REQUEST:\n" +
-                        "IP : {}\n" +
-                        "URL : {}\n" +
-                        "HTTP_METHOD : {}\n" +
-                        "CONTROLLER_METHOD : {}.{}",
+        log.info("""
+                        
+                        
+                        
+                        
+                        NEW REQUEST:
+                        IP : {}
+                        URL : {}
+                        HTTP_METHOD : {}
+                        CONTROLLER_METHOD : {}.{}""",
                 request.getRemoteAddr(),
                 request.getRequestURL().toString(),
                 request.getMethod(),
@@ -46,8 +51,15 @@ public class Logging {
 
     @Before("serviceLog()")
     public void doBeforeService(JoinPoint jp) {
-        log.info("RUN SERVICE:\n" +
-                        "SERVICE_METHOD : {}.{}",
+        log.info("""
+                        
+                        
+                        
+                        
+                        
+                        RUN SERVICE:
+                        SERVICE_METHOD : {}.{}
+                        """,
                 jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
     }
 
@@ -56,8 +68,17 @@ public class Logging {
      **/
     @AfterReturning(returning = "returnObject", pointcut = "controllerLog()")
     public void doAfterReturning(Object returnObject) {
-        log.info("Return value: {}\n" +
-                        "END OF REQUEST",
+        log.info("""
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        Return value: {}
+                        END OF REQUEST
+                        """,
                 returnObject);
     }
 

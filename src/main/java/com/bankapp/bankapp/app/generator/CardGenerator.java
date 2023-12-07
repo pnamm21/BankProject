@@ -1,4 +1,4 @@
-package com.bankapp.bankapp.app.Generator;
+package com.bankapp.bankapp.app.generator;
 
 import com.bankapp.bankapp.app.entity.enums.CardType;
 import lombok.experimental.UtilityClass;

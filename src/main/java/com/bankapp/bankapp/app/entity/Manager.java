@@ -52,13 +52,13 @@ public class Manager {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @JsonIgnore
-    @OneToMany
-    private List<Client> clients;
-
-    @JsonIgnore
-    @OneToMany
-    private List<Product> products;
+//    @JsonIgnore
+//    @OneToMany
+//    private List<Client> clients;
+//
+//    @JsonIgnore
+//    @OneToMany
+//    private List<Product> products;
 
     @Override
     public boolean equals(Object o) {

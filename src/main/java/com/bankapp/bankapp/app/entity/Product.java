@@ -54,9 +54,9 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     private Manager manager;
 
-    @OneToMany
-    @JsonIgnore
-    private List<Agreement> agreements;
+//    @OneToMany
+//    @JsonIgnore
+//    private List<Agreement> agreements;
 
     @Override
     public boolean equals(Object o) {
@@ -75,7 +75,6 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", managerId=" + manager +
                 ", name='" + name + '\'' +
                 ", status=" + status +
                 ", currencyCode=" + currencyCode +

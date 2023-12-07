@@ -3,22 +3,16 @@ package com.bankapp.bankapp.app.service.impl;
 import com.bankapp.bankapp.app.dto.AccountDto;
 import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.AccountDtoPost;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
-import com.bankapp.bankapp.app.entity.Card;
-import com.bankapp.bankapp.app.entity.Transaction;
-import com.bankapp.bankapp.app.entity.enums.*;
-import com.bankapp.bankapp.app.exception.BalanceIsEmptyException;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.ExceptionMessage;
 import com.bankapp.bankapp.app.mapper.AccountMapper;
 import com.bankapp.bankapp.app.repository.AccountRepository;
-import com.bankapp.bankapp.app.repository.CardRepository;
+import com.bankapp.bankapp.app.repository.ClientRepository;
 import com.bankapp.bankapp.app.service.AccountService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,16 +23,18 @@ import static com.bankapp.bankapp.app.entity.enums.AccountStatus.*;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final ClientRepository clientRepository;
     private final AccountMapper accountMapper;
 
-    public AccountServiceImpl(AccountRepository accountRepository, AccountMapper accountMapper) {
+    public AccountServiceImpl(AccountRepository accountRepository, ClientRepository clientRepository, AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
+        this.clientRepository = clientRepository;
         this.accountMapper = accountMapper;
     }
 
     @Override
-    public Optional<Account> getAccountById(String id) throws DataNotFoundException {
-        return Optional.ofNullable(accountRepository.findById(UUID.fromString(id))
+    public AccountDto getAccountById(String id) throws DataNotFoundException {
+        return accountMapper.accountToAccountDTO(accountRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND)));
     }
 
@@ -50,17 +46,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public Account createAccount(AccountDtoPost accountDtoPost) {
+    public AccountDto createAccount(AccountDtoPost accountDtoPost) {
 
         Account account = accountMapper.accountDtoPostToAccount(accountDtoPost);
 
-        account.setName(accountDtoPost.getName());
-        account.setType(AccountType.valueOf(accountDtoPost.getType()));
-        account.setStatus(AccountStatus.valueOf(accountDtoPost.getStatus()));
-        account.setBalance(Double.valueOf(accountDtoPost.getBalance()));
-        account.setCurrencyCode(CurrencyCodeType.valueOf(accountDtoPost.getCurrencyCode()));
+        account.setClient(clientRepository.findById(UUID.fromString(accountDtoPost.getClientId()))
+                .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND)));
 
-        return accountRepository.save(account);
+        accountRepository.save(account);
+        return accountMapper.accountToAccountDTO(account);
     }
 
     @Override

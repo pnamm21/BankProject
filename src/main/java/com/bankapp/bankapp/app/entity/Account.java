@@ -22,7 +22,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+public class  Account {
 
     @Id
     @Column(name = "id")
@@ -58,21 +58,21 @@ public class Account {
     @JsonIgnore
     private Client client;
 
-    @OneToMany
-    @JsonIgnore
-    private Set<Card> cards;
-
-    @OneToMany
-    @JsonIgnore
-    private List<Agreement> agreements;
-
-    @OneToMany
-    @JsonIgnore
-    private Set<Transaction> debitAccount;
-
-    @OneToMany
-    @JsonIgnore
-    private Set<Transaction> creditAccount;
+//    @OneToMany
+//    @JsonIgnore
+//    private Set<Card> cards;
+//
+//    @OneToMany
+//    @JsonIgnore
+//    private List<Agreement> agreements;
+//
+//    @OneToMany
+//    @JsonIgnore
+//    private Set<Transaction> debitAccount;
+//
+//    @OneToMany
+//    @JsonIgnore
+//    private Set<Transaction> creditAccount;
 
     @Override
     public boolean equals(Object o) {
@@ -91,7 +91,6 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", clientId=" + client +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", status=" + status +

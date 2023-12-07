@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -26,8 +27,12 @@ import static org.springframework.mock.http.server.reactive.MockServerHttpReques
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql("/drop.sql")
+@Sql("/create.sql")
+@Sql("/insert.sql")
 class AccountControllerTest {
 
     @Autowired
@@ -35,21 +40,19 @@ class AccountControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
-    private static final String accountId = "240a158e-d55b-46d3-86a2-88914dae4e68";
-
+    private static final String accountId = "13ad9144-6f02-40f1-bb12-207310775a3f";
     @Test
     @WithMockUser(username = "nam",roles = "USER")
     void getAccount() throws Exception {
 
         AccountDto accountDto = new AccountDto() {{
             setId(accountId);
-            setName("Hannah Taylor");
-            setStatus("CLOSED");
-            setBalance("250000.0");
-            setCurrencyCode("EUR");
-            setType("SAVING_ACCOUNT");
-            setCreatedAt("2023-09-18T10:00:00");
+            setName("John Doe");
+            setStatus("ACTIVE");
+            setBalance("100000.0");
+            setCurrencyCode("UAH");
+            setType("BUSINESS_ACCOUNT");
+            setCreatedAt("2023-09-16T10:00:00");
         }};
 
         MvcResult mvcResult = mockMvc.perform(
@@ -68,32 +71,43 @@ class AccountControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void createAccount() throws Exception {
 
         AccountDtoPost accountDtoPost = new AccountDtoPost() {{
-            setId(accountId);
+            setId("82132342-4232-4123-4768-125643524352");
             setName("Nam");
             setStatus("CLOSED");
             setBalance("250000.0");
             setCurrencyCode("EUR");
             setType("SAVING_ACCOUNT");
-            setClientId("56876795-4d60-413b-8e30-ee56f49df814");
+            setClientId("e1adaf04-68b9-49c8-80b5-fed3ec85fde9");
+        }};
+
+        AccountDto expected = new AccountDto(){{
+            setId("82132342-4232-4123-4768-125643524352");
+            setName("Nam");
+            setStatus("CLOSED");
+            setBalance("250000.0");
+            setCurrencyCode("EUR");
+            setType("SAVING_ACCOUNT");
         }};
 
         String json = objectMapper.writeValueAsString(accountDtoPost);
-
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.post("/account/new", accountId)
+                        MockMvcRequestBuilders.post("/account/new")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json))
                 .andReturn();
 
         assertEquals(200, mvcResult.getResponse().getStatus());
 
-        AccountDtoPost actual = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<>() {
+        AccountDto actual = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<>() {
         });
 
-        assertEquals(accountDtoPost, actual);
+        actual.setCreatedAt(null);
+
+        assertEquals(expected,actual);
     }
 
 //    @Test
@@ -159,14 +173,26 @@ class AccountControllerTest {
     @WithMockUser(username = "nam", roles = "USER")
     void transferTest() throws Exception {
 
-        TransactionDtoTransfer transactionDtoTransfer = new TransactionDtoTransfer();
-        transactionDtoTransfer.setAmount("1000.0");
+        TransactionDtoTransfer transactionDtoTransfer = new TransactionDtoTransfer(){{
+            setDebitAccount("488e29ad-b572-46f9-b305-8c3345216cf5");
+            setTransactionType("TRANSFERS");
+            setAmount("150.00");
+            setDescription("Transaction C");
+            setStatus("UNDER_REVIEW");
+        }};
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/account/transfer/{id}", accountId)
-                        .content(asJsonString(transactionDtoTransfer))
+        String json = objectMapper.writeValueAsString(transactionDtoTransfer);
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/transfer/{id}", accountId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .with(csrf()))
-                .andExpect(status().isBadRequest());
+                        .content(json))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseContent = mvcResult.getResponse().getContentAsString();
+        TransactionDto responseDto = objectMapper.readValue(responseContent, TransactionDto.class);
+
+        assertEquals("APPROVED", responseDto.getStatus());
 
     }
 

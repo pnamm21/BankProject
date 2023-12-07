@@ -19,12 +19,12 @@ import java.util.UUID;
 @Service
 public interface AccountService {
 
-    Optional<Account> getAccountById(String id);
+    AccountDto getAccountById(String id);
 
     List<AccountDto> getListAccount(@Param("id") UUID id);
 
     @Transactional
-    Account  createAccount(AccountDtoPost accountDtoPost);
+    AccountDto  createAccount(AccountDtoPost accountDtoPost);
 
     @Transactional
     Account updateAccount(String id, AccountDtoFullUpdate accountDtoFullUpdate);

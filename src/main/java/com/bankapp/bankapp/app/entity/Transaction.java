@@ -70,8 +70,6 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", debitAccountId=" + debitAccount +
-                ", creditAccountId=" + creditAccount +
                 ", transaction_type=" + transactionType +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +

@@ -62,9 +62,9 @@ public class Client {
     @JsonIgnore
     private Manager manager;
 
-    @OneToMany
-    @JsonIgnore
-    private List<Account> accounts;
+//    @OneToMany
+//    @JsonIgnore
+//    private List<Account> accounts;
 
     @Override
     public boolean equals(Object o) {
@@ -83,7 +83,6 @@ public class Client {
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", managerId=" + manager +
                 ", status=" + status +
                 ", taxCode='" + taxCode + '\'' +
                 ", firstName='" + firstName + '\'' +
