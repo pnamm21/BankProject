@@ -10,6 +10,8 @@ import com.bankapp.bankapp.app.mapper.AccountMapper;
 import com.bankapp.bankapp.app.repository.AccountRepository;
 import com.bankapp.bankapp.app.repository.ClientRepository;
 import com.bankapp.bankapp.app.service.AccountService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,11 @@ import java.util.UUID;
 
 import static com.bankapp.bankapp.app.entity.enums.AccountStatus.*;
 
+
+/**
+ * Account Service
+ * @author ffam5
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -26,24 +33,44 @@ public class AccountServiceImpl implements AccountService {
     private final ClientRepository clientRepository;
     private final AccountMapper accountMapper;
 
+    /**
+     * @param accountRepository Account Repository
+     * @param clientRepository Client Repository
+     * @param accountMapper Account Mapper
+     */
     public AccountServiceImpl(AccountRepository accountRepository, ClientRepository clientRepository, AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
         this.clientRepository = clientRepository;
         this.accountMapper = accountMapper;
     }
 
+    /**
+     * Find Account by ID
+     * @param id AccountID
+     * @return Account or throw DataNotFoundException
+     */
     @Override
     public AccountDto getAccountById(String id) throws DataNotFoundException {
         return accountMapper.accountToAccountDTO(accountRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND)));
     }
 
+    /**
+     * Find List<Account> by ClientID
+     * @param id ClientID
+     * @return List<AccountDto>
+     */
     @Override
     public List<AccountDto> getListAccount(UUID id) {
         List<Account> accounts = accountRepository.getAccountsByClientId(id);
         return accountMapper.ListAccountToListAccountDto(accounts);
     }
 
+    /**
+     * Create Account
+     * @param accountDtoPost AccountDtoPost
+     * @return AccountDto or throw DataNotFoundException
+     */
     @Override
     @Transactional
     public AccountDto createAccount(AccountDtoPost accountDtoPost) {
@@ -57,9 +84,15 @@ public class AccountServiceImpl implements AccountService {
         return accountMapper.accountToAccountDTO(account);
     }
 
+    /**
+     * Update Account
+     * @param id AccountID
+     * @param accountDtoFullUpdate AccountDtoFullUpdate
+     * @return Account or throw DataNotFoundException
+     */
     @Override
     @Transactional
-    public Account updateAccount(String id, AccountDtoFullUpdate accountDtoFullUpdate) {
+    public AccountDtoFullUpdate updateAccount(String id, AccountDtoFullUpdate accountDtoFullUpdate) {
         UUID stringId = UUID.fromString(id);
         if (accountRepository.existsById(stringId)) {
             accountDtoFullUpdate.setClientId(accountDtoFullUpdate.getClientId());
@@ -69,12 +102,19 @@ public class AccountServiceImpl implements AccountService {
                     .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
             account.setClient(original.getClient());
             Account updated = accountMapper.mergeAccounts(account, original);
-            return accountRepository.save(updated);
+            accountRepository.save(updated);
+            AccountDtoFullUpdate update = accountMapper.accountToAccountFullDto(updated);
+            return update;
         } else {
             throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }
     }
 
+    /**
+     * Delete Account
+     * @param id AccountID
+     * @return "Account has been CLOSED!"
+     */
     @Override
     @Transactional
     public String deleteAccount(String id) {

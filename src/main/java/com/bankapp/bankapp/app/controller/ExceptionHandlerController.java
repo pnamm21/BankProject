@@ -6,10 +6,14 @@ import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.DataNotUpdatedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
+/**
+ * ExceptionHandler Controller
+ * @author Fam Le Duc Nam
+ */
 @ControllerAdvice
 public class ExceptionHandlerController {
 

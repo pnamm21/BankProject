@@ -10,8 +10,14 @@ import com.bankapp.bankapp.app.service.util.CardService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Card Controller
+ * @author Fam Le Duc Nam
+ */
+@Validated
 @RestController
 @RequestMapping("/api/card")
 public class CardController {

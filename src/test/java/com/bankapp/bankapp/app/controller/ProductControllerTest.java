@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -26,7 +27,6 @@ import java.util.UUID;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 class ProductControllerTest {
@@ -45,6 +45,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getProductIdTest() {
 
         Product product = new Product();
@@ -73,6 +74,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void createProductTest() {
 
         ProductDtoPost productDtoPost = new ProductDtoPost();
@@ -90,6 +92,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void updateProductTest() {
 
         ProductDtoFullUpdate productDtoFullUpdate = new ProductDtoFullUpdate();
@@ -117,6 +120,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void deleteProductTest() {
 
         Mockito.when(productService.deleteProduct(productId.toString())).thenReturn("Product deleted successfully");

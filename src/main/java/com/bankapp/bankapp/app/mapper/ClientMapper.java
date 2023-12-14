@@ -1,14 +1,13 @@
 package com.bankapp.bankapp.app.mapper;
 
 import com.bankapp.bankapp.app.dto.ClientDto;
-import com.bankapp.bankapp.app.dto.ClientDtpFullUpdate;
+import com.bankapp.bankapp.app.dto.ClientDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
-import java.util.UUID;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ClientMapper {
@@ -17,7 +16,7 @@ public interface ClientMapper {
     Client clientDTOtoClient(ClientDto clientDto);
 
     Client mergeClient(Client from, @MappingTarget Client to);
-    Client clientDtoFullToClient(ClientDtpFullUpdate clientDtpFullUpdate);
+    Client clientDtoFullToClient(ClientDtoFullUpdate clientDtpFullUpdate);
     List<ClientDto> listClientToListClientDto(List<Client> clients);
 
 }

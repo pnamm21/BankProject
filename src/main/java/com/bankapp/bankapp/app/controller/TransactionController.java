@@ -9,11 +9,17 @@ import com.bankapp.bankapp.app.service.util.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Transaction Controller
+ * @author Fam Le Duc Nam
+ */
+@Validated
 @RestController
 @RequestMapping("/api/transaction")
 public class TransactionController {

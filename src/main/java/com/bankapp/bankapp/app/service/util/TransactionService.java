@@ -24,7 +24,7 @@ public interface TransactionService {
     Transaction updateTransaction(String id, TransactionDtoFullUpdate transactionDtoFullUpdate);
 
     @Transactional
-    TransactionDto transfer(UUID accountId, TransactionDtoTransfer transactionDtoTransfer);
+    String transfer(UUID accountId, TransactionDtoTransfer transactionDtoTransfer);
 
     @Transactional
     String deleteTransaction(String id);

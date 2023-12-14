@@ -1,11 +1,8 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.dto.AccountDtoPost;
 import com.bankapp.bankapp.app.dto.CardDtoPost;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransferCard;
-import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Card;
-import com.bankapp.bankapp.app.service.AccountService;
 import com.bankapp.bankapp.app.service.util.CardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,28 +11,19 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Optional;
 import java.util.UUID;
 
-import static java.lang.reflect.Array.get;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 class CardControllerTest {
@@ -54,6 +42,7 @@ class CardControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getCardTest(){
 
         Card card = new Card();
@@ -63,7 +52,7 @@ class CardControllerTest {
         String responseContent = null;
         try {
             responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/card/get/{id}", cardId))
-                    .andExpect(status().isOk())  // Expect a successful response
+                    .andExpect(status().isOk())
                     .andReturn().getResponse().getContentAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -73,8 +62,8 @@ class CardControllerTest {
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.get("/api/card/get/{id}", cardId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(cardId.toString()));  // Expect the correct account ID in the JSON response
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(cardId.toString()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -82,6 +71,7 @@ class CardControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void createMasterCardTest(){
 
         CardDtoPost cardDtoPost = new CardDtoPost();
@@ -91,7 +81,7 @@ class CardControllerTest {
             mockMvc.perform(MockMvcRequestBuilders.post("/api/card/create-master-card")
                             .content(asJsonString(cardDtoPost))
                             .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk());  // Expect a successful response
+                    .andExpect(status().isOk());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -99,6 +89,7 @@ class CardControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void createVisaCardTest(){
 
         CardDtoPost cardDtoPost = new CardDtoPost();
@@ -108,7 +99,7 @@ class CardControllerTest {
             mockMvc.perform(MockMvcRequestBuilders.post("/api/card/create-visa-card")
                             .content(asJsonString(cardDtoPost))
                             .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk());  // Expect a successful response
+                    .andExpect(status().isOk());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -116,14 +107,14 @@ class CardControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void transferByCardNumberTest() {
 
         TransactionDtoTransferCard transactionDtoTransferCard = new TransactionDtoTransferCard();
-        transactionDtoTransferCard.setFrom("123");
-        transactionDtoTransferCard.setTo("123");
+        transactionDtoTransferCard.setTo("5931-8562-1234-9876");
 
         try {
-            mockMvc.perform(MockMvcRequestBuilders.post("/api/card/card-transfer")
+            mockMvc.perform(MockMvcRequestBuilders.post("/api/card/card-transfer","4434-5678-9012-3456")
                             .content(asJsonString(transactionDtoTransferCard))
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());
@@ -133,7 +124,6 @@ class CardControllerTest {
 
     }
 
-    // Helper method to convert objects to JSON string
     private String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

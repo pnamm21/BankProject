@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -27,7 +28,6 @@ import java.util.UUID;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 class TransactionControllerTest {
@@ -46,6 +46,7 @@ class TransactionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getListTransactionByCreditAccountIdTest() {
 
         List<TransactionDto> transactionDtos = Collections.singletonList(new TransactionDto());
@@ -64,6 +65,7 @@ class TransactionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getListTransactionByDebitAccountIdTest() {
 
         List<TransactionDto> transactionDtos = Collections.singletonList(new TransactionDto());
@@ -82,6 +84,7 @@ class TransactionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void updateTransactionTest() {
 
         TransactionDtoFullUpdate transactionDtoFullUpdate = new TransactionDtoFullUpdate();
@@ -109,6 +112,7 @@ class TransactionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void deleteTransactionTest() {
 
         Mockito.when(transactionService.deleteTransaction(transactionId.toString())).thenReturn("Transaction deleted successfully");

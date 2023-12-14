@@ -1,7 +1,7 @@
 package com.bankapp.bankapp.app.service;
 
 import com.bankapp.bankapp.app.dto.ClientDto;
-import com.bankapp.bankapp.app.dto.ClientDtpFullUpdate;
+import com.bankapp.bankapp.app.dto.ClientDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Client;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
@@ -20,5 +20,5 @@ public interface ClientService {
     List<ClientDto> getListClients(@Param("id") UUID id);
 
     @Transactional
-    Client updateClient(String id, ClientDtpFullUpdate clientDtoFullUpdate);
+    Client updateClient(String id, ClientDtoFullUpdate clientDtoFullUpdate);
 }

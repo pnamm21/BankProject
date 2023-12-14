@@ -19,5 +19,6 @@ public interface CardMapper {
     @Mapping(target = "createdAt", expression = "java(LocalDateTime.now())")
     Card cardDtoPostToCard(CardDtoPost cardDtoPost);
 
-    List<CardDto> listCardToListCardDto(List<Card> cards);
+    List<CardDto> cardToCardDto(List<Card> cards);
+
 }

@@ -1,27 +1,20 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.AgreementDto;
 import com.bankapp.bankapp.app.dto.AgreementFullDtoUpdate;
-import com.bankapp.bankapp.app.dto.CardDto;
-import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Agreement;
 import com.bankapp.bankapp.app.service.AgreementService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -63,7 +56,7 @@ class AgreementControllerTest {
         try {
             responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/agreement/get/{id}", agreementId)
                             .secure(true))
-                    .andExpect(status().isOk()) // Expect a successful response
+                    .andExpect(status().isOk())
                     .andReturn().getResponse().getContentAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -73,8 +66,8 @@ class AgreementControllerTest {
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.get("/api/agreement/get/{id}", agreementId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(agreementId.toString()));  // Expect the correct account ID in the JSON response
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(agreementId.toString()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -90,13 +83,13 @@ class AgreementControllerTest {
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.get("/api/agreement/all-agreements?id={id}", agreementId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(agreementDtos.size()));  // Expect the correct number of cards in the JSON response
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(agreementDtos.size()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        verify(agreementService).getListAgreement(agreementId);  // Verify that the service method was called with the correct ID
+        verify(agreementService).getListAgreement(agreementId);
 
     }
 
@@ -108,7 +101,7 @@ class AgreementControllerTest {
         agreementFullDtoUpdate.setStatus("INACTIVE");
 
         Agreement agreement = new Agreement();
-        agreement.setId(agreementId);  // Set the ID in the mock response
+        agreement.setId(agreementId);
         Mockito.when(agreementService.updateAgreement(agreementId.toString(), agreementFullDtoUpdate)).thenReturn(agreement);
 
         String responseContent = null;
@@ -124,7 +117,7 @@ class AgreementControllerTest {
 
         System.out.println("Response Content: " + responseContent);
 
-        verify(agreementService).updateAgreement(agreementId.toString(), agreementFullDtoUpdate);  // Verify that the service method was called with the correct ID and DTO
+        verify(agreementService).updateAgreement(agreementId.toString(), agreementFullDtoUpdate);
 
     }
 

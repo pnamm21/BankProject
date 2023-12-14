@@ -1,7 +1,6 @@
 package com.bankapp.bankapp.app.controller;
 
 import com.bankapp.bankapp.app.dto.*;
-import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Manager;
 import com.bankapp.bankapp.app.service.ClientService;
 import com.bankapp.bankapp.app.service.ManagerService;
@@ -13,11 +12,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -27,11 +25,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 class ManagerControllerTest {
@@ -56,6 +52,7 @@ class ManagerControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getManagerTest() {
 
         Manager mockManager = new Manager();
@@ -66,7 +63,7 @@ class ManagerControllerTest {
         String responseContent = null;
         try {
             responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/{id}", managerId))
-                    .andExpect(status().isOk())  // Expect a successful response
+                    .andExpect(status().isOk())
                     .andReturn().getResponse().getContentAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -76,8 +73,8 @@ class ManagerControllerTest {
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/{id}", managerId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(managerId.toString()));  // Expect the correct account ID in the JSON response
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(managerId.toString()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -85,13 +82,14 @@ class ManagerControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void updateManagerTest() {
 
         ManagerDtoFullUpdate managerDtoFullUpdate = new ManagerDtoFullUpdate();
         managerDtoFullUpdate.setFirstName("Updated Name");
 
         Manager manager = new Manager();
-        manager.setId(managerId);  // Set the ID in the mock response
+        manager.setId(managerId);
         Mockito.when(managerService.updateManager(managerId.toString(), managerDtoFullUpdate)).thenReturn(manager);
 
         String responseContent = null;
@@ -107,11 +105,12 @@ class ManagerControllerTest {
 
         System.out.println("Response Content: " + responseContent);
 
-        verify(managerService).updateManager(managerId.toString(), managerDtoFullUpdate);  // Verify that the service method was called with the correct ID and DTO
+        verify(managerService).updateManager(managerId.toString(), managerDtoFullUpdate);
 
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getClientsTest() {
 
         List<ClientDto> clientDtos = Collections.singletonList(new ClientDto());
@@ -119,17 +118,18 @@ class ManagerControllerTest {
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/all-clients?id={id}", managerId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(clientDtos.size()));  // Expect the correct number of cards in the JSON response
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(clientDtos.size()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        verify(clientService).getListClients(managerId);  // Verify that the service method was called with the correct ID
+        verify(clientService).getListClients(managerId);
 
     }
 
     @Test
+    @WithMockUser(username = "nam",roles = "USER")
     void getProductsTest() {
 
         List<ProductDto> productDtos = Collections.singletonList(new ProductDto());
@@ -137,13 +137,13 @@ class ManagerControllerTest {
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/all-products?id={id}", managerId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(productDtos.size()));  // Expect the correct number of cards in the JSON response
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(productDtos.size()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        verify(productService).getListProduct(managerId);  // Verify that the service method was called with the correct ID
+        verify(productService).getListProduct(managerId);
 
     }
 

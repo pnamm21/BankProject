@@ -49,7 +49,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<CardDto> getListCards(UUID id) {
         List<Card> cards = cardRepository.getCardsByAccount_Id(id);
-        return cardMapper.listCardToListCardDto(cards);
+        return cardMapper.cardToCardDto(cards);
     }
 
     @Override

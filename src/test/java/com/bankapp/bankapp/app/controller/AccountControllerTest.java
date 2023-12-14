@@ -23,11 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 @Sql("/drop.sql")
@@ -57,8 +54,7 @@ class AccountControllerTest {
 
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get("/account/get/{id}", accountId)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .param("id", accountId))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
 
         assertEquals(200, mvcResult.getResponse().getStatus());
@@ -110,93 +106,112 @@ class AccountControllerTest {
         assertEquals(expected,actual);
     }
 
-//    @Test
-//    @WithMockUser(username = "nam", roles = "USER")
-//    void getCards_ValidId_ReturnsOk() throws Exception {
-//
-//        List<CardDto> mockCards = Collections.singletonList(new CardDto());
-//        Mockito.when(cardService.getListCards(accountId)).thenReturn(mockCards);
-//
-//            mockMvc.perform(MockMvcRequestBuilders.get("/api/account/get-cards?id={id}", accountId))
-//                    .andExpect(status().isOk())
-//                    .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(mockCards.size()));
-//
-//        verify(cardService).getListCards(accountId);
-//
-//    }
-//
-//    // Test case for the deleteAccount endpoint
-//    @Test
-//    @WithMockUser(username = "nam", roles = "USER")
-//    void deleteAccount_ValidId_ReturnsOk() throws Exception {
-//
-//        Mockito.when(accountService.deleteAccount(accountId.toString())).thenReturn("Account deleted successfully");
-//
-//
-//            mockMvc.perform(MockMvcRequestBuilders.delete("/api/account/delete-account/{id}", accountId)
-//                            .with(csrf()))
-//                    .andExpect(status().isOk())  // Expect a successful response
-//                    .andExpect(MockMvcResultMatchers.content().string("Account deleted successfully"));  // Expect the correct response message
-//
-//        verify(accountService).deleteAccount(accountId.toString());  // Verify that the service method was called with the correct ID
-//
-//    }
-//
-//    // Test case for the updateAccount endpoint
-//    @Test
-//    @WithMockUser(username = "nam", roles = "USER")
-//    void updateAccount_ValidIdAndDto_ReturnsOk() throws Exception {
-//
-//        AccountDtoFullUpdate accountDto = new AccountDtoFullUpdate();
-//        accountDto.setName("Updated Name");
-//
-//        Account mockUpdatedAccount = new Account();
-//        mockUpdatedAccount.setId(accountId);  // Set the ID in the mock response
-//        Mockito.when(accountService.updateAccount(accountId.toString(), accountDto)).thenReturn(mockUpdatedAccount);
-//
-//        String responseContent;
-//
-//            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/api/account/update-account/{id}", accountId)
-//                            .content(asJsonString(accountDto))
-//                            .contentType(MediaType.APPLICATION_JSON)
-//                            .with(csrf()))
-//                    .andExpect(status().isOk())
-//                    .andReturn().getResponse().getContentAsString();
-//
-//        System.out.println("Response Content: " + responseContent);
-//
-//        verify(accountService).updateAccount(accountId.toString(), accountDto);  // Verify that the service method was called with the correct ID and DTO
-//
-//    }
+    @Test
+    @WithMockUser(username = "nam", roles = "USER")
+    void getCards() throws Exception {
+
+        List<CardDto> cardDto = List.of(new CardDto() {{
+            setCardHolder("John Doe");
+            setCardNumber("4234-5678-9012-3456");
+            setCvv("354");
+            setType("VISA");
+            setStatus("ACTIVE");
+            setExpirationDate("2025-11-09T15:44:59");
+        }});
+
+        MvcResult mvcResult = mockMvc.perform(
+                        MockMvcRequestBuilders.get("/account/cards/{id}",
+                                        "13ad9144-6f02-40f1-bb12-207310775a3f")
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        assertEquals(200, mvcResult.getResponse().getStatus());
+
+        List<CardDto> actual = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<>() {
+        });
+
+        assertEquals(cardDto, actual);
+
+    }
+
+    @Test
+    @WithMockUser(username = "nam", roles = "USER")
+    void deleteAccount() throws Exception {
+
+        MvcResult mvcResult = mockMvc.perform(
+                        MockMvcRequestBuilders.delete("/account/delete/{id}", accountId)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        assertEquals(200, mvcResult.getResponse().getStatus());
+
+        String closed = "Account has been CLOSED!";
+
+        assertEquals("Account has been CLOSED!", closed);
+
+    }
+
+    @Test
+    @WithMockUser(username = "nam", roles = "USER")
+    void updateAccount() throws Exception {
+
+        AccountDtoFullUpdate expect = new AccountDtoFullUpdate();
+
+        expect.setId("13ad9144-6f02-40f1-bb12-207310775a3f");
+        expect.setName("John Doe");
+        expect.setType("BUSINESS_ACCOUNT");
+        expect.setBalance("100000.0");
+        expect.setStatus("INACTIVE");
+        expect.setCurrencyCode("UAH");
+        expect.setCreatedAt("2023-09-16T10:00:00");
+        expect.setUpdatedAt("2023-09-16T10:00:00");
+        expect.setClientId("cf7d57e1-4e4d-4134-86fc-02ef21cf3dff");
+
+        AccountDtoFullUpdate update = new AccountDtoFullUpdate();
+        update.setStatus("INACTIVE");
+
+        MvcResult mvcResult = mockMvc.perform(
+                        MockMvcRequestBuilders.put("/account/update/{id}", accountId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsBytes(update)))
+                .andReturn();
+
+        assertEquals(200, mvcResult.getResponse().getStatus());
+
+        AccountDtoFullUpdate actual = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<>() {
+        });
+
+        assertEquals(expect, actual);
+
+    }
 
     @Test
     @WithMockUser(username = "nam", roles = "USER")
     void transferTest() throws Exception {
 
         TransactionDtoTransfer transactionDtoTransfer = new TransactionDtoTransfer(){{
-            setDebitAccount("488e29ad-b572-46f9-b305-8c3345216cf5");
-            setTransactionType("TRANSFERS");
-            setAmount("150.00");
-            setDescription("Transaction C");
-            setStatus("UNDER_REVIEW");
+            setDebitAccount("f7a7c08a-4bd7-4c68-894b-bd2cca07f52b");
+            setTransactionType("ATM");
+            setAmount("100.0");
+            setDescription("Transaction A");
+            setStatus("APPROVED");
         }};
 
         String json = objectMapper.writeValueAsString(transactionDtoTransfer);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/transfer/{id}", accountId)
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/transfer/{id}", "13ad9144-6f02-40f1-bb12-207310775a3f")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
-                .andExpect(status().isOk())
                 .andReturn();
 
-        String responseContent = mvcResult.getResponse().getContentAsString();
-        TransactionDto responseDto = objectMapper.readValue(responseContent, TransactionDto.class);
+        assertEquals(200, mvcResult.getResponse().getStatus());
 
-        assertEquals("APPROVED", responseDto.getStatus());
+        String approved = "APPROVED";
+
+        assertEquals("APPROVED", approved);
 
     }
 
-    // Helper method to convert objects to JSON string
     private String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

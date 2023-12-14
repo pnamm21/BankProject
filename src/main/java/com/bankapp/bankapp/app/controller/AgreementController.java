@@ -22,6 +22,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Agreement Controller
+ * @author Fam Le Duc Nam
+ */
 @Validated
 @RestController
 @RequestMapping("/api/agreement")

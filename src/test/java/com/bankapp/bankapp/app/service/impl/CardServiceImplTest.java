@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.service.impl;
 
+import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.generator.CardGenerator;
 import com.bankapp.bankapp.app.dto.CardDto;
 import com.bankapp.bankapp.app.dto.CardDtoPost;
@@ -12,9 +13,7 @@ import com.bankapp.bankapp.app.entity.enums.CardType;
 import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
 import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import com.bankapp.bankapp.app.mapper.CardMapper;
-import com.bankapp.bankapp.app.mapper.TransactionMapper;
 import com.bankapp.bankapp.app.repository.CardRepository;
-import com.bankapp.bankapp.app.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,7 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.zip.DataFormatException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,11 +36,6 @@ class CardServiceImplTest {
 
     @Mock
     private CardMapper cardMapper;
-
-    @Mock
-    private TransactionMapper transactionMapper;
-    @Mock
-    private TransactionRepository transactionRepository;
 
     @InjectMocks
     private CardServiceImpl cardService;
@@ -72,11 +65,11 @@ class CardServiceImplTest {
     }
 
     @Test
-    void getAccountByIdNotFoundTest() {
+    void getCardByIdNotFoundTest() {
 
         when(cardRepository.findById(cardId)).thenReturn(Optional.empty());
 
-        assertThrows(DataFormatException.class, () -> {
+        assertThrows(DataNotFoundException.class, () -> {
             cardService.getCardById(cardId.toString());
         });
 
@@ -89,7 +82,7 @@ class CardServiceImplTest {
         List<Card> cards = Arrays.asList(new Card(), new Card());
 
         when(cardRepository.getCardsByAccount_Id(cardId)).thenReturn(cards);
-        when(cardMapper.listCardToListCardDto(cards)).thenReturn(Arrays.asList(new CardDto(), new CardDto()));
+        when(cardMapper.cardToCardDto(cards)).thenReturn(Arrays.asList(new CardDto(), new CardDto()));
 
         List<CardDto> result = cardService.getListCards(cardId);
 
@@ -97,7 +90,7 @@ class CardServiceImplTest {
         assertEquals(2, result.size());
 
         verify(cardRepository, times(1)).getCardsByAccount_Id(cardId);
-        verify(cardMapper, times(1)).listCardToListCardDto(cards);
+        verify(cardMapper, times(1)).cardToCardDto(cards);
     }
 
     @Test
@@ -152,7 +145,6 @@ class CardServiceImplTest {
     @Test
     void testTransferByCardNumbers() {
 
-        // Mock data
         String fromCardNumber = "4234567890123456";
         String toCardNumber = "4876543210987654";
         TransactionDtoTransferCard transactionDtoTransferCard = new TransactionDtoTransferCard();
@@ -190,13 +182,10 @@ class CardServiceImplTest {
         when(cardRepository.findCardByCardNumber(fromCardNumber)).thenReturn(Optional.of(sourceCard));
         when(cardRepository.findCardByCardNumber(toCardNumber)).thenReturn(Optional.of(destinationCard));
 
-        // Invoke the method
         Transaction resultTransaction = cardService.transferByCardNumbers(fromCardNumber,toCardNumber,transactionDtoTransferCard);
 
-        // Assertions
-//        assertNotNull(resultTransaction);
-        assertEquals(fromAccount.getBalance(), 50.0); // Check if the balance was updated correctly for the source account
-        assertEquals(toAccount.getBalance(), 100.0); // Check if the balance was updated correctly for the destination account
+        assertEquals(fromAccount.getBalance(), 50.0);
+        assertEquals(toAccount.getBalance(), 100.0);
         assertEquals(TransactionType.TRANSFERS, resultTransaction.getTransactionType());
         assertEquals(50.0, resultTransaction.getAmount());
         assertEquals("Test Transfer", resultTransaction.getDescription());

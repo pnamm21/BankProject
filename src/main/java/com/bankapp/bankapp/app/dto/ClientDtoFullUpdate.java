@@ -1,9 +1,17 @@
 package com.bankapp.bankapp.app.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * Client Dto Full Update
+ * @author Fam Le Duc Nam
+ */
 @Data
-public class ClientDtpFullUpdate {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ClientDtoFullUpdate {
 
     String id;
     String firstName;

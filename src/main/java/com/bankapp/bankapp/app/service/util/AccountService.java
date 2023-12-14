@@ -27,7 +27,7 @@ public interface AccountService {
     AccountDto  createAccount(AccountDtoPost accountDtoPost);
 
     @Transactional
-    Account updateAccount(String id, AccountDtoFullUpdate accountDtoFullUpdate);
+    AccountDtoFullUpdate updateAccount(String id, AccountDtoFullUpdate accountDtoFullUpdate);
 
     @Transactional
     String deleteAccount(String id);

@@ -78,7 +78,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Transactional
-    public TransactionDto transfer(UUID accountId, TransactionDtoTransfer transactionDtoTransfer) {
+    public String transfer(UUID accountId, TransactionDtoTransfer transactionDtoTransfer) {
 
         Account fromAccount = accountRepository.findById(accountId).orElseThrow();
         Account toAccount = accountService.getAccountByAccountNumber(transactionDtoTransfer.getCreditAccount());
@@ -104,8 +104,7 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.setCreditAccount(toAccount);
 
             transactionRepository.save(transaction);
-            TransactionDto transactionDto = transactionMapper.transactionToTransactionDto(transaction);;
-            return transactionDto;
+            return "APPROVED";
         } else {
             throw new BalanceIsEmptyException(ExceptionMessage.BALANCE_IS_EMPTY);
         }

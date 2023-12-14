@@ -29,4 +29,7 @@ public interface AccountMapper {
     Account accountDtoFullToAccount(AccountDtoFullUpdate accountDtoFullUpdate);
 
     List<AccountDto> ListAccountToListAccountDto(List<Account> accounts);
+
+    @Mapping(target = "clientId",source = "client.id")
+    AccountDtoFullUpdate accountToAccountFullDto(Account updated);
 }
