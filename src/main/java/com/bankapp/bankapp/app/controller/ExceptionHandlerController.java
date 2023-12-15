@@ -1,9 +1,6 @@
 package com.bankapp.bankapp.app.controller;
 
-import com.bankapp.bankapp.app.exception.BalanceIsEmptyException;
-import com.bankapp.bankapp.app.exception.DataNotCreatedException;
-import com.bankapp.bankapp.app.exception.DataNotFoundException;
-import com.bankapp.bankapp.app.exception.DataNotUpdatedException;
+import com.bankapp.bankapp.app.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -47,7 +44,22 @@ public class ExceptionHandlerController {
         ErrorResponse response = ErrorResponse.builder(ex, HttpStatus.NOT_FOUND, ex.getMessage()).build();
 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<ErrorResponse> insufficientBalanceException(Throwable ex) {
+
+        ErrorResponse response = ErrorResponse.builder(ex, HttpStatus.NO_CONTENT, ex.getMessage()).build();
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidTransactionAmountException.class)
+    public ResponseEntity<ErrorResponse> invalidTransactionException(Throwable ex) {
+
+        ErrorResponse response = ErrorResponse.builder(ex, HttpStatus.BAD_REQUEST, ex.getMessage()).build();
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }

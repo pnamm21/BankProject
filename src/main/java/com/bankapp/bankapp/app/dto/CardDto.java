@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CardDto {
 
+    String id;
     String cardNumber;
     String cardHolder;
     String type;

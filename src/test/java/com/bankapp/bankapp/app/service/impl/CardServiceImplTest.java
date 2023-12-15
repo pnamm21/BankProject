@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.service.impl;
 
+import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.generator.CardGenerator;
 import com.bankapp.bankapp.app.dto.CardDto;
@@ -13,12 +14,17 @@ import com.bankapp.bankapp.app.entity.enums.CardType;
 import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
 import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import com.bankapp.bankapp.app.mapper.CardMapper;
+import com.bankapp.bankapp.app.mapper.TransactionMapper;
 import com.bankapp.bankapp.app.repository.CardRepository;
+import com.bankapp.bankapp.app.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -33,9 +39,13 @@ class CardServiceImplTest {
 
     @Mock
     private CardRepository cardRepository;
+    @Mock
+    private TransactionRepository transactionRepository;
 
     @Mock
     private CardMapper cardMapper;
+    @Mock
+    private TransactionMapper transactionMapper;
 
     @InjectMocks
     private CardServiceImpl cardService;
@@ -50,18 +60,19 @@ class CardServiceImplTest {
     @Test
     void getCardByIdTest() {
 
-        Card card = new Card();
-        card.setId(cardId);
+        Card mockCard = new Card();
+        when(cardRepository.findById(cardId)).thenReturn(Optional.of(mockCard));
 
-        when(cardRepository.findById(cardId)).thenReturn(Optional.of(card));
+        CardDto mockCardDto = new CardDto();
+        when(cardMapper.cardToCardDto(mockCard)).thenReturn(mockCardDto);
 
-        Optional<Card> result = cardService.getCardById(cardId.toString());
+        CardDto result = cardService.getCardById(cardId.toString());
 
-        assertTrue(result.isPresent());
+        assertNotNull(result);
+        assertEquals(mockCardDto, result);
 
-        assertEquals(cardId, result.get().getId());
-
-        verify(cardRepository, times(1)).findById(cardId);
+        verify(cardRepository).findById(cardId);
+        verify(cardMapper).cardToCardDto(mockCard);
     }
 
     @Test
@@ -99,22 +110,20 @@ class CardServiceImplTest {
         CardDtoPost cardDtoPost = new CardDtoPost();
         cardDtoPost.setCardNumber("1234567891011123");
         cardDtoPost.setCardHolder("Name");
-        cardDtoPost.setType("VISA");
+        cardDtoPost.setType("MASTERCARD");
         cardDtoPost.setCvv("123");
 
-        Card card = new Card();
-        card.setId(cardId);
+        Card mockCard = new Card();
+        when(cardMapper.cardDtoPostToCard(cardDtoPost)).thenReturn(mockCard);
+        when(cardMapper.cardToCardDto(mockCard)).thenReturn(new CardDto());
 
-        when(cardMapper.cardDtoPostToCard(cardDtoPost)).thenReturn(card);
-        when(cardRepository.save(card)).thenReturn(card);
-
-        Card result = cardService.createVisaCard(cardDtoPost);
+        CardDto result = cardService.createMasterCard(cardDtoPost);
 
         assertNotNull(result);
-        assertNotNull(result.getId());
 
-        verify(cardMapper, times(1)).cardDtoPostToCard(cardDtoPost);
-        verify(cardRepository, times(1)).save(card);
+        verify(cardRepository).save(mockCard);
+        verify(cardMapper).cardDtoPostToCard(cardDtoPost);
+        verify(cardMapper).cardToCardDto(mockCard);
     }
 
     @Test
@@ -123,75 +132,76 @@ class CardServiceImplTest {
         CardDtoPost cardDtoPost = new CardDtoPost();
         cardDtoPost.setCardNumber("1234567891011123");
         cardDtoPost.setCardHolder("Name");
-        cardDtoPost.setType("MASTERCARD");
+        cardDtoPost.setType("VISA");
         cardDtoPost.setCvv("123");
 
-        Card card = new Card();
-        card.setId(cardId);
+        Card mockCard = new Card();
+        when(cardMapper.cardDtoPostToCard(cardDtoPost)).thenReturn(mockCard);
+        when(cardMapper.cardToCardDto(mockCard)).thenReturn(new CardDto());
 
-        when(cardMapper.cardDtoPostToCard(cardDtoPost)).thenReturn(card);
-        when(cardRepository.save(card)).thenReturn(card);
-
-        Card result = cardService.createMasterCard(cardDtoPost);
+        CardDto result = cardService.createMasterCard(cardDtoPost);
 
         assertNotNull(result);
-        assertNotNull(result.getId());
 
-        verify(cardMapper, times(1)).cardDtoPostToCard(cardDtoPost);
-        verify(cardRepository, times(1)).save(card);
+        verify(cardRepository).save(mockCard);
+        verify(cardMapper).cardDtoPostToCard(cardDtoPost);
+        verify(cardMapper).cardToCardDto(mockCard);
 
     }
 
     @Test
-    void testTransferByCardNumbers() {
+    public void testTransferByCardNumbers() {
 
-        String fromCardNumber = "4234567890123456";
-        String toCardNumber = "4876543210987654";
-        TransactionDtoTransferCard transactionDtoTransferCard = new TransactionDtoTransferCard();
-        transactionDtoTransferCard.setFrom(fromCardNumber);
-        transactionDtoTransferCard.setTo(toCardNumber);
-        transactionDtoTransferCard.setAmount("50.0");
-        transactionDtoTransferCard.setTransactionType("TRANSFERS");
-        transactionDtoTransferCard.setDescription("Test Transfer");
-        transactionDtoTransferCard.setStatus("APPROVED");
+        String fromCardNumber = "1234";
+        String toCardNumber = "5678";
+        double amount = 100.0;
 
         Card sourceCard = new Card();
-        sourceCard.setCardHolder("Name");
         sourceCard.setCardNumber(fromCardNumber);
-        sourceCard.setCvv("123");
-        sourceCard.setStatus(CardStatus.ACTIVE);
-        sourceCard.setType(CardType.VISA);
-        sourceCard.setExpirationDate(CardGenerator.generateExpirationDate());
-        sourceCard.setCreatedAt(LocalDateTime.now());
-        Account fromAccount = new Account();
-        fromAccount.setBalance(100.0);
-        sourceCard.setAccount(fromAccount);
 
         Card destinationCard = new Card();
-        destinationCard.setCardHolder("Name");
         destinationCard.setCardNumber(toCardNumber);
-        destinationCard.setCvv("123");
-        destinationCard.setStatus(CardStatus.ACTIVE);
-        destinationCard.setType(CardType.VISA);
-        destinationCard.setExpirationDate(CardGenerator.generateExpirationDate());
-        destinationCard.setCreatedAt(LocalDateTime.now());
+
+        Account fromAccount = new Account();
+        fromAccount.setBalance(200.0);
+        sourceCard.setAccount(fromAccount);
+
         Account toAccount = new Account();
         toAccount.setBalance(50.0);
         destinationCard.setAccount(toAccount);
 
-        when(cardRepository.findCardByCardNumber(fromCardNumber)).thenReturn(Optional.of(sourceCard));
-        when(cardRepository.findCardByCardNumber(toCardNumber)).thenReturn(Optional.of(destinationCard));
+        TransactionDtoTransferCard transferCard = new TransactionDtoTransferCard();
+        transferCard.setAmount("100.0");
+        transferCard.setTransactionType("TRANSFERS");
+        transferCard.setDescription("Test Transfer");
+        transferCard.setStatus("PENDING");
 
-        Transaction resultTransaction = cardService.transferByCardNumbers(fromCardNumber,toCardNumber,transactionDtoTransferCard);
+        Transaction transaction = new Transaction();
+        transaction.setDebitAccount(fromAccount);
+        transaction.setCreditAccount(toAccount);
+        transaction.setTransactionType(TransactionType.TRANSFERS);
+        transaction.setAmount(amount);
+        transaction.setDescription("Test Transfer");
+        transaction.setStatus(TransactionStatus.PENDING);
 
-        assertEquals(fromAccount.getBalance(), 50.0);
-        assertEquals(toAccount.getBalance(), 100.0);
-        assertEquals(TransactionType.TRANSFERS, resultTransaction.getTransactionType());
-        assertEquals(50.0, resultTransaction.getAmount());
-        assertEquals("Test Transfer", resultTransaction.getDescription());
-        assertEquals(TransactionStatus.APPROVED, resultTransaction.getStatus());
+        TransactionDto expectedDto = new TransactionDto();
+        expectedDto.setStatus("PENDING");
+        expectedDto.setDescription("Test Transfer");
 
-        verify(cardService, times(1)).transferByCardNumbers(fromCardNumber, toCardNumber, transactionDtoTransferCard);
+        when(cardRepository.findCardByCardNumber(fromCardNumber)).thenReturn(java.util.Optional.of(sourceCard));
+        when(cardRepository.findCardByCardNumber(toCardNumber)).thenReturn(java.util.Optional.of(destinationCard));
+        when(transactionMapper.transactionToTransactionDto(transaction)).thenReturn(expectedDto);
+
+        TransactionDto result = cardService.transferByCardNumbers(fromCardNumber, toCardNumber, transferCard);
+
+        verify(cardRepository, times(1)).findCardByCardNumber(fromCardNumber);
+        verify(cardRepository, times(1)).findCardByCardNumber(toCardNumber);
+        verify(transactionRepository, times(1)).save(any(Transaction.class));
+        verify(transactionMapper, times(1)).transactionToTransactionDto(any(Transaction.class));
+
+        assertNotNull(result);
+        assertEquals(expectedDto.getStatus(), result.getStatus());
+        assertEquals(expectedDto.getDescription(), result.getDescription());
     }
 
 }

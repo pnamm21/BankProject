@@ -30,25 +30,23 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping(value = "/creditAccount/all-transactions")
-    public ResponseEntity<List<TransactionDto>> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker UUID id) {
-        List<TransactionDto> transactionDtos = transactionService.getListTransactionByCreditAccountId(id);
-        return new ResponseEntity<>(transactionDtos, HttpStatus.OK);
+    @GetMapping(value = "/creditAccount/transactions")
+    public List<TransactionDto> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker UUID id) {
+        return transactionService.getListTransactionByCreditAccountId(id);
     }
 
-    @GetMapping(value = "/debitAccount/all-transactions")
-    public ResponseEntity<List<TransactionDto>> getListTransactionByDebitAccountId(@RequestParam("id") @IDChecker UUID id) {
-        List<TransactionDto> transactionDtos = transactionService.getListTransactionByDebitAccountId(id);
-        return new ResponseEntity<>(transactionDtos, HttpStatus.OK);
+    @GetMapping(value = "/debitAccount/transactions")
+    public List<TransactionDto> getListTransactionByDebitAccountId(@RequestParam("id") @IDChecker UUID id) {
+        return  transactionService.getListTransactionByDebitAccountId(id);
     }
 
-    @RequestMapping(value = "/update-transaction/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Transaction> updateTransaction(@PathVariable("id") @IDChecker String id, @RequestBody @Valid TransactionDtoFullUpdate transactionDtoFullUpdate) {
-        return ResponseEntity.ofNullable(transactionService.updateTransaction(id, transactionDtoFullUpdate));
+    @RequestMapping(value = "/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public TransactionDto updateTransaction(@PathVariable("id") @IDChecker String id, @RequestBody @Valid TransactionDtoFullUpdate transactionDtoFullUpdate) {
+        return transactionService.updateTransaction(id, transactionDtoFullUpdate);
     }
 
-    @RequestMapping(value = "/delete-transaction/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public ResponseEntity<String> deleteTransaction(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(transactionService.deleteTransaction(id));
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteTransaction(@PathVariable("id") @IDChecker String id) {
+        return transactionService.deleteTransaction(id);
     }
 }

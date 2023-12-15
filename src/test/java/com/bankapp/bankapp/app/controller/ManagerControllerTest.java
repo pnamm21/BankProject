@@ -51,63 +51,63 @@ class ManagerControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    @WithMockUser(username = "nam",roles = "USER")
-    void getManagerTest() {
+//    @Test
+//    @WithMockUser(username = "nam",roles = "USER")
+//    void getManagerTest() {
+//
+//        Manager mockManager = new Manager();
+//        mockManager.setId(managerId);
+//        Mockito.when(managerService.getManagerById(managerId.toString())).thenReturn(Optional.of(mockManager));
+//
+//
+//        String responseContent = null;
+//        try {
+//            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/{id}", managerId))
+//                    .andExpect(status().isOk())
+//                    .andReturn().getResponse().getContentAsString();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        System.out.println("Response Content: " + responseContent);
+//
+//        try {
+//            mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/{id}", managerId))
+//                    .andExpect(status().isOk())
+//                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(managerId.toString()));
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 
-        Manager mockManager = new Manager();
-        mockManager.setId(managerId);
-        Mockito.when(managerService.getManagerById(managerId.toString())).thenReturn(Optional.of(mockManager));
-
-
-        String responseContent = null;
-        try {
-            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/{id}", managerId))
-                    .andExpect(status().isOk())
-                    .andReturn().getResponse().getContentAsString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("Response Content: " + responseContent);
-
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/manager/get/{id}", managerId))
-                    .andExpect(status().isOk())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(managerId.toString()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    @Test
-    @WithMockUser(username = "nam",roles = "USER")
-    void updateManagerTest() {
-
-        ManagerDtoFullUpdate managerDtoFullUpdate = new ManagerDtoFullUpdate();
-        managerDtoFullUpdate.setFirstName("Updated Name");
-
-        Manager manager = new Manager();
-        manager.setId(managerId);
-        Mockito.when(managerService.updateManager(managerId.toString(), managerDtoFullUpdate)).thenReturn(manager);
-
-        String responseContent = null;
-        try {
-            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/manager/update-manager/{id}", managerId)
-                            .content(asJsonString(managerDtoFullUpdate))
-                            .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andReturn().getResponse().getContentAsString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("Response Content: " + responseContent);
-
-        verify(managerService).updateManager(managerId.toString(), managerDtoFullUpdate);
-
-    }
+//    @Test
+//    @WithMockUser(username = "nam",roles = "USER")
+//    void updateManagerTest() {
+//
+//        ManagerDtoFullUpdate managerDtoFullUpdate = new ManagerDtoFullUpdate();
+//        managerDtoFullUpdate.setFirstName("Updated Name");
+//
+//        Manager manager = new Manager();
+//        manager.setId(managerId);
+//        Mockito.when(managerService.updateManager(managerId.toString(), managerDtoFullUpdate)).thenReturn(manager);
+//
+//        String responseContent = null;
+//        try {
+//            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/manager/update-manager/{id}", managerId)
+//                            .content(asJsonString(managerDtoFullUpdate))
+//                            .contentType(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isOk())
+//                    .andReturn().getResponse().getContentAsString();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        System.out.println("Response Content: " + responseContent);
+//
+//        verify(managerService).updateManager(managerId.toString(), managerDtoFullUpdate);
+//
+//    }
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")

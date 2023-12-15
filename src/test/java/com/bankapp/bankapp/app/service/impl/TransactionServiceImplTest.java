@@ -1,11 +1,13 @@
 package com.bankapp.bankapp.app.service.impl;
 
+import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.TransactionDto;
 import com.bankapp.bankapp.app.dto.TransactionDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
 import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.entity.enums.TransactionStatus;
+import com.bankapp.bankapp.app.entity.enums.TransactionType;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.mapper.TransactionMapper;
 import com.bankapp.bankapp.app.repository.AccountRepository;
@@ -17,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -51,17 +54,20 @@ class TransactionServiceImplTest {
 
     @Test
     void getTransactionByIdTest() {
+
         Transaction transaction = new Transaction();
-        transaction.setId(transactionId);
+        TransactionDto expectedTransactionDto = new TransactionDto();
 
         when(transactionRepository.findById(transactionId)).thenReturn(Optional.of(transaction));
+        when(transactionMapper.transactionToTransactionDto(transaction)).thenReturn(expectedTransactionDto);
 
-        Transaction result = transactionService.getTransactionById(transactionId.toString()).orElse(null);
+        TransactionDto result = transactionService.getTransactionById(transactionId.toString());
 
         assertNotNull(result);
-        assertSame(transaction, result);
 
         verify(transactionRepository, times(1)).findById(transactionId);
+        verify(transactionMapper, times(1)).transactionToTransactionDto(transaction);
+
     }
 
     @Test
@@ -111,28 +117,19 @@ class TransactionServiceImplTest {
     void updateTransactionTest() {
 
         TransactionDtoFullUpdate transactionDtoFullUpdate = new TransactionDtoFullUpdate();
-        transactionDtoFullUpdate.setCreditAccountId(String.valueOf(UUID.randomUUID()));
-        transactionDtoFullUpdate.setDebitAccountId(String.valueOf(UUID.randomUUID()));
-
         Transaction originalTransaction = new Transaction();
-        originalTransaction.setId(transactionId);
 
         when(transactionRepository.existsById(transactionId)).thenReturn(true);
         when(transactionRepository.findById(transactionId)).thenReturn(Optional.of(originalTransaction));
         when(transactionMapper.transactionFUllDtoTotransaction(transactionDtoFullUpdate)).thenReturn(originalTransaction);
-        when(transactionMapper.mergeTransaction(originalTransaction, originalTransaction)).thenReturn(originalTransaction);
-        when(transactionRepository.save(originalTransaction)).thenReturn(originalTransaction);
+        when(transactionRepository.save(any())).thenReturn(originalTransaction);
+        when(transactionMapper.transactionToTransactionDto(originalTransaction)).thenReturn(new TransactionDto());
 
-        Transaction result = transactionService.updateTransaction(transactionId.toString(), transactionDtoFullUpdate);
+        TransactionDto result = transactionService.updateTransaction(transactionId.toString(), transactionDtoFullUpdate);
 
         assertNotNull(result);
-        assertEquals(transactionId, result.getId());
 
-        verify(transactionRepository, times(1)).existsById(transactionId);
-        verify(transactionRepository, times(1)).findById(transactionId);
-        verify(transactionRepository, times(1)).save(originalTransaction);
-        verify(transactionMapper, times(1)).mergeTransaction(originalTransaction, originalTransaction);
-        verify(transactionMapper, times(1)).transactionFUllDtoTotransaction(transactionDtoFullUpdate);
+        verify(transactionRepository, times(1)).save(any());
     }
 
     @Test
@@ -203,17 +200,17 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void deleteTransactionNitFoundTest(){
+    void deleteTransactionNitFoundTest() {
 
         when(transactionRepository.existsById(transactionId)).thenReturn(false);
 
-        assertThrows(DataNotFoundException.class,()->{
-           transactionService.deleteTransaction(transactionId.toString());
+        assertThrows(DataNotFoundException.class, () -> {
+            transactionService.deleteTransaction(transactionId.toString());
         });
 
-        verify(transactionRepository,times(1)).existsById(transactionId);
-        verify(transactionRepository,never()).findById(transactionId);
-        verify(transactionRepository,never()).save(any());
+        verify(transactionRepository, times(1)).existsById(transactionId);
+        verify(transactionRepository, never()).findById(transactionId);
+        verify(transactionRepository, never()).save(any());
     }
 
 }

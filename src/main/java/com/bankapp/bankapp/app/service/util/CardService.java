@@ -1,9 +1,6 @@
 package com.bankapp.bankapp.app.service.util;
 
-import com.bankapp.bankapp.app.dto.CardDto;
-import com.bankapp.bankapp.app.dto.CardDtoPost;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransfer;
-import com.bankapp.bankapp.app.dto.TransactionDtoTransferCard;
+import com.bankapp.bankapp.app.dto.*;
 import com.bankapp.bankapp.app.entity.Card;
 import com.bankapp.bankapp.app.entity.Transaction;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
@@ -15,19 +12,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Card Service
+ * @author Fam Le Duc Nam
+ */
 @Service
 public interface CardService {
 
-    Optional<Card> getCardById(String id) throws DataNotFoundException;
+    CardDto getCardById(String id) throws DataNotFoundException;
 
     List<CardDto> getListCards(@Param("id")UUID id);
 
     @Transactional
-    Card createMasterCard(CardDtoPost cardDtoPost);
+    CardDto createMasterCard(CardDtoPost cardDtoPost);
 
     @Transactional
-    Card createVisaCard(CardDtoPost cardDtoPost);
+    CardDto createVisaCard(CardDtoPost cardDtoPost);
 
     @Transactional
-    Transaction transferByCardNumbers(String from, String to, TransactionDtoTransferCard transactionDtoTransferCard);
+    TransactionDto transferByCardNumbers(String from, String to, TransactionDtoTransferCard transactionDtoTransferCard);
 }

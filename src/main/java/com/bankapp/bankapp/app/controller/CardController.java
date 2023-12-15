@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.controller;
 
+import com.bankapp.bankapp.app.dto.CardDto;
 import com.bankapp.bankapp.app.dto.CardDtoPost;
 import com.bankapp.bankapp.app.dto.TransactionDtoTransferCard;
 import com.bankapp.bankapp.app.entity.Card;
@@ -29,18 +30,18 @@ public class CardController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Card> getCard(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(cardService.getCardById(id).orElse(null));
+    public CardDto getCard(@PathVariable("id") @IDChecker String id) {
+        return cardService.getCardById(id);
     }
 
     @RequestMapping(value = "/create-master-card", method = {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<Card> createMasterCard(@RequestBody CardDtoPost cardDtoPost) {
-        return new ResponseEntity<>(cardService.createMasterCard(cardDtoPost), HttpStatus.OK);
+    public CardDto createMasterCard(@RequestBody CardDtoPost cardDtoPost) {
+        return cardService.createMasterCard(cardDtoPost);
     }
 
     @RequestMapping(value = "/create-visa-card", method = {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<Card> createVisaCard(@RequestBody CardDtoPost cardDtoPost) {
-        return new ResponseEntity<>(cardService.createVisaCard(cardDtoPost), HttpStatus.OK);
+    public CardDto createVisaCard(@RequestBody CardDtoPost cardDtoPost) {
+        return cardService.createVisaCard(cardDtoPost);
     }
 
     @RequestMapping(value = "/card-transfer/{cardNumber}", method = {RequestMethod.POST, RequestMethod.GET})

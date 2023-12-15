@@ -12,16 +12,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Product Service
+ * @author Fam Le Duc Nam
+ */
 @Service
 public interface ProductService {
 
-    Optional<Product> getProductById(String id);
+    ProductDto getProductById(String id);
     @Transactional
-    Product createProduct(ProductDtoPost productDtoPost);
+    ProductDto createProduct(ProductDtoPost productDtoPost);
     List<ProductDto> getListProduct(@Param("id")UUID id);
 
     @Transactional
-    Product updateProduct(String id, ProductDtoFullUpdate productDtoFullUpdate);
+    ProductDto updateProduct(String id, ProductDtoFullUpdate productDtoFullUpdate);
 
     @Transactional
     String deleteProduct(String id);

@@ -9,6 +9,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
+/**
+ * Client Mapper
+ * @author Fam Le Duc Nam
+ */
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ClientMapper {
     ClientDto clientToClientDTO(Client client);

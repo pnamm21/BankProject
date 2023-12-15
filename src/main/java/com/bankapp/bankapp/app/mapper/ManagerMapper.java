@@ -10,6 +10,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.UUID;
 
+/**
+ * Manager Mapper
+ * @author Fam Le Duc Nam
+ */
 @Mapper(componentModel = "spring",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ManagerMapper {
     ManagerDto managerToManagerDto(Manager manager);

@@ -13,10 +13,16 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Transaction Mapper
+ * @author Fam Le Duc Nam
+ */
 @Mapper(componentModel = "spring", uses = UUID.class, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface TransactionMapper {
+
     Transaction transactionFUllDtoTotransaction(TransactionDtoFullUpdate transactionDtoFullUpdate);
 
+    Transaction transactionDtoFullupdateToTransaction(TransactionDtoFullUpdate transactionDtoFullUpdate);
     Transaction transactionDtoTransferCardToTransaction(TransactionDtoTransferCard transactionDtoTransferCard);
 
     TransactionDto transactionToTransactionDto(Transaction transaction);
@@ -24,4 +30,6 @@ public interface TransactionMapper {
     List<TransactionDto> listTransactionToListTransactionDto(List<Transaction> transactions);
 
     Transaction mergeTransaction(Transaction from, @MappingTarget Transaction to);
+
+    TransactionDtoFullUpdate transactionToTransactionDtoFullUpdate(Transaction updatedTransaction);
 }

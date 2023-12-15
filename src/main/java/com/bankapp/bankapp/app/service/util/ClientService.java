@@ -11,14 +11,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Client Service
+ * @author Fam Le Duc Nam
+ */
 @Service
 public interface ClientService {
-    Optional<Client> getClientById(String id);
+    ClientDto getClientById(String id);
     @Transactional
     String deleteClient(String id);
 
     List<ClientDto> getListClients(@Param("id") UUID id);
 
     @Transactional
-    Client updateClient(String id, ClientDtoFullUpdate clientDtoFullUpdate);
+    ClientDto updateClient(String id, ClientDtoFullUpdate clientDtoFullUpdate);
 }

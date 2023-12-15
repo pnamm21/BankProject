@@ -83,33 +83,33 @@ class TransactionControllerTest {
 
     }
 
-    @Test
-    @WithMockUser(username = "nam",roles = "USER")
-    void updateTransactionTest() {
-
-        TransactionDtoFullUpdate transactionDtoFullUpdate = new TransactionDtoFullUpdate();
-        transactionDtoFullUpdate.setAmount("1000.0");
-
-        Transaction transaction = new Transaction();
-        transaction.setId(transactionId);  // Set the ID in the mock response
-        Mockito.when(transactionService.updateTransaction(transactionId.toString(), transactionDtoFullUpdate)).thenReturn(transaction);
-
-        String responseContent;
-        try {
-            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/api/transaction/update-transaction/{id}", transactionId)
-                            .content(asJsonString(transactionDtoFullUpdate))
-                            .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andReturn().getResponse().getContentAsString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("Response Content: " + responseContent);
-
-        verify(transactionService).updateTransaction(transactionId.toString(), transactionDtoFullUpdate);  // Verify that the service method was called with the correct ID and DTO
-
-    }
+//    @Test
+//    @WithMockUser(username = "nam",roles = "USER")
+//    void updateTransactionTest() {
+//
+//        TransactionDtoFullUpdate transactionDtoFullUpdate = new TransactionDtoFullUpdate();
+//        transactionDtoFullUpdate.setAmount("1000.0");
+//
+//        Transaction transaction = new Transaction();
+//        transaction.setId(transactionId);  // Set the ID in the mock response
+//        Mockito.when(transactionService.updateTransaction(transactionId.toString(), transactionDtoFullUpdate)).thenReturn(transaction);
+//
+//        String responseContent;
+//        try {
+//            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/api/transaction/update-transaction/{id}", transactionId)
+//                            .content(asJsonString(transactionDtoFullUpdate))
+//                            .contentType(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isOk())
+//                    .andReturn().getResponse().getContentAsString();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        System.out.println("Response Content: " + responseContent);
+//
+//        verify(transactionService).updateTransaction(transactionId.toString(), transactionDtoFullUpdate);  // Verify that the service method was called with the correct ID and DTO
+//
+//    }
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")

@@ -11,12 +11,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Agreement Service
+ * @author Fam Le Duc Nam
+ */
 @Service
 public interface AgreementService {
 
-    Optional<Agreement> getAgreementById(String id);
+    AgreementDto getAgreementById(String id);
 
     List<AgreementDto> getListAgreement(@Param("id")UUID id);
     @Transactional
-    Agreement updateAgreement(String id, AgreementFullDtoUpdate agreementFullDto);
+    AgreementDto updateAgreement(String id, AgreementFullDtoUpdate agreementFullDto);
 }

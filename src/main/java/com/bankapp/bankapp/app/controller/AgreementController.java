@@ -35,20 +35,18 @@ public class AgreementController {
     private final AgreementService agreementService;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Agreement> getAgreement(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(agreementService.getAgreementById(id).orElse(null));
+    public AgreementDto getAgreement(@PathVariable("id") @IDChecker String id) {
+        return agreementService.getAgreementById(id);
     }
 
     @GetMapping("/all-agreements")
-    public ResponseEntity<List<AgreementDto>> getListAgreement(@RequestParam("id") @IDChecker String id) {
-
-        List<AgreementDto> agreementDtos = agreementService.getListAgreement(UUID.fromString(id));
-        return new ResponseEntity<>(agreementDtos, HttpStatus.OK);
+    public List<AgreementDto> getListAgreement(@RequestParam("id") @IDChecker String id) {
+        return agreementService.getListAgreement(UUID.fromString(id));
     }
 
-    @RequestMapping(value = "/update-agreement/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Agreement> updateAgreement(@PathVariable("id") @IDChecker String id, @RequestBody AgreementFullDtoUpdate agreementFullDto) {
-        return ResponseEntity.ofNullable(agreementService.updateAgreement(id, agreementFullDto));
+    @RequestMapping(value = "/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public AgreementDto updateAgreement(@PathVariable("id") @IDChecker String id, @RequestBody AgreementFullDtoUpdate agreementFullDto) {
+        return agreementService.updateAgreement(id, agreementFullDto);
     }
 
 }

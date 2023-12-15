@@ -12,16 +12,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Transaction Service
+ * @author Fam Le Duc Nam
+ */
 @Service
 public interface TransactionService {
-    Optional<Transaction> getTransactionById(String id);
+    TransactionDto getTransactionById(String id);
 
     List<TransactionDto> getListTransactionByCreditAccountId(@Param("id") UUID id);
 
     List<TransactionDto> getListTransactionByDebitAccountId(@Param("id") UUID id);
 
     @Transactional
-    Transaction updateTransaction(String id, TransactionDtoFullUpdate transactionDtoFullUpdate);
+    TransactionDto updateTransaction(String id, TransactionDtoFullUpdate transactionDtoFullUpdate);
 
     @Transactional
     String transfer(UUID accountId, TransactionDtoTransfer transactionDtoTransfer);

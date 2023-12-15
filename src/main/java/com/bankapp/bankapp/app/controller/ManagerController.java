@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.controller;
 
 import com.bankapp.bankapp.app.dto.ClientDto;
+import com.bankapp.bankapp.app.dto.ManagerDto;
 import com.bankapp.bankapp.app.dto.ManagerDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.ProductDto;
 import com.bankapp.bankapp.app.entity.Manager;
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 @Validated
 @RestController
-@RequestMapping("/manager")
+@RequestMapping("/api/manager")
 @RequiredArgsConstructor
 public class ManagerController {
 
@@ -32,27 +33,23 @@ public class ManagerController {
     private final ProductService productService;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Manager> getManager(@PathVariable("id") String id) {
-        return ResponseEntity.ok(managerService.getManagerById(id).orElse(null));
+    public ManagerDto getManager(@PathVariable("id") String id) {
+        return managerService.getManagerById(id);
     }
 
-    @RequestMapping(value = "/update-manager/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Manager> updateManager(@PathVariable("id") @IDChecker String id, @RequestBody ManagerDtoFullUpdate managerDtoFullUpdate) {
-        return ResponseEntity.ofNullable(managerService.updateManager(id, managerDtoFullUpdate));
+    @RequestMapping(value = "/update{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public ManagerDto updateManager(@PathVariable("id") @IDChecker String id, @RequestBody ManagerDtoFullUpdate managerDtoFullUpdate) {
+        return managerService.updateManager(id, managerDtoFullUpdate);
     }
 
-    @RequestMapping("/get/all-clients")
-    public ResponseEntity<List<ClientDto>> getClients(@RequestParam("id") @IDChecker String id){
-
-        List<ClientDto> clientDtos = clientService.getListClients(UUID.fromString(id));
-        return new ResponseEntity<>(clientDtos,HttpStatus.OK);
+    @RequestMapping("/clients")
+    public List<ClientDto> getClients(@RequestParam("id") @IDChecker String id){
+        return clientService.getListClients(UUID.fromString(id));
     }
 
-    @RequestMapping("/get/all-products")
-    public ResponseEntity<List<ProductDto>> getProducts(@RequestParam("id") @IDChecker String id){
-
-        List<ProductDto> productDtos = productService.getListProduct(UUID.fromString(id));
-        return new ResponseEntity<>(productDtos,HttpStatus.OK);
+    @RequestMapping("/products")
+    public List<ProductDto> getProducts(@RequestParam("id") @IDChecker String id){
+        return productService.getListProduct(UUID.fromString(id));
     }
 
 }

@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class TransactionDto {
     String id;
     String transactionType;
+    String description;
     String amount;
     String status;
 }

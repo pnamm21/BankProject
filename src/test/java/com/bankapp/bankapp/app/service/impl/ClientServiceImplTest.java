@@ -39,17 +39,17 @@ class ClientServiceImplTest {
     void getClientByIdTest() {
 
         Client client = new Client();
-        client.setId(clientId);
-        client.setStatus(ClientStatus.ACTIVE);
+        ClientDto expectedClientDto = new ClientDto();
 
         when(clientRepository.findById(clientId)).thenReturn(Optional.of(client));
+        when(clientMapper.clientToClientDTO(client)).thenReturn(expectedClientDto);
 
-        Optional<Client> result = clientService.getClientById(clientId.toString());
+        ClientDto result = clientService.getClientById(clientId.toString());
 
-        assertTrue(result.isPresent());
-        assertEquals(client, result.get());
+        assertNotNull(result);
 
         verify(clientRepository, times(1)).findById(clientId);
+        verify(clientMapper, times(1)).clientToClientDTO(client);
     }
 
     @Test

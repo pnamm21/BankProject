@@ -17,7 +17,6 @@ public class TransactionDtoFullUpdate {
     String amount;
     String description;
     String status;
-    String createdAt;
     String debitAccountId;
     String creditAccountId;
 }

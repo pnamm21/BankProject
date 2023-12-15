@@ -7,4 +7,6 @@ public class ExceptionMessage {
     public static final String UUID_INVALID = "uuid is invalid";
     public static final String BALANCE_IS_EMPTY = "balance is empty";
     public static final String TRANSFER_SUCCESSFUL = "Transfer successful";
+    public static final String INSUFFICIENT_BALANCE = "Insufficient balance";
+    public static final String INVALID_TRANSACTION_AMOUNT = "Invalid transaction amount";
 }

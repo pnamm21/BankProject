@@ -1,6 +1,7 @@
 package com.bankapp.bankapp.app.controller;
 
 import com.bankapp.bankapp.app.dto.AccountDto;
+import com.bankapp.bankapp.app.dto.ClientDto;
 import com.bankapp.bankapp.app.dto.ClientDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Client;
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;
@@ -21,7 +22,7 @@ import java.util.UUID;
  */
 @Validated
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/api/client")
 @RequiredArgsConstructor
 public class ClientController {
 
@@ -29,25 +30,23 @@ public class ClientController {
     private final AccountService accountService;
 
  @GetMapping(value = "/get/{id}")
-    public ResponseEntity<Client> getClient( @PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(clientService.getClientById(id).orElse(null));
+    public ClientDto getClient(@PathVariable("id") @IDChecker String id) {
+        return clientService.getClientById(id);
     }
 
-    @RequestMapping(value = "/update-client/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Client> updateClient(@PathVariable("id") @IDChecker String id, @RequestBody ClientDtoFullUpdate clientDtpFullUpdate) {
-        return ResponseEntity.ofNullable(clientService.updateClient(id, clientDtpFullUpdate));
+    @RequestMapping(value = "/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public ClientDto updateClient(@PathVariable("id") @IDChecker String id, @RequestBody ClientDtoFullUpdate clientDtpFullUpdate) {
+        return clientService.updateClient(id, clientDtpFullUpdate);
     }
 
-    @RequestMapping(value = "/delete-client/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public ResponseEntity<String> deleteClient(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(clientService.deleteClient(id));
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteClient(@PathVariable("id") @IDChecker String id) {
+        return clientService.deleteClient(id);
     }
 
     @GetMapping(value = "/all-accounts")
-    public ResponseEntity<List<AccountDto>> getListAccountByClientId(@RequestParam("id") @IDChecker String id) {
-
-        List<AccountDto> accountDtos = accountService.getListAccount(UUID.fromString(id));
-        return new ResponseEntity<>(accountDtos, HttpStatus.OK);
+    public List<AccountDto> getListAccountByClientId(@RequestParam("id") @IDChecker String id) {
+        return accountService.getListAccount(UUID.fromString(id));
     }
 
 }

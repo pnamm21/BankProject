@@ -1,5 +1,6 @@
 package com.bankapp.bankapp.app.controller;
 
+import com.bankapp.bankapp.app.dto.ProductDto;
 import com.bankapp.bankapp.app.dto.ProductDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.ProductDtoPost;
 import com.bankapp.bankapp.app.entity.Product;
@@ -20,7 +21,7 @@ import java.util.UUID;
  */
 @Validated
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -28,25 +29,23 @@ public class ProductController {
 
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Product> getProductId(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(productService.getProductById(id).orElse(null));
+    public ProductDto getProductId(@PathVariable("id") @IDChecker String id) {
+        return productService.getProductById(id);
     }
 
-    @RequestMapping(value = "/create-product", method = {RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductDtoPost productDtoPost) {
-        productDtoPost.setId(UUID.randomUUID().toString());
-
-        return new ResponseEntity<>(productService.createProduct(productDtoPost), HttpStatus.OK);
+    @RequestMapping(value = "/create", method = {RequestMethod.POST, RequestMethod.GET})
+    public ProductDto createProduct(@RequestBody @Valid ProductDtoPost productDtoPost) {
+        return productService.createProduct(productDtoPost);
     }
 
-    @RequestMapping(value = "/update-product/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") @IDChecker String id, @RequestBody ProductDtoFullUpdate productDtoFullUpdate) {
-        return ResponseEntity.ofNullable(productService.updateProduct(id, productDtoFullUpdate));
+    @RequestMapping(value = "/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public ProductDto updateProduct(@PathVariable("id") @IDChecker String id, @RequestBody ProductDtoFullUpdate productDtoFullUpdate) {
+        return productService.updateProduct(id, productDtoFullUpdate);
     }
 
-    @RequestMapping(value = "/delete-product/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") @IDChecker String id) {
-        return ResponseEntity.ok(productService.deleteProduct(id));
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteProduct(@PathVariable("id") @IDChecker String id) {
+        return productService.deleteProduct(id);
     }
 
 }

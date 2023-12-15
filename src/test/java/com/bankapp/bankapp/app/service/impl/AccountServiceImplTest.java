@@ -4,24 +4,28 @@ import com.bankapp.bankapp.app.dto.AccountDto;
 import com.bankapp.bankapp.app.dto.AccountDtoFullUpdate;
 import com.bankapp.bankapp.app.dto.AccountDtoPost;
 import com.bankapp.bankapp.app.entity.Account;
+import com.bankapp.bankapp.app.entity.Client;
 import com.bankapp.bankapp.app.entity.enums.AccountStatus;
 import com.bankapp.bankapp.app.entity.enums.AccountType;
 import com.bankapp.bankapp.app.entity.enums.CurrencyCodeType;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.mapper.AccountMapper;
 import com.bankapp.bankapp.app.repository.AccountRepository;
+import com.bankapp.bankapp.app.repository.ClientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-
+@ExtendWith(MockitoExtension.class)
 class AccountServiceImplTest {
 
     @Mock
@@ -34,7 +38,6 @@ class AccountServiceImplTest {
     private AccountServiceImpl accountService;
 
     private static final UUID accountId = UUID.randomUUID();
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -44,20 +47,18 @@ class AccountServiceImplTest {
     void getAccountByIdTest() {
 
         Account mockAccount = new Account();
-        mockAccount.setId(accountId);
-
-        // When the accountRepository.findById() method is called with the `accountId` argument,
-        // return an Optional containing the `mockAccount` object.
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(mockAccount));
 
-        // Call the getAccountById() method on the `accountService` object, passing in the `accountId` argument.
+        AccountDto mockAccountDto = new AccountDto();
+        when(accountMapper.accountToAccountDTO(mockAccount)).thenReturn(mockAccountDto);
+
         AccountDto result = accountService.getAccountById(accountId.toString());
 
-        // Assert that the `id` of the Account object returned by the `getAccountById()` method is equal to the `accountId`.
-        assertEquals(accountId, result.getId());
+        assertNotNull(result);
+        assertEquals(mockAccountDto, result);
 
-        // Verify that the `findById()` method on the `accountRepository` object was called once with the `accountId` argument.
-        verify(accountRepository, times(1)).findById(accountId);
+        verify(accountRepository).findById(accountId);
+        verify(accountMapper).accountToAccountDTO(mockAccount);
     }
 
     @Test
@@ -101,63 +102,51 @@ class AccountServiceImplTest {
         accountDtoPost.setClientId(String.valueOf(UUID.randomUUID()));
 
         Account mockAccount = new Account();
-        mockAccount.setId(UUID.randomUUID());
-
         when(accountMapper.accountDtoPostToAccount(accountDtoPost)).thenReturn(mockAccount);
-        when(accountRepository.save(mockAccount)).thenReturn(mockAccount);
+        when(accountMapper.accountToAccountDTO(mockAccount)).thenReturn(new AccountDto());
 
         AccountDto result = accountService.createAccount(accountDtoPost);
 
         assertNotNull(result);
-        assertNotNull(result.getId());
 
-        verify(accountMapper, times(1)).accountDtoPostToAccount(accountDtoPost);
-        verify(accountRepository, times(1)).save(mockAccount);
+        verify(accountMapper).accountDtoPostToAccount(accountDtoPost);
+        verify(accountMapper).accountToAccountDTO(mockAccount);
+        verify(accountRepository).save(mockAccount);
     }
 
     @Test
     void updateAccountTest() {
 
-        AccountDtoFullUpdate accountDtoFullUpdate = new AccountDtoFullUpdate();
-        accountDtoFullUpdate.setName("Updated Account");
-        accountDtoFullUpdate.setType("MAKE_MONEY_ACCOUNT");
-        accountDtoFullUpdate.setStatus("ACTIVE");
-        accountDtoFullUpdate.setBalance("2000.0");
-        accountDtoFullUpdate.setCurrencyCode("EUR");
-        accountDtoFullUpdate.setClientId(String.valueOf(UUID.randomUUID()));
+        AccountDtoFullUpdate fullUpdate = new AccountDtoFullUpdate();
+        fullUpdate.setName("Updated Account");
+        fullUpdate.setType("MAKE_MONEY_ACCOUNT");
+        fullUpdate.setStatus("ACTIVE");
+        fullUpdate.setBalance("2000.0");
+        fullUpdate.setCurrencyCode("EUR");
+        fullUpdate.setClientId(String.valueOf(UUID.randomUUID()));
 
         Account originalAccount = new Account();
-        originalAccount.setId(accountId);
-
-        Account updatedAccount = new Account();
-        updatedAccount.setId(accountId);
-        updatedAccount.setName(accountDtoFullUpdate.getName());
-        updatedAccount.setType(AccountType.valueOf(accountDtoFullUpdate.getType()));
-        updatedAccount.setStatus(AccountStatus.valueOf(accountDtoFullUpdate.getStatus()));
-        updatedAccount.setBalance(Double.valueOf(accountDtoFullUpdate.getBalance()));
-        updatedAccount.setCurrencyCode(CurrencyCodeType.valueOf(accountDtoFullUpdate.getCurrencyCode()));
-
         when(accountRepository.existsById(accountId)).thenReturn(true);
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(originalAccount));
+
+        AccountDtoFullUpdate accountDtoFullUpdate = new AccountDtoFullUpdate();
+        Account updatedAccount = new Account();
         when(accountMapper.accountDtoFullToAccount(accountDtoFullUpdate)).thenReturn(updatedAccount);
         when(accountMapper.mergeAccounts(updatedAccount, originalAccount)).thenReturn(updatedAccount);
-        when(accountRepository.save(updatedAccount)).thenReturn(updatedAccount);
+        when(accountMapper.accountToAccountFullDto(updatedAccount)).thenReturn(new AccountDtoFullUpdate());
 
         AccountDtoFullUpdate result = accountService.updateAccount(accountId.toString(), accountDtoFullUpdate);
 
         assertNotNull(result);
-        assertEquals(accountId.toString(), result.getId());
-        assertEquals(accountDtoFullUpdate.getName(), result.getName());
-        assertEquals(accountDtoFullUpdate.getType(), result.getType());
-        assertEquals(accountDtoFullUpdate.getStatus(), result.getStatus());
-        assertEquals(Double.parseDouble(accountDtoFullUpdate.getBalance()), Double.parseDouble(result.getBalance()));
-        assertEquals(accountDtoFullUpdate.getCurrencyCode(), result.getCurrencyCode());
 
-        verify(accountRepository, times(1)).existsById(accountId);
-        verify(accountRepository, times(1)).findById(accountId);
-        verify(accountMapper, times(1)).accountDtoFullToAccount(accountDtoFullUpdate);
-        verify(accountMapper, times(1)).mergeAccounts(updatedAccount, originalAccount);
-        verify(accountRepository, times(1)).save(updatedAccount);
+        verify(accountRepository).existsById(accountId);
+        verify(accountRepository).findById(accountId);
+        verify(accountRepository).save(updatedAccount);
+
+        verify(accountMapper).accountDtoFullToAccount(accountDtoFullUpdate);
+        verify(accountMapper).mergeAccounts(updatedAccount, originalAccount);
+        verify(accountMapper).accountToAccountFullDto(updatedAccount);
+
     }
 
     @Test

@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
     /**
      * Find Account by ID
      * @param id AccountID
-     * @return Account or throw DataNotFoundException
+     * @return AccountDto or throw DataNotFoundException
      */
     @Override
     public AccountDto getAccountById(String id) throws DataNotFoundException {
@@ -77,9 +77,6 @@ public class AccountServiceImpl implements AccountService {
 
         Account account = accountMapper.accountDtoPostToAccount(accountDtoPost);
 
-        account.setClient(clientRepository.findById(UUID.fromString(accountDtoPost.getClientId()))
-                .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND)));
-
         accountRepository.save(account);
         return accountMapper.accountToAccountDTO(account);
     }
@@ -88,7 +85,7 @@ public class AccountServiceImpl implements AccountService {
      * Update Account
      * @param id AccountID
      * @param accountDtoFullUpdate AccountDtoFullUpdate
-     * @return Account or throw DataNotFoundException
+     * @return AccountDtoFullUpdate or throw DataNotFoundException
      */
     @Override
     @Transactional
@@ -103,8 +100,7 @@ public class AccountServiceImpl implements AccountService {
             account.setClient(original.getClient());
             Account updated = accountMapper.mergeAccounts(account, original);
             accountRepository.save(updated);
-            AccountDtoFullUpdate update = accountMapper.accountToAccountFullDto(updated);
-            return update;
+            return accountMapper.accountToAccountFullDto(updated);
         } else {
             throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
         }

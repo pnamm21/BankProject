@@ -50,16 +50,16 @@ class ProductServiceImplTest {
     void getProductByIdTest() {
 
         Product product = new Product();
-        product.setId(productId);
+        ProductDto expectedProductDto = new ProductDto();
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(productMapper.productToProductDto(product)).thenReturn(expectedProductDto);
 
-        Optional<Product> result = productService.getProductById(productId.toString());
+        ProductDto result = productService.getProductById(productId.toString());
 
-        assertTrue(result.isPresent());
-        assertEquals(productId, result.get().getId());
-
+        assertNotNull(result);
         verify(productRepository, times(1)).findById(productId);
+        verify(productMapper, times(1)).productToProductDto(product);
     }
 
     @Test
@@ -67,9 +67,9 @@ class ProductServiceImplTest {
 
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
-        Optional<Product> result = productService.getProductById(productId.toString());
-
-        assertFalse(result.isPresent());
+        assertThrows(DataNotFoundException.class, () -> {
+            productService.getProductById(productId.toString());
+        });
 
         verify(productRepository, times(1)).findById(productId);
     }
@@ -95,78 +95,47 @@ class ProductServiceImplTest {
     void createProductTest() {
 
         ProductDtoPost productDtoPost = new ProductDtoPost();
-        productDtoPost.setName("Simple Product");
-        productDtoPost.setStatus("ACTIVE");
-        productDtoPost.setLimit("1000");
-        productDtoPost.setInterestRate("5");
-
         Product product = new Product();
-        product.setId(productId);
-        product.setName(productDtoPost.getName());
-        product.setStatus(ProductStatus.ACTIVE);
-        product.setInterestRate(5.0);
-        product.setCreatedAt(LocalDateTime.now());
-        product.setUpdatedAt(LocalDateTime.now());
+        ProductDto expectedProductDto = new ProductDto();
 
         when(productMapper.productDtoPostToProduct(productDtoPost)).thenReturn(product);
-        when(productRepository.save(product)).thenReturn(product);
+        when(productMapper.productToProductDto(product)).thenReturn(expectedProductDto);
 
-        Product result = productService.createProduct(productDtoPost);
+        ProductDto result = productService.createProduct(productDtoPost);
 
         assertNotNull(result);
-        assertNotNull(result.getId());
-        assertEquals(productDtoPost.getName(), result.getName());
-        assertEquals(ProductStatus.ACTIVE, result.getStatus());
-        assertEquals(1000.0, result.getLimit());
-        assertEquals(5.0, result.getInterestRate());
 
         verify(productMapper, times(1)).productDtoPostToProduct(productDtoPost);
         verify(productRepository, times(1)).save(product);
+        verify(productMapper, times(1)).productToProductDto(product);
     }
 
     @Test
     void updateProductTest() {
 
         ProductDtoFullUpdate productDtoFullUpdate = new ProductDtoFullUpdate();
-        productDtoFullUpdate.setName("Name");
-        productDtoFullUpdate.setStatus("ACTIVE");
-        productDtoFullUpdate.setCurrencyCode("USD");
-        productDtoFullUpdate.setInterestRate("0.0001");
-        productDtoFullUpdate.setLimit("1000");
-        productDtoFullUpdate.setManagerId(String.valueOf(UUID.randomUUID()));
-
+        Product product = new Product();
         Product originalProduct = new Product();
-        originalProduct.setId(productId);
-
         Product updatedProduct = new Product();
-        updatedProduct.setId(productId);
-        updatedProduct.setName(productDtoFullUpdate.getName());
-        updatedProduct.setStatus(ProductStatus.valueOf(productDtoFullUpdate.getStatus()));
-        updatedProduct.setCurrencyCode(CurrencyCodeType.valueOf(productDtoFullUpdate.getCurrencyCode()));
-        updatedProduct.setInterestRate(Double.valueOf(productDtoFullUpdate.getInterestRate()));
-        updatedProduct.setLimit(Integer.parseInt(productDtoFullUpdate.getLimit()));
+        ProductDto expectedProductDto = new ProductDto();
 
         when(productRepository.existsById(productId)).thenReturn(true);
         when(productRepository.findById(productId)).thenReturn(Optional.of(originalProduct));
-        when(productMapper.productFullDtoToProduct(productDtoFullUpdate)).thenReturn(updatedProduct);
-        when(productMapper.mergeProduct(updatedProduct, originalProduct)).thenReturn(updatedProduct);
-        when(productRepository.save(updatedProduct)).thenReturn(updatedProduct);
+        when(productMapper.productFullDtoToProduct(productDtoFullUpdate)).thenReturn(product);
+        when(productMapper.mergeProduct(product, originalProduct)).thenReturn(updatedProduct);
+        when(productMapper.productToProductDto(updatedProduct)).thenReturn(expectedProductDto);
 
-        Product result = productService.updateProduct(productId.toString(), productDtoFullUpdate);
+        ProductDto result = productService.updateProduct(productId.toString(), productDtoFullUpdate);
 
         assertNotNull(result);
-        assertEquals(productId, result.getId());
-        assertEquals(productDtoFullUpdate.getName(), result.getName());
-        assertEquals(productDtoFullUpdate.getStatus(), result.getStatus().toString());
-        assertEquals(productDtoFullUpdate.getCurrencyCode(), result.getCurrencyCode().toString());
-        assertEquals(Double.parseDouble(productDtoFullUpdate.getInterestRate()), result.getInterestRate());
-        assertEquals(productDtoFullUpdate.getLimit(), String.valueOf(result.getLimit()));
 
         verify(productRepository, times(1)).existsById(productId);
         verify(productRepository, times(1)).findById(productId);
-        verify(productMapper, times(1)).productFullDtoToProduct(productDtoFullUpdate);
-        verify(productMapper, times(1)).mergeProduct(updatedProduct, originalProduct);
         verify(productRepository, times(1)).save(updatedProduct);
+        verify(productMapper, times(1)).productFullDtoToProduct(productDtoFullUpdate);
+        verify(productMapper, times(1)).mergeProduct(product, originalProduct);
+        verify(productMapper, times(1)).productToProductDto(updatedProduct);
+
     }
 
     @Test
