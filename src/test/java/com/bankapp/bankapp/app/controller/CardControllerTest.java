@@ -42,34 +42,28 @@ class CardControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-//    @Test
-//    @WithMockUser(username = "nam",roles = "USER")
-//    void getCardTest(){
-//
-//        CardDto card = new CardDto();
-//        card.setId(cardId);
-//        Mockito.when(cardService.getCardById(cardId.toString())).thenReturn(card);
-//
-//        String responseContent = null;
-//        try {
-//            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/card/get/{id}", cardId))
-//                    .andExpect(status().isOk())
-//                    .andReturn().getResponse().getContentAsString();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        System.out.println("Response Content: " + responseContent);
-//
-//        try {
-//            mockMvc.perform(MockMvcRequestBuilders.get("/api/card/get/{id}", cardId))
-//                    .andExpect(status().isOk())
-//                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(cardId.toString()));
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
+    @Test
+    @WithMockUser(username = "nam",roles = "USER")
+    void getCardTest() throws Exception {
+
+        CardDto card = new CardDto();
+        card.setId(String.valueOf(cardId));
+        Mockito.when(cardService.getCardById(cardId.toString())).thenReturn(card);
+
+        String responseContent = null;
+
+            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/card/get/{id}", cardId))
+                    .andExpect(status().isOk())
+                    .andReturn().getResponse().getContentAsString();
+
+
+        System.out.println("Response Content: " + responseContent);
+
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/card/get/{id}", cardId))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(cardId.toString()));
+
+    }
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")
@@ -115,7 +109,7 @@ class CardControllerTest {
         transactionDtoTransferCard.setTo("5931-8562-1234-9876");
 
         try {
-            mockMvc.perform(MockMvcRequestBuilders.post("/api/card/card-transfer","4434-5678-9012-3456")
+            mockMvc.perform(MockMvcRequestBuilders.post("/api/card/card-transfer/{cardNumber}","4434-5678-9012-3456")
                             .content(asJsonString(transactionDtoTransferCard))
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());

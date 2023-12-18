@@ -18,6 +18,8 @@ import java.util.UUID;
  */
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ProductMapper {
+
+    @Mapping(target="managerId",source = "manager.id")
     ProductDto productToProductDto(Product product);
 
     Product productDtoToProduct(ProductDto productDto);

@@ -11,12 +11,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -47,89 +45,73 @@ class TransactionControllerTest {
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")
-    void getListTransactionByCreditAccountIdTest() {
+    void getListTransactionByCreditAccountIdTest() throws Exception {
 
         List<TransactionDto> transactionDtos = Collections.singletonList(new TransactionDto());
         Mockito.when(transactionService.getListTransactionByCreditAccountId(transactionId)).thenReturn(transactionDtos);
 
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/transaction/creditAccount/all-transactions?id={id}", transactionId.toString()))
-                    .andExpect(status().isOk())  // Expect a successful response
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/transaction/creditAccount/transactions/{id}", transactionId.toString()))
+                    .andExpect(status().isOk())
                     .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(transactionDtos.size()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-        verify(transactionService).getListTransactionByCreditAccountId(transactionId);  // Verify that the service method was called with the correct ID
+        verify(transactionService).getListTransactionByCreditAccountId(transactionId);
 
     }
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")
-    void getListTransactionByDebitAccountIdTest() {
+    void getListTransactionByDebitAccountIdTest() throws Exception {
 
         List<TransactionDto> transactionDtos = Collections.singletonList(new TransactionDto());
         Mockito.when(transactionService.getListTransactionByDebitAccountId(transactionId)).thenReturn(transactionDtos);
 
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/transaction/debitAccount/all-transactions?id={id}", transactionId.toString()))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(transactionDtos.size()));  // Expect the correct number of cards in the JSON response
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/transaction/debitAccount/transactions/{id}", transactionId.toString()))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(transactionDtos.size()));
 
-        verify(transactionService).getListTransactionByDebitAccountId(transactionId);  // Verify that the service method was called with the correct ID
+        verify(transactionService).getListTransactionByDebitAccountId(transactionId);
 
     }
-
-//    @Test
-//    @WithMockUser(username = "nam",roles = "USER")
-//    void updateTransactionTest() {
-//
-//        TransactionDtoFullUpdate transactionDtoFullUpdate = new TransactionDtoFullUpdate();
-//        transactionDtoFullUpdate.setAmount("1000.0");
-//
-//        Transaction transaction = new Transaction();
-//        transaction.setId(transactionId);  // Set the ID in the mock response
-//        Mockito.when(transactionService.updateTransaction(transactionId.toString(), transactionDtoFullUpdate)).thenReturn(transaction);
-//
-//        String responseContent;
-//        try {
-//            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/api/transaction/update-transaction/{id}", transactionId)
-//                            .content(asJsonString(transactionDtoFullUpdate))
-//                            .contentType(MediaType.APPLICATION_JSON))
-//                    .andExpect(status().isOk())
-//                    .andReturn().getResponse().getContentAsString();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        System.out.println("Response Content: " + responseContent);
-//
-//        verify(transactionService).updateTransaction(transactionId.toString(), transactionDtoFullUpdate);  // Verify that the service method was called with the correct ID and DTO
-//
-//    }
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")
-    void deleteTransactionTest() {
+    void updateTransactionTest() throws Exception {
 
-        Mockito.when(transactionService.deleteTransaction(transactionId.toString())).thenReturn("Transaction deleted successfully");
+        TransactionDtoFullUpdate transactionDtoFullUpdate = new TransactionDtoFullUpdate();
+        transactionDtoFullUpdate.setAmount("1000.0");
 
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.delete("/api/transaction/delete-transaction/{id}", transactionId))
-                    .andExpect(status().isOk())  // Expect a successful response
-                    .andExpect(MockMvcResultMatchers.content().string("Transaction deleted successfully"));  // Expect the correct response message
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Transaction transaction = new Transaction();
+        transaction.setId(transactionId);
 
-        verify(transactionService).deleteTransaction(transactionId.toString());  // Verify that the service method was called with the correct ID
+        String responseContent;
+
+            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/api/transaction/update/{id}", transactionId)
+                            .content(asJsonString(transactionDtoFullUpdate))
+                            .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andReturn().getResponse().getContentAsString();
+
+
+        System.out.println("Response Content: " + responseContent);
+
+        verify(transactionService).updateTransaction(transactionId.toString(), transactionDtoFullUpdate);
 
     }
 
-    // Helper method to convert objects to JSON string
+    @Test
+    @WithMockUser(username = "nam",roles = "USER")
+    void deleteTransactionTest() throws Exception {
+
+        Mockito.when(transactionService.deleteTransaction(transactionId.toString())).thenReturn("Transaction deleted successfully");
+
+            mockMvc.perform(MockMvcRequestBuilders.delete("/api/transaction/delete/{id}", transactionId))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.content().string("Transaction deleted successfully"));
+
+        verify(transactionService).deleteTransaction(transactionId.toString());
+
+    }
+
     private String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

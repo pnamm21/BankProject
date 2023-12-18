@@ -191,7 +191,7 @@ class TransactionServiceImplTest {
 
         String result = transactionService.deleteTransaction(transactionId.toString());
 
-        assertEquals("Transaction has been CANCELED", result);
+        assertEquals("Transaction has been CANCELED!", result);
         assertEquals(TransactionStatus.CANCELED, mockTransaction.getStatus());
 
         verify(transactionRepository, times(1)).existsById(transactionId);

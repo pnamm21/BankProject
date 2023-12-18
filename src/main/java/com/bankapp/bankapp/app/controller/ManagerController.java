@@ -37,7 +37,7 @@ public class ManagerController {
         return managerService.getManagerById(id);
     }
 
-    @RequestMapping(value = "/update{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
     public ManagerDto updateManager(@PathVariable("id") @IDChecker String id, @RequestBody ManagerDtoFullUpdate managerDtoFullUpdate) {
         return managerService.updateManager(id, managerDtoFullUpdate);
     }

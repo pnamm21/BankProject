@@ -17,4 +17,5 @@ public class ProductDto {
     String status;
     String currencyCode;
     String limit;
+    String managerId;
 }

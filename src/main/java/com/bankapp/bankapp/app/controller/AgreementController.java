@@ -45,7 +45,8 @@ public class AgreementController {
     }
 
     @RequestMapping(value = "/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public AgreementDto updateAgreement(@PathVariable("id") @IDChecker String id, @RequestBody AgreementFullDtoUpdate agreementFullDto) {
+    public AgreementDto updateAgreement(@PathVariable("id") @IDChecker String id,
+                                        @RequestBody AgreementFullDtoUpdate agreementFullDto) {
         return agreementService.updateAgreement(id, agreementFullDto);
     }
 

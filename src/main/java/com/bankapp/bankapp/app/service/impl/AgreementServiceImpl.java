@@ -2,6 +2,7 @@ package com.bankapp.bankapp.app.service.impl;
 
 import com.bankapp.bankapp.app.dto.AgreementDto;
 import com.bankapp.bankapp.app.dto.AgreementFullDtoUpdate;
+import com.bankapp.bankapp.app.entity.Account;
 import com.bankapp.bankapp.app.entity.Agreement;
 import com.bankapp.bankapp.app.exception.DataNotFoundException;
 import com.bankapp.bankapp.app.exception.ExceptionMessage;
@@ -69,13 +70,17 @@ public class AgreementServiceImpl implements AgreementService {
     public AgreementDto updateAgreement(String id, AgreementFullDtoUpdate agreementFullDtoUpdate) {
         UUID stringId = UUID.fromString(id);
         if (agreementRepository.existsById(stringId)) {
-
+            agreementFullDtoUpdate.setAccountId(agreementFullDtoUpdate.getAccountId());
+            agreementFullDtoUpdate.setProductId(agreementFullDtoUpdate.getProductId());
+            agreementFullDtoUpdate.setId(id);
             Agreement agreement = agreementMapper.agreementFullDtoToAgreement(agreementFullDtoUpdate);
             Agreement original = agreementRepository.findById(stringId)
                     .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
+            agreement.setAccount(original.getAccount());
+            agreement.setProduct(original.getProduct());
             Agreement updated = agreementMapper.mergeAgreement(agreement, original);
-            agreementRepository.save(updated);
 
+            agreementRepository.save(updated);
             return agreementMapper.agreementToAgreementDto(updated);
         } else {
             throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);

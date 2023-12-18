@@ -30,13 +30,13 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping(value = "/creditAccount/transactions")
-    public List<TransactionDto> getListTransactionByCreditAccountId(@RequestParam("id") @IDChecker UUID id) {
+    @GetMapping(value = "/creditAccount/transactions/{id}")
+    public List<TransactionDto> getListTransactionByCreditAccountId(@PathVariable("id") UUID id) {
         return transactionService.getListTransactionByCreditAccountId(id);
     }
 
-    @GetMapping(value = "/debitAccount/transactions")
-    public List<TransactionDto> getListTransactionByDebitAccountId(@RequestParam("id") @IDChecker UUID id) {
+    @GetMapping(value = "/debitAccount/transactions/{id}")
+    public List<TransactionDto> getListTransactionByDebitAccountId( @PathVariable("id") UUID id) {
         return  transactionService.getListTransactionByDebitAccountId(id);
     }
 

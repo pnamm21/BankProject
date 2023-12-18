@@ -200,13 +200,6 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.7</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <excludes>
                         <exclude>com/**/controller/*</exclude>
@@ -217,7 +210,7 @@
                         <exclude>com/**/exception/*</exclude>
                         <exclude>com/**/BankServiceApplication.class</exclude>
                     </excludes>
-                    <outputDirectory>${project.basedir}/target/site/jacoco</outputDirectory>
+                    <outputDirectory>C:\Users\ffam5\BankProject\target\site\jacoco</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -227,8 +220,8 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>jacoco-site</id>
-                        <phase>package</phase>
+                        <id>report</id>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>

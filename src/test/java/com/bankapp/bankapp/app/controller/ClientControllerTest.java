@@ -1,6 +1,8 @@
 package com.bankapp.bankapp.app.controller;
 
 import com.bankapp.bankapp.app.dto.AccountDto;
+import com.bankapp.bankapp.app.dto.AgreementDto;
+import com.bankapp.bankapp.app.dto.ClientDto;
 import com.bankapp.bankapp.app.dto.ClientDtoFullUpdate;
 import com.bankapp.bankapp.app.entity.Client;
 import com.bankapp.bankapp.app.service.AccountService;
@@ -48,63 +50,52 @@ class ClientControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-//    @Test
-//    @WithMockUser(username = "nam",roles = "USER")
-//    void getClientTest() {
-//
-//        Client mockClient = new Client();
-//        mockClient.setId(clientId);
-//        Mockito.when(clientService.getClientById(clientId.toString())).thenReturn(Optional.of(mockClient));
-//
-//        String responseContent = null;
-//
-//        try {
-//            responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/client/get/{id}", clientId))
-//                    .andExpect(status().isOk())
-//                    .andReturn().getResponse().getContentAsString();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        System.out.println("Response Content: " + responseContent);
-//
-//        try {
-//            mockMvc.perform(MockMvcRequestBuilders.get("/client/get/{id}",clientId))
-//                    .andExpect(status().isOk())
-//                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(clientId.toString()));
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
+    @Test
+    @WithMockUser(username = "nam",roles = "USER")
+    void getClientTest() throws Exception {
 
-//    @Test
-//    @WithMockUser(username = "nam",roles = "USER")
-//    void updateClientTest() {
-//
-//        ClientDtoFullUpdate clientDtpFullUpdate = new ClientDtoFullUpdate();
-//        clientDtpFullUpdate.setFirstName("Updated Name");
-//
-//        Client mockClient = new Client();
-//        mockClient.setId(clientId);
-//        Mockito.when(clientService.updateClient(clientId.toString(), clientDtpFullUpdate)).thenReturn(mockClient);
-//
-//        String responseContent = null;
-//        try {
-//            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/client/update-client/{id}", clientId)
-//                            .content(asJsonString(clientDtpFullUpdate))
-//                            .contentType(MediaType.APPLICATION_JSON))
-//                    .andExpect(status().isOk())
-//                    .andReturn().getResponse().getContentAsString();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        System.out.println("Response Content: " + responseContent);
-//
-//        verify(clientService).updateClient(clientId.toString(), clientDtpFullUpdate);
-//
-//    }
+        ClientDto clientDto = new ClientDto();
+        clientDto.setId(String.valueOf(clientId));
+        Mockito.when(clientService.getClientById(String.valueOf(clientId))).thenReturn(clientDto);
+
+        String responseContent = null;
+
+        responseContent = mockMvc.perform(MockMvcRequestBuilders.get("/api/client/get/{id}", clientId)
+                        .secure(true))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        System.out.println("Response Content: " + responseContent);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/get/{id}", clientId))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(clientId.toString()));
+
+    }
+
+    @Test
+    @WithMockUser(username = "nam",roles = "USER")
+    void updateClientTest() throws Exception {
+
+        ClientDtoFullUpdate clientDtpFullUpdate = new ClientDtoFullUpdate();
+        clientDtpFullUpdate.setFirstName("Updated Name");
+
+        Client mockClient = new Client();
+        mockClient.setId(clientId);
+
+        String responseContent = null;
+
+            responseContent = mockMvc.perform(MockMvcRequestBuilders.put("/api/client/update/{id}", clientId)
+                            .content(asJsonString(clientDtpFullUpdate))
+                            .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andReturn().getResponse().getContentAsString();
+
+        System.out.println("Response Content: " + responseContent);
+
+        verify(clientService).updateClient(clientId.toString(), clientDtpFullUpdate);
+
+    }
 
     @Test
     @WithMockUser(username = "nam",roles = "USER")
@@ -113,7 +104,7 @@ class ClientControllerTest {
         Mockito.when(clientService.deleteClient(clientId.toString())).thenReturn("Client deleted successfully");
 
         try {
-            mockMvc.perform(MockMvcRequestBuilders.delete("/client/delete-client/{id}", clientId))
+            mockMvc.perform(MockMvcRequestBuilders.delete("/api/client/delete/{id}", clientId))
                     .andExpect(status().isOk())
                     .andExpect(MockMvcResultMatchers.content().string("Client deleted successfully"));
         } catch (Exception e) {
@@ -132,7 +123,7 @@ class ClientControllerTest {
         Mockito.when(accountService.getListAccount(clientId)).thenReturn(mockClients);
 
         try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/client/all-accounts?id={id}", clientId))
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/client/all-accounts?id={id}", clientId))
                     .andExpect(status().isOk())
                     .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(mockClients.size()));
         } catch (Exception e) {
@@ -143,7 +134,6 @@ class ClientControllerTest {
 
     }
 
-    // Helper method to convert objects to JSON string
     private String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

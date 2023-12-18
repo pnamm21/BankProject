@@ -3,27 +3,20 @@ package com.bankapp.bankapp.app.controller;
 import com.bankapp.bankapp.app.dto.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -111,6 +104,7 @@ class AccountControllerTest {
     void getCards() throws Exception {
 
         List<CardDto> cardDto = List.of(new CardDto() {{
+            setId("a46fe0de-ae78-4e58-83b9-774fc244a559");
             setCardHolder("John Doe");
             setCardNumber("4234-5678-9012-3456");
             setCvv("354");
@@ -153,7 +147,7 @@ class AccountControllerTest {
 
     @Test
     @WithMockUser(username = "nam", roles = "USER")
-    void updateAccount() throws Exception {
+    void updateAccountTest() throws Exception {
 
         AccountDtoFullUpdate expect = new AccountDtoFullUpdate();
 
@@ -191,6 +185,7 @@ class AccountControllerTest {
 
         TransactionDtoTransfer transactionDtoTransfer = new TransactionDtoTransfer(){{
             setDebitAccount("f7a7c08a-4bd7-4c68-894b-bd2cca07f52b");
+            setCreditAccount("13ad9144-6f02-40f1-bb12-207310775a3f");
             setTransactionType("ATM");
             setAmount("100.0");
             setDescription("Transaction A");
@@ -199,7 +194,7 @@ class AccountControllerTest {
 
         String json = objectMapper.writeValueAsString(transactionDtoTransfer);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/transfer/{id}", "13ad9144-6f02-40f1-bb12-207310775a3f")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/account/transfer/{id}", "13ad9144-6f02-40f1-bb12-207310775a3f")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andReturn();
