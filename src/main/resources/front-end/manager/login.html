@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <style>
+        .placeholder-fg::placeholder {
+            color: #000000;
+        }
+    </style>
+
+</head>
+<body class="bg-secondary">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-white border-white"
+                 style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                <div class="card-header text-dark">Login</div>
+                <div class="card-body bg-dark"
+                     style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        Invalid username or password!
+                    </div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group text-light">
+                            <label for="username">AccountName:</label>
+                            <input type="text" class="form-control bg-secondary text-light border-dark placeholder-fg"
+                                   id="username" name="username" required placeholder="password">
+                        </div>
+                        <div class="form-group text-light">
+                            <label for="password">Password:</label>
+                            <input type="password"
+                                   class="form-control bg-secondary text-light border-dark placeholder-fg" id="password"
+                                   name="password" required placeholder="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a class="p-3" style="color: #00BFFF" th:href="@{/register}">Register</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

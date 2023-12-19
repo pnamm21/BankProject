@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -35,6 +34,17 @@ public interface AccountService {
 
     @Transactional
     String deleteAccount(String id);
+
+    boolean existByPasswordAndAccountName(String password, String email);
+
+    Account findByPasswordAndAccountName(String password, String email);
+
+    boolean existByAccountName(String accountName);
+
+    Account findByAccountName(String accountName);
+
+    AccountDto findAccountDtoByAccountName(String accountName);
+
 
     Account getAccountByAccountNumber(String accountNumber);
 

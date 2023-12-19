@@ -73,4 +73,9 @@ public class AccountController {
         return transactionService.transfer(id, transactionDtoTransfer);
     }
 
+    @GetMapping("/get/by-accountName")
+    public ResponseEntity<AccountDto> getAccountByAccountName(@Param("accountName") String accountName) {
+        return new ResponseEntity<>(accountService.findAccountDtoByAccountName(accountName), HttpStatus.OK);
+    }
+
 }

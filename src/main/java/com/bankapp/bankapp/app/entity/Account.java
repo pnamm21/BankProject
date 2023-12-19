@@ -32,6 +32,9 @@ public class  Account {
     @Column(name = "account_name")
     private String name;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "account_type")
     @Enumerated(EnumType.STRING)
     private AccountType type;

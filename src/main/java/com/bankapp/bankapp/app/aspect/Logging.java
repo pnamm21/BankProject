@@ -56,7 +56,7 @@ public class Logging {
                         
                         
                         
-                        
+                                                                                                        
                         RUN SERVICE:
                         SERVICE_METHOD : {}.{}
                         """,
@@ -74,8 +74,7 @@ public class Logging {
                         
                         
                         
-                        
-                        
+                                                
                         Return value: {}
                         END OF REQUEST
                         """,

@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 public class AccountDto {
 
     String id;
+    String password;
     String name;
     String type;
     String status;

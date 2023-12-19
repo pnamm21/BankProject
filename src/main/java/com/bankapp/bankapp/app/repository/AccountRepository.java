@@ -14,4 +14,8 @@ public interface AccountRepository extends JpaRepository<Account, UUID> {
 
     List<Account> getAccountsByClientId(@Param("id") UUID id);
 
+    Account findAccountByName(@Param("accountName") String accountName);
+
+    Account findAccountByPasswordAndName(@Param("password") String password, @Param("accountName") String accountName);
+
 }

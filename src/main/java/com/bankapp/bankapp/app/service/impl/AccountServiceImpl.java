@@ -10,8 +10,6 @@ import com.bankapp.bankapp.app.mapper.AccountMapper;
 import com.bankapp.bankapp.app.repository.AccountRepository;
 import com.bankapp.bankapp.app.repository.ClientRepository;
 import com.bankapp.bankapp.app.service.AccountService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +22,7 @@ import static com.bankapp.bankapp.app.entity.enums.AccountStatus.*;
 
 /**
  * Account Service
+ *
  * @author ffam5
  */
 @Service
@@ -35,8 +34,8 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * @param accountRepository Account Repository
-     * @param clientRepository Client Repository
-     * @param accountMapper Account Mapper
+     * @param clientRepository  Client Repository
+     * @param accountMapper     Account Mapper
      */
     public AccountServiceImpl(AccountRepository accountRepository, ClientRepository clientRepository, AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
@@ -46,6 +45,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Find Account by ID
+     *
      * @param id AccountID
      * @return AccountDto or throw DataNotFoundException
      */
@@ -57,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Find List<Account> by ClientID
+     *
      * @param id ClientID
      * @return List<AccountDto>
      */
@@ -68,6 +69,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Create Account
+     *
      * @param accountDtoPost AccountDtoPost
      * @return AccountDto or throw DataNotFoundException
      */
@@ -83,7 +85,8 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Update Account
-     * @param id AccountID
+     *
+     * @param id                   AccountID
      * @param accountDtoFullUpdate AccountDtoFullUpdate
      * @return AccountDtoFullUpdate or throw DataNotFoundException
      */
@@ -108,6 +111,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Delete Account
+     *
      * @param id AccountID
      * @return "Account has been CLOSED!"
      */
@@ -127,12 +131,46 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public boolean existByPasswordAndAccountName(String password, String email) {
+        return accountRepository.findAccountByPasswordAndName(password, email) != null;
+    }
+
+    @Override
+    public Account findByPasswordAndAccountName(String password, String email) {
+
+        if (accountRepository.findAccountByPasswordAndName(password, email) != null) {
+            return accountRepository.findAccountByPasswordAndName(password, email);
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
+        }
+
+    }
+
+    @Override
+    public boolean existByAccountName(String accountName) {
+        return accountRepository.findAccountByName(accountName) != null;
+    }
+
+    @Override
+    public Account findByAccountName(String accountName) {
+
+        if (accountRepository.findAccountByName(accountName) != null) {
+            return accountRepository.findAccountByName(accountName);
+        } else {
+            throw new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND);
+        }
+
+    }
+
+    @Override
+    public AccountDto findAccountDtoByAccountName(String accountName) {
+        return accountMapper.accountToAccountDTO(findByAccountName(accountName));
+    }
+
+    @Override
     public Account getAccountByAccountNumber(String accountNumber) {
         return accountRepository.findById(UUID.fromString(accountNumber))
                 .orElseThrow(() -> new DataNotFoundException(ExceptionMessage.DATA_NOT_FOUND));
     }
-
-
-
 
 }
