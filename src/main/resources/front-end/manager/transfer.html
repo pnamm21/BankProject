@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Transfer</title>
+    <link href="bootstrap.min.css" rel="stylesheet" >
+</head>
+<body>
+<div class="container">
+    <h1>Money Transfer</h1>
+    <form id="transferForm" method="post">
+        <div class="mb-3">
+            <label for="senderName" class="form-label">Sender Name</label>
+            <input type="text" class="form-control" id="senderName" name="senderName" placeholder="Enter sender name">
+        </div>
+        <div class="mb-3">
+            <label for="senderAccount" class="form-label">Sender Account Number</label>
+            <input type="number" class="form-control" id="senderAccount" name="senderAccount" placeholder="Enter sender account number">
+        </div>
+        <div class="mb-3">
+            <label for="recipientName" class="form-label">Recipient Name</label>
+            <input type="text" class="form-control" id="recipientName" name="recipientName" placeholder="Enter recipient name">
+        </div>
+        <div class="mb-3">
+            <label for="recipientAccount" class="form-label">Recipient Account Number</label>
+            <input type="number" class="form-control" id="recipientAccount" name="recipientAccount" placeholder="Enter recipient account number">
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter transfer amount">
+        </div>
+        <button type="submit" class="btn btn-primary">Transfer</button>
+    </form>
+</div>
+
+<script src="bootstrap.bundle.js"></script>
+</body>
+</html>
