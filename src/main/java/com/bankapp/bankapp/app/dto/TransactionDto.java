@@ -17,4 +17,5 @@ public class TransactionDto {
     String description;
     String amount;
     String status;
+    String createdAt;
 }

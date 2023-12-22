@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class AccountDtoPost {
 
     String id;
+    String password;
     String name;
     String type;
     String status;

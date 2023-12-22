@@ -68,7 +68,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/transfer/{id}", method = {RequestMethod.POST, RequestMethod.GET})
-    public String transfer( @PathVariable("id")  UUID id,
+    public String transfer(@IDChecker @PathVariable("id")  UUID id,
                                                 @RequestBody TransactionDtoTransfer transactionDtoTransfer) {
         return transactionService.transfer(id, transactionDtoTransfer);
     }
@@ -77,5 +77,7 @@ public class AccountController {
     public ResponseEntity<AccountDto> getAccountByAccountName(@Param("accountName") String accountName) {
         return new ResponseEntity<>(accountService.findAccountDtoByAccountName(accountName), HttpStatus.OK);
     }
+
+    // Registration PostRequest
 
 }

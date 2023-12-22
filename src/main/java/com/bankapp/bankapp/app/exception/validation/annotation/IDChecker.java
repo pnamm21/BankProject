@@ -1,6 +1,6 @@
 package com.bankapp.bankapp.app.exception.validation.annotation;
 
-import com.bankapp.bankapp.app.impl.IDCheckerConstraint;
+import com.bankapp.bankapp.app.exception.validation.constraint.IDCheckerConstraint;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

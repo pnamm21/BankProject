@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AccountDtoFullUpdate {
     String id;
+    String password;
     String name;
     String type;
     String status;

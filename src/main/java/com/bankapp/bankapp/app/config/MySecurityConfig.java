@@ -30,7 +30,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @RequiredArgsConstructor
 public class MySecurityConfig {
 
-//    private final JwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -39,11 +39,11 @@ public class MySecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/main",
-                                "/account",
                                 "/transaction",
                                 "/transfer",
                                 "/aboutMe",
                                 "/bootstrap",
+                                "/logout",
                                 "/reset",
                                 "/login",
                                 "/register",
@@ -51,52 +51,23 @@ public class MySecurityConfig {
                                 "/js/bootstrap.min.js"
                         )
                         .permitAll()
-//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
-                .formLogin(withDefaults())//t -> t.loginPage("/login"))
-//                .logout(LogoutConfigurer::permitAll)
+                .formLogin(t -> t.loginPage("/login"))
+                .logout(LogoutConfigurer::permitAll)
                 .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
 
-//    @Bean
-//    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-//        AuthenticationManagerBuilder authenticationManagerBuilder =
-//                http.getSharedObject(AuthenticationManagerBuilder.class);
-//        authenticationManagerBuilder.authenticationProvider(jwtAuthenticationFilter);
-//        return authenticationManagerBuilder.build();
-//    }
-
-    /**
-     * Registration Users
-     * Username:     nam
-     * Password:   user123
-     * ====================
-     * Registration Admin
-     * AdminName:   admin
-     * Password:   admin123
-     */
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("nam")
-                .password(passwordEncoder().encode("user123"))
-                .roles("USER")
-                .build();
-
-//        UserDetails admin = User.withUsername("admin")
-//                .password(passwordEncoder().encode("admin123"))
-//                .roles("ADMIN")
-//                .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(jwtAuthenticationFilter);
+        return authenticationManagerBuilder.build();
     }
 
 }

@@ -38,6 +38,7 @@ class AccountControllerTest {
         AccountDto accountDto = new AccountDto() {{
             setId(accountId);
             setName("John Doe");
+            setPassword("123");
             setStatus("ACTIVE");
             setBalance("100000.0");
             setCurrencyCode("UAH");
@@ -66,6 +67,7 @@ class AccountControllerTest {
         AccountDtoPost accountDtoPost = new AccountDtoPost() {{
             setId("82132342-4232-4123-4768-125643524352");
             setName("Nam");
+            setPassword("123");
             setStatus("CLOSED");
             setBalance("250000.0");
             setCurrencyCode("EUR");
@@ -76,6 +78,7 @@ class AccountControllerTest {
         AccountDto expected = new AccountDto(){{
             setId("82132342-4232-4123-4768-125643524352");
             setName("Nam");
+            setPassword("123");
             setStatus("CLOSED");
             setBalance("250000.0");
             setCurrencyCode("EUR");
@@ -153,6 +156,7 @@ class AccountControllerTest {
 
         expect.setId("13ad9144-6f02-40f1-bb12-207310775a3f");
         expect.setName("John Doe");
+        expect.setPassword("123");
         expect.setType("BUSINESS_ACCOUNT");
         expect.setBalance("100000.0");
         expect.setStatus("INACTIVE");

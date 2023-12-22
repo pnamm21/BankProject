@@ -1,4 +1,4 @@
-package com.bankapp.bankapp.app.impl;
+package com.bankapp.bankapp.app.exception.validation.constraint;
 
 
 import com.bankapp.bankapp.app.exception.validation.annotation.IDChecker;

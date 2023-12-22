@@ -10,7 +10,7 @@ public class JwtUtil {
     public static UUID encode(String name) {
         MessageDigest md = null;
         try {
-            md = MessageDigest.getInstance("nam");
+            md = MessageDigest.getInstance("SHA256");
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

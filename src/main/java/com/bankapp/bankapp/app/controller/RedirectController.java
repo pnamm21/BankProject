@@ -13,7 +13,7 @@ public class RedirectController {
 
     @GetMapping("/main")
     public String redirectToMain(){
-        return "redirect:/bootstrap";
+        return "manager/bootstrap";
     }
 
     @GetMapping("/")
@@ -28,7 +28,7 @@ public class RedirectController {
 
     @GetMapping("/transaction")
     public String redirectToTransaction(){
-        return "manager/account-transaction";
+        return "manager/transaction";
     }
 
     @GetMapping("/login")
