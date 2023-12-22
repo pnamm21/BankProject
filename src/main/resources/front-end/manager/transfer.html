@@ -1,39 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Transfer</title>
-    <link href="bootstrap.min.css" rel="stylesheet" >
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: url('https://wallpapercave.com/wp/wp3231265.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 5%;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: #ffffff;
+            border-bottom: none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body {
+            background-color: #343a40;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .form-group label {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .form-control {
+            background-color: #495057;
+            color: #ffffff;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control::placeholder {
+            color: #adb5bd;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border: 1px solid #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-<div class="container">
-    <h1>Money Transfer</h1>
-    <form id="transferForm" method="post">
-        <div class="mb-3">
-            <label for="senderName" class="form-label">Sender Name</label>
-            <input type="text" class="form-control" id="senderName" name="senderName" placeholder="Enter sender name">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">Transfer Money</div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="senderName">Sender Name:</label>
+                            <input type="text" class="form-control" id="senderName" name="senderName" required placeholder="Sender Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="senderAccountNumber">Sender Account Number:</label>
+                            <input type="text" class="form-control" id="senderAccountNumber" name="senderAccountNumber" required placeholder="XXXX-XXXX-XXXX-XXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipientName">Recipient Name:</label>
+                            <input type="text" class="form-control" id="recipientName" name="recipientName" required placeholder="Recipient Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipientAccountNumber">Recipient Account Number:</label>
+                            <input type="text" class="form-control" id="recipientAccountNumber" name="recipientAccountNumber" required placeholder="XXXX-XXXX-XXXX-XXXX">
+                        </div>
+                        <button type="button" class="btn btn-primary">Transfer</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="senderAccount" class="form-label">Sender Account Number</label>
-            <input type="number" class="form-control" id="senderAccount" name="senderAccount" placeholder="Enter sender account number">
-        </div>
-        <div class="mb-3">
-            <label for="recipientName" class="form-label">Recipient Name</label>
-            <input type="text" class="form-control" id="recipientName" name="recipientName" placeholder="Enter recipient name">
-        </div>
-        <div class="mb-3">
-            <label for="recipientAccount" class="form-label">Recipient Account Number</label>
-            <input type="number" class="form-control" id="recipientAccount" name="recipientAccount" placeholder="Enter recipient account number">
-        </div>
-        <div class="mb-3">
-            <label for="amount" class="form-label">Amount</label>
-            <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter transfer amount">
-        </div>
-        <button type="submit" class="btn btn-primary">Transfer</button>
-    </form>
+    </div>
 </div>
 
 <script src="bootstrap.bundle.js"></script>
+<script>
+    // Your JavaScript code here
+</script>
 </body>
+
 </html>

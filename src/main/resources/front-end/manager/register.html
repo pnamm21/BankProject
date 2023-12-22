@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .placeholder-fg::placeholder {
+            color: #000000;
+        }
+
+        body {
+            background: url('https://wallpapercave.com/wp/wp3231265.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+
+    </style>
+</head>
+<body class="bg-secondary">
+<div class="container mt-5 bg-secondary">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-white border-white"
+                 style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                <div class="card-header text-dark">Register</div>
+                <div class="card-body bg-dark"
+                     style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        <p th:text="${param.error}">
+                        </p>
+                    </div>
+                    <div class="form-group text-light">
+                        <label for="accountName">FirstName and LastName:</label>
+                        <input type="text" class="form-control bg-secondary text-light border-dark placeholder-fg"
+                               id="accountName"
+                               name="accountName" required placeholder="accountName">
+                    </div>
+                    <div class="form-group text-light">
+                        <label for="currencyCode">Currency Code:</label>
+                        <input type="text" class="form-control bg-secondary text-light border-dark placeholder-fg"
+                               id="currencyCode"
+                               name="currencyCode" required placeholder="xxx">
+                    </div>
+                    <div class="form-group text-light">
+                        <label for="accountType">Account Type:</label>
+                        <input type="text" class="form-control bg-secondary text-light border-dark placeholder-fg"
+                               placeholder="example: SAVING_ACCOUNT" id="accountType" required
+                               name="accountType">
+                    </div>
+                    <div class="form-group text-light">
+                        <label for="password">Password:</label>
+                        <input type="password"
+                               class="form-control bg-secondary text-light border-dark placeholder-fg"
+                               id="password"
+                               name="password" required placeholder="password">
+                    </div>
+                    <button onclick="sendFormData()" class="btn btn-primary">Register</button>
+                    <a class="p-3" style="color: #00BFFF" th:href="@{/login}">have an account?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    function sendFormData() {
+
+        const formData = {
+            "accountName": !!document.getElementById("accountName").value ?
+                document.getElementById("accountName").value : null,
+            "accountType": !!document.getElementById("accountType").value ?
+                document.getElementById("accountType").value : null,
+            "currencyCode": !!document.getElementById("currencyCode").value ?
+                document.getElementById("currencyCode").value : null,
+            "password": !!document.getElementById("password").value ?
+                document.getElementById("password").value : null
+        };
+
+        fetch('/account/new', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    response.text().then(
+                        result => JSON.parse(result).body.detail,
+                        error => error)
+                        .then((value) => {
+                            const list = value.split(":");
+                            console.log(list)
+                            if ("For input string" === list[0]) {
+                                window.location.href = "/register?error=invalid value for \"Earning\""
+                            } else {
+                                window.location.href = "/register?error=" + list[list.length - 1]
+                            }
+                        });
+                }
+
+                if (response.ok) {
+                    window.location.href = "/login"
+                }
+            })
+    }
+</script>
+</body>
+</html>

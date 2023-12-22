@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://wallpapercave.com/wp/wp3231265.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: #fff;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: left;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul.navbar-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav li a[href="/swagger"] {
+            color: #61f363;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: rgba(52, 73, 94, 0.9);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #fff;
+            padding: 8px;
+            text-align: left;
+            color: #fff;
+        }
+
+        th {
+            background-color: rgba(52, 73, 94, 0.9);
+            color: #ecf0f1;
+        }
+
+        #loginForm {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #transactionsSection {
+            display: none;
+        }
+
+    </style>
+    <title>Banking Transactions</title>
+</head>
+
+<body>
+<header>
+    <h1>Transactions</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/main">Home</a></li>
+        <li><a href="/account">Accounts</a></li>
+        <li><a href="/swagger">Swagger</a></li>
+    </ul>
+</nav>
+
+<section id="loginForm">
+    <h2>Login</h2>
+    <form id="userLoginForm">
+        <label for="loginId">Input ID:</label>
+        <input type="text" id="loginId" name="loginId" required>
+        <button type="button" onclick="fetchTransactions()">Submit</button>
+    </form>
+</section>
+
+<section id="transactionsSection">
+    <h2>Transactions</h2>
+    <table id="transactionsTable">
+        <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</section>
+
+<footer>
+    <p>2023 NexGalactic Bank</p>
+</footer>
+
+<script>
+    function fetchTransactions() {
+        const loginId = document.getElementById("loginId").value;
+
+        fetch(`api/transaction/creditAccount/transactions/${loginId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(transactions => {
+
+                const tableBody = document.querySelector("#transactionsTable tbody");
+                tableBody.innerHTML = '';
+
+                transactions.forEach(transaction => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                            <td>${transaction.id}</td>
+                            <td>${transaction.transactionType}</td>
+                            <td>${transaction.description}</td>
+                            <td>${transaction.amount}</td>
+                            <td>${transaction.status}</td>
+                            <td>${transaction.createdAt}</td>
+                        `;
+                    tableBody.appendChild(row);
+                });
+
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("transactionsSection").style.display = "block";
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+            });
+    }
+</script>
+</body>
+
+</html>

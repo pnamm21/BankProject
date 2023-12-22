@@ -1,38 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGalactic Banking</title>
     <link href="bootstrap.min.css" rel="stylesheet">
-    <title>Banking Accounts</title>
     <style>
+        body, h1, h2, ul, li, p {
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            background: url('https://cdn.discordapp.com/attachments/1110319470892814518/1187409252101410816/image.png? ex=6596c80a&is=6584530a&hm=a7b263c50dfdd6cc5f06c65ced84d65afff479f68cddceebd8a1911f4698643f&') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            transition: background 0.5s ease-in-out;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 20px;
+            transition: background 0.5s ease-in-out;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul.navbar-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav li a[href="/aboutMe"] {
+            color: #efeb0b;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            max-width: 100%;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card:hover {
+            background-color: rgb(80, 80, 80);
+        }
+
+        footer {
+            background-color: rgba(52, 73, 94, 0.9);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .col-md-4 {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
 
 
     </style>
 </head>
+
 <body>
-<header>
-    <h1>Accounts</h1>
-</header>
 
-
-<nav>
-    <ul>
-        <li><a href="/main">Home</a></li>
-        <li><a href="/transaction">Transactions</a></li>
-        <li><a href="/transfer">Send Money</a></li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand mx-3" href="/main">NexGalactic Bank</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/main">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/transaction">Transactions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/transfer">Send Money</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/aboutMe">AboutMe</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
-<section>
-    <h2>Accounts Page Content</h2>
+<section class="container mt-4">
+    <h2>My Galactic Account</h2>
+    <p>Explore the cosmos with the latest news and information about our interstellar banking services.</p>
 
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1110319470892814518/1187410088403669164/image.png?ex=6
+                596c8d2&is=658453d2&hm=e68d7011774677288ceff88a429080292594047d79acad9aa7641158d68d784f&"
+                     class="card-img-top" alt="News 1 Image">
+                <div class="card-body">
+                    <h5 class="card-title">Exciting News: New Savings Account Option!</h5>
+                    <p class="card-text">Embark on a journey with our new high-interest savings account
+                        and watch your funds reach for the stars!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1110319470892814518/1187410018371383296/image.png?ex=6
+                596c8c1&is=658453c1&hm=ca3f5057801e04de802697e82fd27d327a78e05fdc26d83d963d64c08b92fc3d&"
+                     class="card-img-top" alt="News 2 Image">
+                <div class="card-body">
+                    <h5 class="card-title">Upcoming Feature: Warp-Speed Fund Transfers</h5>
+                    <p class="card-text">Prepare for the future as we unveil a groundbreaking feature allowing you to
+                        transfer funds at warp speed across the galaxy. Stay tuned!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1110319470892814518/1187409942773235752/image.png?ex=6
+                596c8af&is=658453af&hm=eb310a3b6451b461a46a3cbd7cd101163b02014ea09b1781302f033b9d558fa6&"
+                     class="card-img-top" alt="News 3 Image">
+                <div class="card-body">
+                    <h5 class="card-title">Celestial Customer Appreciation Month</h5>
+                    <p class="card-text">In honor of our cosmic customers, we're offering exclusive discounts and
+                        benefits throughout this celestial month. Thank you for choosing us!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1110319470892814518/1187411219833946322/image.png?ex=
+                6596c9df&is=658454df&hm=b57def352cde19546d39a7908e19031b2445a004366659b0cf4c2c8c8abd7c84&"
+                     class="card-img-top" alt="News 4 Image">
+                <div class="card-body">
+                    <h5 class="card-title">Exciting News: This is what my visual should look like!</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>
-    <p>&copy; 2023 My Bank. </p>
+    <p>2023 NexGalactic Bank</p>
 </footer>
+
+<script src="bootstrap.min.js"></script>
 </body>
-<script src="bootstrap.bundle.min.js"></script>
+
 </html>

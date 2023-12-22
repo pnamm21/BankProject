@@ -228,6 +228,9 @@
                         <exclude>com/**/util/*</exclude>
                         <exclude>com/**/enums/*</exclude>
                         <exclude>com/**/exception/*</exclude>
+                        <exclude>com/**/dto/*</exclude>
+                        <exclude>com/**/generator/*</exclude>
+                        <exclude>com/**/swagger/*</exclude>
                         <exclude>com/**/BankServiceApplication.class</exclude>
                     </excludes>
                     <outputDirectory>C:\Users\ffam5\BankProject\target\site\jacoco</outputDirectory>

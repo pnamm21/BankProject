@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Ваш Банк</title>
-
+    <title>NexGalactic Bank</title>
     <link href="bootstrap.min.css" rel="stylesheet">
     <style>
-
         body, h1, h2, ul, li, p {
             margin: 0;
             padding: 0;
         }
 
+        h3{
+            color: #f3de9c;
+        }
+
         body {
-            background-color: #f3de9c;
-            color: #333;
-            font-family: Arial, sans-serif;
+            background: url('https://cdn.discordapp.com/attachments/1110319470892814518/1187409252101410816/image.png?ex=6596c80a&is=6584530a&hm=a7b263c50dfdd6cc5f06c65ced84d65afff479f68cddceebd8a1911f4698643f&') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
         }
 
         nav {
-            background-color: #3498db;
-            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
             text-align: center;
             padding: 20px;
         }
@@ -32,14 +35,33 @@
             padding: 0;
         }
 
+        nav ul.navbar-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
         nav li {
             display: inline;
             margin-right: 20px;
         }
 
+        nav li a[href="/swagger"] {
+            color: #61f363;
+        }
+
+        nav li a[href="/aboutMe"] {
+            color: #efeb0b;
+        }
+
+        nav li a[href="/gitHub"] {
+            color: #ffffff;
+        }
+
         nav a {
             text-decoration: none;
-            color: #ecf0f1;
+            color: #ffffff;
             font-weight: bold;
         }
 
@@ -47,8 +69,53 @@
             padding: 20px;
         }
 
+        .container-lg {
+            width: 65%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(107, 102, 102, 0.7);
+            color: #fff;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+        }
+
+        .col-md-4 {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .card img {
+            max-height: 100px;
+            object-fit: contain;
+        }
+
         footer {
-            background-color: #34495e;
+            background-color: rgba(52, 73, 94, 0.9);
             color: #ecf0f1;
             text-align: center;
             padding: 10px;
@@ -56,16 +123,12 @@
             bottom: 0;
             width: 100%;
         }
-
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/main">Ваш Банк</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand mx-3" href="/main">NexGalactic Bank</a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
@@ -73,12 +136,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/account">Account</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/transaction">Transactions</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/transfer">Send Money</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
@@ -96,13 +153,144 @@
     </div>
 </nav>
 
-<div class="container mt-4">
-    <h1>Welcome to my Bank!</h1>
-    <p>Here you can see your accounts, transactions and send money:)).</p>
-</div>
+<section class="container-lg">
+    <div class="content">
+        <h2>BankService Project</h2>
 
+        <h3>Overview</h3>
+
+        <p>The BankService project is a Spring Boot application designed to provide essential banking services.
+            It leverages various technologies to create a robust and secure banking system.</p>
+
+        <h3>Technologies Used</h3>
+
+        <ul>
+            <li><strong>Spring Boot:</strong> Main framework for building the application.</li>
+            <li><strong>Spring Security:</strong> Ensures secure authentication and authorization.</li>
+            <li><strong>Spring Boot Test (H2 Database):</strong> Enables testing with an in-memory H2 database.</li>
+            <li><strong>Hibernate JPA:</strong> Object-relational mapping for database interactions.</li>
+            <li><strong>REST:</strong> Architecture for building scalable web services.</li>
+            <li><strong>Mapstruct (v1.5.3):</strong> Simplifies the mapping between Java bean types.</li>
+            <li><strong>Logging Aspect (v1.4.8):</strong> Enhances logging capabilities for better debugging.</li>
+            <li><strong>MySQL:</strong> Relational database for storing banking data.</li>
+            <li><strong>Liquibase:</strong> Manages database schema changes over time.</li>
+            <li><strong>JUnit 5:</strong> Testing framework for unit and integration testing.</li>
+            <li><strong>Swagger (v2.0.2):</strong> API documentation for easy integration and testing.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="container">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187509639382831124/spring-boot-logo.png?
+                        ex=65972588&is=6584b088&hm=9dae18768980d98fa3f7ce503e1809cf09be4e4cbd807267a5f01859f9ecc5f5&"
+                     class="card-img-top" alt="Spring Boot Image">
+                <div class="card-body">
+                    <h5 class="card-title">Spring Boot</h5>
+                    <p class="card-text">Main framework for building the application.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187509468544643204/66NFe2g3_400x400.png?
+                    ex=65972560&is=6584b060&hm=eec23d6c5ae5c019f25aef37746fdc1cceab6af680b9e5688cb839b888a87faa&"
+                     class="card-img-top" alt="Hibernate JPA Image">
+                <div class="card-body">
+                    <h5 class="card-title">Hibernate JPA</h5>
+                    <p class="card-text">Object-relational mapping for database interactions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REST -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187509334251425832/LtAAAAAElFTkSuQmCC.png?
+                    ex=65972540&is=6584b040&hm=0cc3053fb034cb9ccc9b5d830e791e4e72bbff885e0ed3ea761444fc82a824bb&"
+                     class="card-img-top" alt="REST Image">
+                <div class="card-body">
+                    <h5 class="card-title">REST</h5>
+                    <p class="card-text">Architecture for building scalable web services.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mapstruct -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187509267624906883/mapstruct.png?
+                    ex=65972530&is=6584b030&hm=c4f0913c1614a8db6c8ab2ea89e91b0e8a4ee4639cc36118a0956f0d3e9c3078&"
+                     class="card-img-top" alt="Mapstruct Image">
+                <div class="card-body">
+                    <h5 class="card-title">Mapstruct (v1.5.3)</h5>
+                    <p class="card-text">Simplifies the mapping between Java bean types.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MySQL -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187509036787191818/orig.png?ex=659724f9&
+                    is=6584aff9&hm=5fdeeec9a652353ddb0f7c6699014a7ad9f64a86fc3129fcc53d279155a69a3c&"
+                     class="card-img-top" alt="MySQL Image">
+                <div class="card-body">
+                    <h5 class="card-title">MySQL</h5>
+                    <p class="card-text">Relational database for storing banking data.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liquibase -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://styles.redditmedia.com/t5_2tkuz/styles/communityIcon_de54omal7wa51.png"
+                     class="card-img-top" alt="Liquibase Image">
+                <div class="card-body">
+                    <h5 class="card-title">Liquibase</h5>
+                    <p class="card-text">Manages database schema changes over time.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- JUnit 5 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187508782142591096/Byaqm47qLdpyAAAAAElFTkSuQmCC.png?
+                    ex=659724bc&is=6584afbc&hm=3c7e1e982fabe46308c3ffdc742c0829c6ee7edf992218c6bab21743d1356620&"
+                     class="card-img-top" alt="JUnit 5 Image">
+                <div class="card-body">
+                    <h5 class="card-title">JUnit 5</h5>
+                    <p class="card-text">Testing framework for unit and integration testing.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swagger -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187508485756309615/7658037.png?
+                    ex=65972475&is=6584af75&hm=4988cb3ba9e421915e1fecc84cfcb6d936bef74b7c1e6c5d1e5608cf404528fe&"
+                     class="card-img-top" alt="Swagger Image">
+                <div class="card-body">
+                    <h5 class="card-title">Swagger (v2.0.2)</h5>
+                    <p class="card-text">API documentation for easy integration and testing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>2023 NexGalactic Bank</p>
+</footer>
 
 <script src="bootstrap.min.js"></script>
 </body>
-</html>
 
+</html>

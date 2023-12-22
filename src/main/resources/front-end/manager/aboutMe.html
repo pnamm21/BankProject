@@ -15,11 +15,24 @@
         }
 
         body {
-            background-color: #505050;
+            background: url('https://wallpapercave.com/wp/wp3231265.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .image-container {
+            text-align: center;
         }
 
         .image-frame {
-            border: 2px solid #333;
+            border: none;
+            box-shadow: 0 0 10px rgb(255, 255, 255);
             padding: 10px;
             display: inline-block;
         }
@@ -30,13 +43,48 @@
         }
 
         .image-frame figcaption {
-            color: white;
+            color: #ffffff;
             text-align: center;
+            font-size: 20px;
         }
 
-        .back-to-home {
-            margin-top: 20px;
-            text-align: center;
+        .about-me {
+            font-size: 60px;
+            padding: 20px;
+            font-weight: lighter;
+            color: #efeb0b;
+        }
+
+        .card {
+            background-color: transparent;
+            border: none;
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .card-text {
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #efeb0b;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 20px;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        a:hover {
+            text-decoration: none;
         }
 
 
@@ -49,7 +97,9 @@
 
     <div class="image-container">
         <figure class="image-frame">
-            <img src="Photo_Nam.jpg" alt="My Profile Picture" width="300" height="400">
+            <img src="https://cdn.discordapp.com/attachments/1175911990288470066/1187420907057188864/Photo_Nam.jpg?ex=
+            6596d2e5&is=65845de5&hm=bb5958b1c84ccffefc21ef7b6b710ddec93ac2c2494c155179ae060593de1a17&"
+                 alt="My Profile Picture" width="300" height="400">
             <figcaption>Junior Back-end Developer</figcaption>
         </figure>
         <span class="about-me">AboutMe</span>
@@ -71,7 +121,7 @@
 
     <div class="card mt-4">
         <div class="card-body">
-            <h5 class="card-title">Professional Skills</h5>
+            <h5 class="card-title">Skills</h5>
             <p class="card-text">
                 My professional skills include a solid foundation in C++ and advanced proficiency in Java,
                 with a particular focus on Spring Boot and Hibernate technologies.
@@ -94,7 +144,7 @@
         </div>
     </div>
 
-    <div class="back-to-home">
+    <div class="card mt-4">
         <a href="/main" class="btn btn-primary">Back to Home</a>
     </div>
 

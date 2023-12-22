@@ -30,6 +30,7 @@ CREATE TABLE if not exists accounts
     id            uuid PRIMARY KEY,
     client_id     uuid,
     account_name  VARCHAR(100),
+    password  VARCHAR(100),
     account_type  VARCHAR(30),
     status        VARCHAR(50),
     balance       DECIMAL(15, 2),
