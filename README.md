@@ -2,6 +2,8 @@
 
 ## Overview
 The BankService project is a Spring Boot application designed to provide essential banking services. It leverages various technologies to create a robust and secure banking system.
+![Uploading Снимок экрана 2024-02-06 163802.png…]()
+
 
 ## Technologies Used
 - **Spring Boot:** Main framework for building the application.
