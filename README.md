@@ -2,9 +2,7 @@
 
 ## Overview
 The BankService project is a Spring Boot application designed to provide essential banking services. It leverages various technologies to create a robust and secure banking system.
-![Uploading image.png…]()
-
-
+![image](https://github.com/pnamm21/BankProject/assets/123586816/5b0f02a6-c0d7-4d51-a862-305a3786a924)
 
 ## Technologies Used
 - **Spring Boot:** Main framework for building the application.
@@ -18,6 +16,7 @@ The BankService project is a Spring Boot application designed to provide essenti
 - **Liquibase:** Manages database schema changes over time.
 - **JUnit 5:** Testing framework for unit and integration testing.
 - **Swagger (v2.0.2):** API documentation for easy integration and testing.
+- ![image](https://github.com/pnamm21/BankProject/assets/123586816/8a2261e0-1fcb-41d8-a3ff-89cacd95bced)
 
 ## Setup and Configuration
 1. Clone the repository: `git clone [repository-url]`
@@ -28,8 +27,22 @@ The BankService project is a Spring Boot application designed to provide essenti
 ## API Documentation
 Explore and test the API using Swagger:
 - Local URL: `http://localhost:8080/swagger-ui.html`
+- ![image](https://github.com/pnamm21/BankProject/assets/123586816/8a2261e0-1fcb-41d8-a3ff-89cacd95bced)
 
-## Testing
-Run tests using JUnit 5:
-```bash
-./mvnw test
+## Login
+**Spring Security:** Ensures secure authentication and authorization.
+![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/EXmMwUPRJgtAhkoVX3XFFyIBYYjeO99CR0jIQsSGBrOBkA?e=2TVbUe)
+
+## The Transactions
+You need to write your account number
+![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/ERQ1Q7oj2S1AgDto8UV5HEYBypw4O6aJ5-NeHdG5OOuYVQ?e=prYmOc)
+Then if you can see all of your transactions
+![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/ERQ1Q7oj2S1AgDto8UV5HEYBypw4O6aJ5-NeHdG5OOuYVQ?e=prYmOc)
+
+
+## About Me
+![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/Eb4By1QZB7hHh77kFGjqmrABHB0H_09bMehu7Cu31EJIFg?e=JtObr5)
+
+
+
+
