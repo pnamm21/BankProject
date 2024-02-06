@@ -2,7 +2,7 @@
 
 ## Overview
 The BankService project is a Spring Boot application designed to provide essential banking services. It leverages various technologies to create a robust and secure banking system.
-![image](https://github.com/pnamm21/BankProject/assets/123586816/5b0f02a6-c0d7-4d51-a862-305a3786a924)
+![image](https://github.com/pnamm21/BankProject/assets/123586816/f3d75680-950e-447d-9c99-59e423546a43)
 
 ## Technologies Used
 - **Spring Boot:** Main framework for building the application.
@@ -27,22 +27,24 @@ The BankService project is a Spring Boot application designed to provide essenti
 ## API Documentation
 Explore and test the API using Swagger:
 - Local URL: `http://localhost:8080/swagger-ui.html`
-- ![image](https://github.com/pnamm21/BankProject/assets/123586816/8a2261e0-1fcb-41d8-a3ff-89cacd95bced)
+- ![image](https://github.com/pnamm21/BankProject/assets/123586816/5466f639-2c96-439c-8b61-ebda54918019)
 
 ## Login
 **Spring Security:** Ensures secure authentication and authorization.
-![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/EXmMwUPRJgtAhkoVX3XFFyIBYYjeO99CR0jIQsSGBrOBkA?e=2TVbUe)
+![image](https://github.com/pnamm21/BankProject/assets/123586816/8a552846-1880-4282-864a-e3462d9a409b)
+
 
 ## The Transactions
 You need to write your account number
-![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/ERQ1Q7oj2S1AgDto8UV5HEYBypw4O6aJ5-NeHdG5OOuYVQ?e=prYmOc)
+![image](https://github.com/pnamm21/BankProject/assets/123586816/22512e10-c37b-41da-a274-171e17e1fa53)
+
 Then if you can see all of your transactions
-![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/ERQ1Q7oj2S1AgDto8UV5HEYBypw4O6aJ5-NeHdG5OOuYVQ?e=prYmOc)
+![image](https://github.com/pnamm21/BankProject/assets/123586816/508cebb4-8d4c-42c4-9b15-90d0723e87ef)
 
 
 ## About Me
-![image](https://bs2ros-my.sharepoint.com/:i:/g/personal/le_pham_stud_bsz2ro_de/Eb4By1QZB7hHh77kFGjqmrABHB0H_09bMehu7Cu31EJIFg?e=JtObr5)
+![image](https://github.com/pnamm21/BankProject/assets/123586816/1cf11ccc-d216-44ee-a396-89a8fffd0f96)
 
 
-
-
+## Contributor
+- Pham Nam
