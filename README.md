@@ -39,7 +39,6 @@ You need to write your account number
 ![image](https://github.com/pnamm21/BankProject/assets/123586816/22512e10-c37b-41da-a274-171e17e1fa53)
 
 Then if you can see all of your transactions
-![image](https://github.com/pnamm21/BankProject/assets/123586816/508cebb4-8d4c-42c4-9b15-90d0723e87ef)
 
 
 ## About Me
