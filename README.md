@@ -40,10 +40,5 @@ You need to write your account number
 
 Then if you can see all of your transactions
 
-
-## About Me
-
-
-
 ## Contributor
 - Pham Nam
