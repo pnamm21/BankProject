@@ -42,7 +42,7 @@ Then if you can see all of your transactions
 
 
 ## About Me
-![image](https://github.com/pnamm21/BankProject/assets/123586816/5ce43e1b-4189-48ec-ad9b-b22fb53ae2dc)
+
 
 
 ## Contributor
